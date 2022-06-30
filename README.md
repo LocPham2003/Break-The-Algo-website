@@ -1,8 +1,8 @@
 This is a website built using these following technologies
 - HTML and Bootstrap (CSS)
-- React framework (JavaScript)
+- Vuejs framework (JavaScript)
 - Python for backend
-- SQL database for login credentials and storing information
+- MongoDB for Database management
 
 Features:
 - Add a mock interview scheduling system and nomination system (Exclusive for BTA members).
