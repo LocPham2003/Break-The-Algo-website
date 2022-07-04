@@ -1,7 +1,6 @@
 <template>
   <img alt="Vue logo" src="./assets/logo.png">
-  <h1>Hello World</h1>
-  <p>This is a paragraph header</p>
+  <h1>Hi guys</h1>
 </template>
 
 <script>
