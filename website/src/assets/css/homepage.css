@@ -1,0 +1,100 @@
+@font-face {
+  font-family: "Jetbrains-mono";
+  src: url(../media/JetBrainsMono-2.242/fonts/ttf/JetBrainsMono-Regular.ttf) format("truetype");
+}
+
+@font-face {
+  font-family: "Jeko";
+  src: url(../media/TextFonts.net_jeko-font-family/Jeko\ Regular.ttf) format("truetype");
+}
+
+
+#app {
+    font-family: Avenir, Helvetica, Arial, sans-serif, Jetbrains-mono, Jeko;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-align: center;
+    color: #2c3e50;
+  }
+  
+body {
+  display: grid;
+  background-image: url('../media/bta_background.svg');
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.content {
+  padding-top: 25vh;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  margin: 20px 10px 0px 10px;
+}
+
+.content .homepage_content {
+  height: fit-content;
+  width: fit-content;
+}
+
+.content .homepage_content h1 {
+  margin: 0px 10px 10px 10px;
+  color: white;
+  text-align: left;
+  font-family: Jeko;
+  font-size: 4em;
+  position: relative;
+}
+
+.content .homepage_content h3 {
+  margin: 0px 10px 0px 10px;
+  color:white;
+  text-align: left;
+  font-family: Jeko;
+  font-size: 2em;
+}
+
+.content .homepage_content .get_started_container a {
+  color: white;
+  background-color: red;
+  border-radius: 5px;
+  padding: 7px;
+  width: 8em;
+  font-family: Jeko;
+}
+
+.content .homepage_content .get_started_container {
+  margin-bottom: 20px;
+}
+
+.content .homepage_content a.social {
+  margin-right: 10px;
+  text-decoration: none;
+  color: white;
+
+}
+
+.top_nav {
+  margin: 20px 10px 0px 10px;
+}
+
+.top_nav a.left_elem {
+  float: left;
+  margin: 0px 10px 0px 10px;
+  text-decoration: none;
+  color: white;
+  font-size: 1em;
+  font-family: Jetbrains-mono;
+}
+
+.top_nav a.right_elem {
+  float: right;
+  margin: 0px 10px 0px 10px;
+  text-decoration: none;
+  color: white;
+  background-color: red;
+  padding: 5px;
+  border-radius: 5px;
+  font-size: 1em;
+  font-family: Jetbrains-mono;
+}
