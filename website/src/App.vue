@@ -32,13 +32,14 @@
             <a class="social" href="../places"><i class="fab fa-linkedin"></i></a>            
           </div>
         </div> 
-        
-         
-
-        
-
       </div>
-      <div class = "bubble_effect"></div>
+      <div class = "bubble_effect">
+          <img class = "coding_img" src = "./assets/media/asfanyar.jpg" alt = "coding_picture">
+          <img class = "presenting_img" src = "./assets/media/marissa.jpg" alt = "coding_picture">
+          <img class = "discussing_img" src = "./assets/media/diako.jpg" alt = "coding_picture">
+          <img class = "studying_img" src = "./assets/media/nidhish.jpg" alt = "coding_picture">
+      </div>
+            
     </div>
 
   </body>
