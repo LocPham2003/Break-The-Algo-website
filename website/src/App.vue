@@ -1,31 +1,44 @@
 <template>
+  <title>Break The Algo</title>
   <body>
-  
-    <div class = "top_nav">
-      <a class="left_elem" href="../places">home</a>
-      <a class="left_elem" href="../places">events</a>
-      <a class="left_elem" href="../places">careers</a>
-      <a class="left_elem" href="../places">blog</a>
-      <a class="right_elem" href="../places">register</a>
-    </div>
-
+    <link rel="stylesheet" 
+        href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" 
+        integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" 
+        crossorigin="anonymous">
+      
+    <nav>
+        <ul class = "topnav" id = "dropDownMenu">
+            <li><a href="..\html\HomePage.html" id="home">Home</a></li>
+            <li><a href="..\html\Blogs-And-Articles.html" id="blogs">Blogs & Articles</a></li>
+            <li><a href="..\html\Support.html" id="support">Support</a></li>
+            <li><a href="..\html\About.html" id="about">About</a></li>
+            <li class="register_button"><a href="places">Register</a></li>    
+        </ul>               
+    </nav>
 
     <div class="content">
       <div class = "homepage_content">
         <h3>hi. let's</h3>
         <h1>break the algo.</h1>
-        <div class = "get_started_container">
-          <a class="get_started">Get started</a>
-        </div>
 
-        <a class="social" href="../places">home</a>
-        <a class="social" href="../places">home</a>
-        <a class="social" href="../places">home</a>
-        <a class="social" href="../places">home</a>
-        <a class="social" href="../places">home</a>
+        <a class="get_started">Get started</a>
+
+        <div class = "social_container">
+          <div>
+            <a class="social" href="../places"><i class="fab fa-twitter"></i></a>
+            <a class="social" href="../places"><i class="fab fa-facebook"></i></a>
+            <a class="social" href="../places"><i class="fab fa-instagram"></i></a>
+            <a class="social" href="../places"><i class="fab fa-discord"></i></a>
+            <a class="social" href="../places"><i class="fab fa-linkedin"></i></a>            
+          </div>
+        </div> 
+        
+         
+
+        
 
       </div>
-      <div class = "empty_space"></div>
+      <div class = "bubble_effect"></div>
     </div>
 
   </body>
@@ -36,8 +49,11 @@
 
 export default {
   name: 'App',
+  created() {
+    document.title = "Break The Algo"
+  },
   components: {
-    
+
   }
 }
 </script>

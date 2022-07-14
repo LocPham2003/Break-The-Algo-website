@@ -18,8 +18,8 @@
   }
   
 body {
-  display: grid;
-  background-image: url('../media/bta_background.svg');
+  /*background-image: url('../media/bta_background_mobile.svg');*/
+  background-color: rgb(32, 32, 32);
   background-repeat: no-repeat;
   background-size: cover;
 }
@@ -30,11 +30,15 @@ body {
   flex-direction: row;
   flex-wrap: wrap;
   margin: 20px 10px 0px 10px;
+  height: fit-content;
 }
 
 .content .homepage_content {
+  display: flex;
+  flex-direction: column;
   height: fit-content;
   width: fit-content;
+  flex-basis: 40%;
 }
 
 .content .homepage_content h1 {
@@ -42,7 +46,7 @@ body {
   color: white;
   text-align: left;
   font-family: Jeko;
-  font-size: 4em;
+  font-size: 10vh;
   position: relative;
 }
 
@@ -51,43 +55,74 @@ body {
   color:white;
   text-align: left;
   font-family: Jeko;
-  font-size: 2em;
+  font-size: 8vh;
 }
 
-.content .homepage_content .get_started_container a {
+.content .homepage_content .get_started_container {
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.content .homepage_content a.get_started {
   color: white;
   background-color: red;
   border-radius: 5px;
   padding: 7px;
   width: 8em;
+  align-self: center;
   font-family: Jeko;
 }
 
-.content .homepage_content .get_started_container {
-  margin-bottom: 20px;
+.content .homepage_content .social_container {
+  margin-top: 10px;
+  margin-left: 10px;
+  align-self: center;
 }
 
-.content .homepage_content a.social {
-  margin-right: 10px;
+.content .homepage_content .social_container a.social {
+  margin-right: 15px;
+  margin-top: 20px;
   text-decoration: none;
   color: white;
-
+  font-size: 1.25em;
 }
 
-.top_nav {
-  margin: 20px 10px 0px 10px;
+.content .bubble_effect {
+  background-color: black;
+  flex-basis: 60%;
 }
 
-.top_nav a.left_elem {
+nav {
+  display: block;
+  overflow: hidden;
+  width: 100%;
+  margin: 0;
+}
+
+nav ul{
+  margin: 0;
+  padding: 0;
+  margin: 0rem 1rem;
+}
+
+ul.topnav li{
+  list-style: none;
   float: left;
-  margin: 0px 10px 0px 10px;
-  text-decoration: none;
-  color: white;
-  font-size: 1em;
-  font-family: Jetbrains-mono;
 }
 
-.top_nav a.right_elem {
+ul.topnav li a{
+  font-size: 1rem;
+  color: white;
+  text-decoration: none;
+  padding: 0.5rem 0.5rem;
+  text-align: center;
+  font-family: Jetbrains-mono;
+  position: relative;
+  display: inline-block;
+}
+
+ul.topnav li.register_button {
+  position: relative;
   float: right;
   margin: 0px 10px 0px 10px;
   text-decoration: none;
@@ -97,4 +132,22 @@ body {
   border-radius: 5px;
   font-size: 1em;
   font-family: Jetbrains-mono;
+}
+
+ul.topnav li a:after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  transform: scaleX(0);
+  height: 2px;
+  bottom: 0;
+  left: 0;
+  background-color: red;
+  transform-origin: bottom right;
+  transition: transform 0.25s ease-out;
+}
+
+ul.topnav li a:hover:after {
+  transform: scaleX(1);
+  transform-origin: bottom left;
 }
