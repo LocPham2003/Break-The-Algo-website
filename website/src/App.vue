@@ -8,9 +8,10 @@
       
     <nav>
         <ul class = "topnav" id = "dropDownMenu">
-            <li><a href="..\html\HomePage.html" id="home">Home</a></li>
-            <li><a href="..\html\Blogs-And-Articles.html" id="blogs">Blogs & Articles</a></li>
-            <li><a href="..\html\Support.html" id="support">Support</a></li>
+            <li><a href="#home"><img src="./assets/media/bta-assets/bta.png" alt="logo" class="logo" /></a></li>
+            <li><a href="..\html\Blogs-And-Articles.html" id="blogs">Careers</a></li>
+            <li><a href="..\html\Support.html" id="support">Blog</a></li>
+            <li><a href="..\html\Blogs-And-Articles.html" id="support">Support</a></li>
             <li><a href="..\html\About.html" id="about">About</a></li>
             <li class="register_button"><a href="places">Register</a></li>    
         </ul>               
@@ -34,12 +35,23 @@
         </div> 
       </div>
       <div class = "bubble_effect">
-          <img class = "coding_img" src = "./assets/media/asfanyar.jpg" alt = "coding_picture">
-          <img class = "presenting_img" src = "./assets/media/marissa.jpg" alt = "coding_picture">
-          <img class = "discussing_img" src = "./assets/media/diako.jpg" alt = "coding_picture">
-          <img class = "studying_img" src = "./assets/media/nidhish.jpg" alt = "coding_picture">
-      </div>
-            
+        <div>
+          <img class = "asfandyar" src = "./assets/media/asfandyar.jpg" alt = "coding_picture">
+        </div>
+
+        <div>
+          <img class = "marissa" src = "./assets/media/marissa.jpg" alt = "coding_picture">
+        </div>
+
+        <div>
+          <img class = "diako" src = "./assets/media/diako.jpg" alt = "coding_picture">
+        </div>
+
+        <div>
+          <img class = "nidhish" src = "./assets/media/nidhish.jpg" alt = "coding_picture">     
+        </div>
+
+      </div>      
     </div>
 
   </body>
