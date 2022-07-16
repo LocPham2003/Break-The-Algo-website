@@ -96,7 +96,8 @@ ul.topnav li a:hover:after {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  margin: 20px 10px 0px 20px;
+  text-align: center;
+  margin: 20px 0px 0px 20px;
 }
 
 .content .homepage_content {

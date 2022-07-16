@@ -66,7 +66,7 @@ export default {
     document.title = "Break The Algo"
   },
   components: {
-
+      
   }
 }
 </script>
