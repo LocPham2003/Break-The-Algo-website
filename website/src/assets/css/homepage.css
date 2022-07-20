@@ -16,15 +16,8 @@
     color: #2c3e50;
   }
   
-body {
-  /*background-image: url('../media/bta_background_mobile.svg');*/
-  background-color: rgb(32, 32, 32);
-  background-repeat: no-repeat;
-  background-size: cover;
-}
-
 .content {
-  padding-top: 25vh;
+  transform: translate(0, 25vh);
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;

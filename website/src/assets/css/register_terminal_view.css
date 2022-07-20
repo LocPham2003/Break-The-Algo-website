@@ -8,84 +8,29 @@ h1 {
     color: white;
 }
 
-.terminal_container {
+.register_container {
+    text-align: center;
     display: flex;
     flex-direction: column;
-    flex-wrap: wrap;
-    margin-left: 10%;
-    margin-right: 10%;
+    justify-content: center;
+    align-items: center;
 }
 
-.terminal_container .toolbar {
+.register_container .terminal_container {
+    width: 80%;
+}
+
+.register_container .terminal_container .file_header h3 {
+    font-family: Menlo;
+    color: #ABABAB;
+    font-size: 20px;
+    padding-top:5px;
+    padding-bottom: 5px;
+    margin: 0;
+
+}
+
+.register_container .terminal_container .file_header {
     width: 100%;
     background-color: #555555;
-}
-
-.terminal_container .toolbar p {
-   font-size: 15px;
-   font-family: Menlo;
-   color: #ABABAB;
-}
-
-.terminal_container .ide {
-    background-color: #31353E;
-}
-
-.terminal_container .ide nav {
-    display: block;
-    width: 100%;
-    overflow: hidden;
-    margin: 0;
-    background-color: #1B2029;
-}
-
-.terminal_container .ide nav ul {
-    margin: 0;
-    padding: 0;
-    font-family: Menlo;
-}
-
-.terminal_container .ide nav ul li{
-    float: left;
-    list-style: none;
-    padding-right: 5px;
-    padding-left: 5px;
-}
-
-.terminal_container .ide nav ul li div {
-    display: inline-block;
-}
-
-.terminal_container .ide nav ul li div p {
-    font-size: 12.5px;
-    color: #F6F6F6;
-}
-
-.terminal_container .ide nav ul li div i {
-    padding-right: 5px;
-}
-
-.terminal_container .ide .text_editor {
-    text-align: left;
-    margin-left: 15px;
-    font-size: 15px;
-    font-family: Menlo;
-    color: greenyellow;
-}
-
-.terminal_container .terminal {
-    background-color: #1B2029;
-    color: white;
-    font-family: Menlo;
-    text-align: left;
-    padding-left: 15px;
-}
-
-.terminal_container .terminal h3{
-    font-size: 15px;
-}
-
-.terminal_container .terminal p {
-    margin: 0;
-    margin-top: -1%;
 }
