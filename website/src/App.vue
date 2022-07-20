@@ -1,4 +1,5 @@
 <template>
+    <title>Break the Algo</title>
     <link rel="stylesheet" 
         href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" 
         integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" 
@@ -17,8 +18,16 @@
     
 </template>
 
+<script>
+export default {
+  created() {
+    document.title = "Break the Algo"
+  }
+}
+</script>
+
 <style type="text/css">
-  @import './assets/css/navbar.css';
+  @import './assets/css/universal_navbar.css';
    body { background: rgb(32,32,32) !important; } /* Adding !important forces the browser to overwrite the default style applied by Bootstrap */
 </style>
 

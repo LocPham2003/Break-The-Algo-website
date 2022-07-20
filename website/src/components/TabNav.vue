@@ -1,10 +1,24 @@
 <template>
-    <div style = "width: 100%">
+    <div style = "width: 100%;">
         <ul class = "nav nav-item">
-            <li v-for="tab in tabs" :key="tab" class = "nav-pills language">
-                <a class="nav-link" :class="{active: tab === selected}" @click="setTab(tab)">
-                    
-                    {{tab}}
+            <li class = "nav-pills language">
+                <a class="nav-link" :class="{active: 'Java' === selected}" @click="setTab('Java')">
+                    <i class = "fab fa-java" style="color: orange"></i>
+                    Main.java
+                </a>
+            </li>
+
+            <li class = "nav-pills language">
+                <a class="nav-link" :class="{active: 'Python' === selected}" @click="setTab('Python')">
+                    <i class = "fab fa-python" style = "color:#3C78AA"></i>
+                    Main.py
+                </a>
+            </li>
+
+            <li class = "nav-pills language">
+                <a class="nav-link" :class="{active: 'C++' === selected}" @click="setTab('C++')">
+                    <i class = "fab fa-cuttlefish" style="color: #4B6D92">++</i>
+                    Main.cpp
                 </a>
             </li>
         </ul>

@@ -14,23 +14,54 @@ h1 {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    border-radius: 10px;
 }
 
 .register_container .terminal_container {
     width: 80%;
+    overflow:hidden;
+    border-radius: 10px;
 }
 
-.register_container .terminal_container .file_header h3 {
+.register_container .terminal_container nav.file_header {
+    display: block;
+    overflow: hidden;
+    width: 100%;
+    margin: 0;
+    background-color: #555555;
+}
+
+.register_container .terminal_container nav.file_header ul {
+    text-align: center;
+}
+
+
+.register_container .terminal_container nav.file_header ul li{
+    list-style: none;
+    display: inline-block;
+}
+
+.register_container .terminal_container nav.file_header ul li.element{
+    float: left;
     font-family: Menlo;
     color: #ABABAB;
-    font-size: 20px;
-    padding-top:5px;
-    padding-bottom: 5px;
+    font-size: 15px;
+    padding-top: 0px;
+    padding-bottom: 0px;
     margin: 0;
-
+    margin-right: 5px;
+    position: relative;
+    display: inline-block;
 }
 
-.register_container .terminal_container .file_header {
-    width: 100%;
-    background-color: #555555;
+.register_container .terminal_container nav.file_header ul li.main_title{
+    font-family: Menlo;
+    color: #ABABAB;
+    font-size: 15px;
+    padding-top: 0px;
+    padding-bottom: 0px;
+    margin: 0;
+    position: relative;
+    display: inline-block;
+    transform: translate(-20%, 0);
 }
