@@ -14,16 +14,17 @@ h1 {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    font-family: Menlo;
     border-radius: 10px;
 }
 
-.register_container .terminal_container {
-    width: 80%;
+.register_container .ide_container {
+    width: 90%;
     overflow:hidden;
     border-radius: 10px;
 }
 
-.register_container .terminal_container nav.file_header {
+.register_container .ide_container nav.file_header {
     display: block;
     overflow: hidden;
     width: 100%;
@@ -31,19 +32,18 @@ h1 {
     background-color: #555555;
 }
 
-.register_container .terminal_container nav.file_header ul {
+.register_container .ide_container nav.file_header ul {
     text-align: center;
 }
 
 
-.register_container .terminal_container nav.file_header ul li{
+.register_container .ide_container nav.file_header ul li{
     list-style: none;
     display: inline-block;
 }
 
-.register_container .terminal_container nav.file_header ul li.element{
+.register_container .ide_container nav.file_header ul li.element{
     float: left;
-    font-family: Menlo;
     color: #ABABAB;
     font-size: 15px;
     padding-top: 0px;
@@ -54,8 +54,7 @@ h1 {
     display: inline-block;
 }
 
-.register_container .terminal_container nav.file_header ul li.main_title{
-    font-family: Menlo;
+.register_container .ide_container nav.file_header ul li.main_title{
     color: #ABABAB;
     font-size: 15px;
     padding-top: 0px;
@@ -64,4 +63,31 @@ h1 {
     position: relative;
     display: inline-block;
     transform: translate(-20%, 0);
+}
+
+.register_container .terminal_container {
+    background-color: #1B2029;
+    text-align: left;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 5px;
+    padding-bottom: 50px;
+    color: white;
+}
+
+.register_container .terminal_container li {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.register_container .terminal_container input {
+    background-color: #1B2029;
+    border: 0;
+    color: white;
+    width: 30vw;
+}
+
+.register_container .terminal_container input:focus {
+    outline-width: 0;
 }

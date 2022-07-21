@@ -46,8 +46,7 @@
     }
 </script>
 
-<style scoped>
-
+<style>
     div {
         margin: 0;
     }
@@ -59,9 +58,13 @@
         font-family: Menlo;
     }
 
+    ul.nav li.language:hover {
+        cursor: pointer;
+    }
+
     ul.nav li.language a {
         color: white;
-        font-size: 12 px;
+        font-size: 12px;
     }
 
     ul.nav li.language .active {

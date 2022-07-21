@@ -2,7 +2,7 @@
     <div class="register_container">
         <h1>One step closer to success</h1>
         
-        <div class="terminal_container">
+        <div class="ide_container">
             <nav class = "file_header">
                 <ul>
                     <li class="element"><span style="color: red"><i class="fas fa-circle"></i></span></li>
@@ -24,6 +24,10 @@
                     font-family: Menlo;
                     color: white;
                 ">
+
+                    <span style="color:#F22739">import java.util.<span style="color:orange">*</span>;</span>
+                    <br>
+                    <br>
                     <span style="color:#F22739">class </span>
                     <span style="color:#A6E22E;
                                 text-decoration: underline;
@@ -86,6 +90,22 @@
             </Tab>
         </TabNav>
         
+        <div class="terminal_container">
+            <h5>Terminal</h5>
+            <span>Last login: </span>
+            <span>{{ date }}</span>
+            <p>Glad to have you here, let's get started :)</p>
+            <p>To login, type BreakTheAlgo.login(). To register, type BreakTheAlgo.register()</p>
+            <span>&#62 </span>
+            <input v-model="input_text" v-on:keyup.enter="onEnter" @input="onInput">
+            <li v-for="index in displayed_commands" :key="index">
+                <span v-if="commands[index - 1].id != 7">&#62 </span>
+                {{ commands[index - 1].text }}
+                <input  v-on:keyup.enter="onEnter" v-if="(commands[index - 1].id === 4 || commands[index - 1].id === 5)" type="password">
+                <input  v-on:keyup.enter="onEnter" v-if="!(commands[index - 1].id === 4 || commands[index - 1].id === 5) && commands[index - 1].id != 7">
+            </li>
+
+        </div>
         </div>
         
     </div>
@@ -95,6 +115,9 @@
 import TabNav from '../components/TabNav.vue'
 import Tab from '../components/Tab.vue'
 
+// Give each commands an unique id
+let id = 0
+
 export default {
     name: 'App', 
     components : {
@@ -103,7 +126,19 @@ export default {
     data() {
         return {
             selected: 'Java',
-            file_name: 'JoinBTA.java'
+            file_name: 'JoinBTA.java',
+            displayed_commands: 0,
+            date: Date(),
+            commands: [
+                {id: id++, text:"Enter your name: "},
+                {id: id++, text:"Enter your study major: "},
+                {id: id++, text:"Enter your current study year: "},
+                {id: id++, text:"Enter your username: "},
+                {id: id++, text:"Enter your password: "},
+                {id: id++, text:"Re-enter your password: "},
+                {id: id++, text:"(Optional) Enter your email for future notification and newsletter: "},
+                {id: id++, text:"Congrats! You've been registered, welcome to BTA :D"}
+            ]
         }
     },
     methods: {
@@ -116,6 +151,9 @@ export default {
             } else if (tab === 'C++') {
                 this.file_name = 'JoinBTA.cpp'
             }
+        },
+        onEnter() {
+            this.displayed_commands = this.displayed_commands + 1
         }
     }
 }

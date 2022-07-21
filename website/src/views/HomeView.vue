@@ -11,7 +11,7 @@
         <h3>hi. let's</h3>
         <h1>break the algo.</h1>
 
-        <a class="get_started">Get started</a>
+        <a class="get_started">Get started.</a>
 
         <div class = "social_container">
           <div>
