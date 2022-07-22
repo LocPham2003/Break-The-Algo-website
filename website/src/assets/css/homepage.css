@@ -68,6 +68,12 @@
   font-family: Jeko;
 }
 
+.content .homepage_content a.get_started:hover {
+  cursor: pointer;
+  background-color: darkred;
+  transition: all 0.1s ease-in;
+}
+
 .content .homepage_content .social_container {
   margin-top: 10px;
   margin-left: 10px;
@@ -139,7 +145,7 @@
     justify-content: center;
     flex-wrap: wrap;
     margin-top: 0;
-    padding-top: 10vh;
+    padding-top: 0;
   }
 
   .content .homepage_content {
@@ -157,5 +163,4 @@
     margin-left: -20%;
     flex-basis: 50%;
   }
-
 }

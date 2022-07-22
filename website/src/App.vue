@@ -5,13 +5,16 @@
         integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" 
         crossorigin="anonymous">
       <nav>
-      <ul class = "topnav" id = "dropDownMenu">
-        <li><router-link to="/"><img src = "./assets/media/bta-assets/bta.png" alt = "logo" class = "logo"/></router-link></li>
+      <ul class = "topnav" id = "dropdown_menu">
+        <li class = "logo_container"><router-link to="/"><img src = "./assets/media/bta-assets/bta.png" alt = "logo" class = "logo"/></router-link></li>
+        <li class = "home_element"><router-link to="/">Home</router-link></li>
         <li><router-link to="/career">Careers</router-link></li>
         <li><router-link to="/blog">Blog</router-link></li>
         <li><router-link to="/support">Support</router-link></li>
         <li><router-link to="/about">About</router-link></li>
         <li class = 'register_button'><router-link to = "/register">Register</router-link></li>
+        <li class="collapse_icon"><a @click="collapse()">&#x2715</a></li>    
+        <li class="dropdown_icon"><a @click="navBarToggle()">&#9776</a></li>    
       </ul>
     </nav>
     <router-view/>
@@ -22,6 +25,20 @@
 export default {
   created() {
     document.title = "Break the Algo"
+  }, 
+  methods: {
+    navBarToggle() {
+      var x = document.getElementById("dropdown_menu");
+      if (x.className === "topnav") {
+        x.className += " responsive";
+      } 
+    },
+    collapse() {
+      var x = document.getElementById("dropdown_menu");
+      if (x.className != "topnav") {
+        x.className = "topnav";
+      } 
+    }
   }
 }
 </script>

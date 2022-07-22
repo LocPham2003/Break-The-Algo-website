@@ -46,6 +46,18 @@ nav {
     font-weight: bold;
     font-family: Jetbrains-mono;
   }
+
+  ul.topnav li.dropdown_icon {
+    display: none;
+  }
+
+  ul.topnav li.home_element {
+    display: none;
+  }
+
+  ul.topnav li.collapse_icon {
+    display: none;
+  }
   
   ul.topnav li a:after {
     content: '';
@@ -64,3 +76,79 @@ nav {
     transform: scaleX(1);
     transform-origin: bottom left;
   }
+
+  @media screen and (max-width: 650px) {
+    ul.topnav li {
+        display: none;   
+    }
+
+    ul.topnav li.dropdown_icon {
+      float: right;
+      display: block;
+      color: white;
+    }
+
+    ul.topnav li.dropdown_icon:hover {
+      cursor: pointer;
+    }
+
+    ul.topnav li.dropdown_icon a {
+      font-size: 1.5rem;
+      padding: 0;
+      margin-right: 5px;
+      margin-top: 3px;
+    }
+}
+@media screen and (max-width: 650px) {
+  ul.topnav.responsive {
+    position: relative;
+    display: block;
+  }
+  
+  /*
+  Masks the burger icon so it is not visible from the user pov
+  */
+
+  ul.topnav.responsive li:last-child {
+      display: none;
+  }
+
+
+  ul.topnav.responsive {
+      position: relative;
+      margin: 0;
+      margin-top: 10px;
+  }
+  
+  ul.topnav.responsive li.collapse_icon {
+    float: none;
+    display: block;
+    color: white;
+  }
+
+  ul.topnav.responsive li.collapse_icon:hover {
+    cursor: pointer;
+  }
+
+
+  ul.topnav.responsive li.logo_container {
+      float: none;
+      display: none;
+  }
+  
+  ul.topnav.responsive li {
+    float: none;
+    display: block;
+    color: white;
+  }
+
+  ul.topnav.responsive li.home_element {
+    float: none;
+    display: block;
+    color: white;
+  }
+
+  ul.topnav.responsive li.register_button a {
+    
+  }
+}
