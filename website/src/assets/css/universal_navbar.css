@@ -77,6 +77,11 @@ nav {
     transform-origin: bottom left;
   }
 
+  ul.topnav li.register_button:hover {
+    background-color: darkred;
+    transition: all 0.1s ease-in;
+  }
+
   @media screen and (max-width: 650px) {
     ul.topnav li {
         display: none;   
@@ -146,9 +151,5 @@ nav {
     float: none;
     display: block;
     color: white;
-  }
-
-  ul.topnav.responsive li.register_button a {
-    
   }
 }
