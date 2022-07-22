@@ -9,3 +9,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 library.add(faPhone)
 
 createApp(App).use(router).component("font-awesome-icon", FontAwesomeIcon).mount('#app')
+
+new Vue({
+    el: "#app",
+    render: h => h(App)
+})

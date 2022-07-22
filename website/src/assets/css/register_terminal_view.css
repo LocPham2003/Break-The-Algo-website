@@ -66,11 +66,11 @@ h1 {
 }
 
 .register_container .terminal_container {
-    background-color: #1B2029;
+    background-color: black;
     text-align: left;
     padding-left: 10px;
     padding-right: 10px;
-    padding-top: 5px;
+    padding-top: 10px;
     padding-bottom: 50px;
     color: white;
 }
@@ -82,10 +82,11 @@ h1 {
 }
 
 .register_container .terminal_container input {
-    background-color: #1B2029;
+    background-color: black;
     border: 0;
     color: white;
     width: 30vw;
+
 }
 
 .register_container .terminal_container input:focus {
