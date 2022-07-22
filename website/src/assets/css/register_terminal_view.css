@@ -92,3 +92,9 @@ h1 {
 .register_container .terminal_container input:focus {
     outline-width: 0;
 }
+
+@media screen and (max-width: 650px) {
+    .register_container .ide_container .ide_body {
+        display: none;   
+    }
+}

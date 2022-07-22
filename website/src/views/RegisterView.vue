@@ -12,7 +12,7 @@
                 </ul>
             </nav>
             
-            <TabNav :tabs="['Java', 'Python', 'C++']" :selected="selected" @selected="setSelected">
+            <TabNav class="ide_body" :tabs="['Java', 'Python', 'C++']" :selected="selected" @selected="setSelected">
             <Tab :isSelected="selected === 'Java'">
                 <div style="
                     background-color: #31353E;
@@ -54,10 +54,7 @@
                     <br>
                     <span>&nbsp&nbsp&nbsp&nbsp <span style="color: #F22739">public static</span> <span style="color: aqua">void</span> <span style="color: greenyellow">join</span>(<span style="color: aqua">String</span> name, 
                     <span style="color: aqua">String</span> studyMajor, 
-                    <span style="color: aqua">int</span> year,
-                    <span style="color: aqua">String</span> username,
-                    <span style="color: aqua">String</span> password,
-                    <span style="color: aqua">String</span> email) {</span>
+                    <span style="color: aqua">int</span> year){</span>
                     <br>
                     <span>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp <span style="color: orange">this</span>.members.<span style="color: greenyellow">add</span><span style="color: cadetblue">(</span><span style="color: #F22739">new </span> <span style="color: greenyellow">Member</span><span style="color: yellow">(</span>name, studyMajor, year<span style="color: yellow">)</span><span style="color: cadetblue">)</span>;</span>
                     <br>
