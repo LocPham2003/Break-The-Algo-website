@@ -9,6 +9,7 @@
         <li class = "logo_container"><router-link to="/"><img src = "./assets/media/bta-assets/bta.png" alt = "logo" class = "logo"/></router-link></li>
         <li class = "home_element"><router-link to="/">Home</router-link></li>
         <li><router-link to="/career">Careers</router-link></li>
+        <li><router-link to="/career">Students</router-link></li>
         <li><router-link to="/blog">Blog</router-link></li>
         <li><router-link to="/support">Support</router-link></li>
         <li><router-link to="/about">About</router-link></li>

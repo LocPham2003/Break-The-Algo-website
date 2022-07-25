@@ -196,14 +196,16 @@
             <span>Last login: </span>
             <span>{{ date }}</span>
             <p>Glad to have you here, let's get started :)</p>
+            <p> {{ name }} {{ studyMajor }} {{ studyYear }} {{ username }} {{ password }} {{ emailAddress }}</p>
             <p>To login, type BreakTheAlgo.login(). Here for the first time ? Type BreakTheAlgo.join()</p>
             <span>Type your command: </span>
-            <input v-focus id="initial_command" v-model="input_text" v-on:keyup.enter="onEnter" ref="first_command" @input="onInput" autofocus>
+            <input v-focus id="initial_command" v-model="input_text" v-on:keyup.enter="onEnter" ref="first_command" autofocus>
             <li v-for="index in displayed_commands" :key="index">
                 <span v-if="commands[index - 1].id != 7">&#62 </span>
                 {{ commands[index - 1].text }}
-                <input v-on:keyup.enter="onEnter" v-if="(commands[index - 1].id === 4 || commands[index - 1].id === 5)" type="password">
-                <input v-on:keyup.enter="onEnter" v-if="!(commands[index - 1].id === 4 || commands[index - 1].id === 5) && commands[index - 1].id != 7">
+                <input v-on:keyup.enter="onEnter" v-if="(commands[index - 1].id === 4 || commands[index - 1].id === 5)" @input="getData" type="password">
+                <input v-on:keyup.enter="onEnter" v-if="!(commands[index - 1].id === 4 || commands[index - 1].id === 5) && (commands[index - 1].id != 6)" @input="getData" type="text">
+                <input v-on:keyup.enter="registerUser" v-if="commands[index - 1].id === 6" @input="getData" type="text">
             </li>
 
         </div>
@@ -215,6 +217,7 @@
 <script>
 import TabNav from '../components/TabNav.vue'
 import Tab from '../components/Tab.vue'
+import AuthenticationService from '../service/AuthenticationService.js'
 
 // Give each commands an unique id
 let id = 0
@@ -234,6 +237,7 @@ export default {
     },
     data() {
         return {
+            // UI state control variables
             selected: 'Java',
             file_name: 'JoinBTA.java',
             displayed_commands: 0,
@@ -247,7 +251,14 @@ export default {
                 {id: id++, text:"Re-enter your password: "},
                 {id: id++, text:"(Optional) Enter your email for future notification and newsletter: "},
                 {id: id++, text:"Congrats! You've been registered, welcome to BTA :D"}
-            ]
+            ],
+            // User authentication variables
+            name: '',
+            studyMajor: '',
+            studyYear: '',
+            username: '',
+            password: '',
+            emailAddress: ''
         }
     },
     methods: {
@@ -262,6 +273,43 @@ export default {
             }
         },
         onEnter() {
+            this.displayed_commands = this.displayed_commands + 1
+        },
+        getData(e) {
+            switch(this.displayed_commands) {
+                case 1:
+                    this.name = e.target.value
+                    break;
+                case 2:
+                    this.studyMajor = e.target.value
+                    break;
+                case 3: 
+                    this.studyYear = e.target.value
+                    break;
+                case 4:
+                    this.username = e.target.value
+                    break;
+                case 5: 
+                    this.password = e.target.value
+                    break;
+                case 6: 
+                    this.password = e.target.value
+                    break;
+                case 7: 
+                    this.emailAddress = e.target.value
+                    break;
+            }
+        },
+        async registerUser() {
+            const response = await AuthenticationService.register({
+                name: this.name,
+                username: this.username,
+                password: this.password,
+                studyMajor: this.studyMajor,
+                studyYear: this.studyYear,                
+		        email: this.emailAddress 
+            })
+            console.log(response.data)
             this.displayed_commands = this.displayed_commands + 1
         }
     }
