@@ -5,12 +5,17 @@ import BlogView from '../views/BlogView.vue'
 import SupportView from '../views/SupportView.vue'
 import AboutView from '../views/AboutView.vue'
 import RegisterView from '../views/RegisterView.vue'
-
+import TestView from '../views/TestView'
 const routes = [  
   {
     path: '/',
-    name: 'Home',
+    name: 'home',
     component: HomeView
+  },
+  {
+    path: '/test',
+    name: 'test',
+    component: TestView
   },
   {
     path: '/career',
