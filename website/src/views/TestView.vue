@@ -38,10 +38,12 @@ export default {
             await UserService.loginUser({
                 username: this.username,
                 password: this.password
+            }).then(res => {
+                this.status = res.data.message
+                this.$router.push({name: 'home'})
+            }, err => {
+                this.status = err.response.data.message
             })
-
-            const response = await UserService.fetchLoginStatus()
-            this.status = response.message
         }
     }
 }

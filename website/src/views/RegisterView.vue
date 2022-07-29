@@ -8,7 +8,7 @@
                     <li class="element"><span style="color: red"><i class="fas fa-circle"></i></span></li>
                     <li class="element"><span style="color: yellow"><i class="fas fa-circle"></i></span></li>
                     <li class="element"><span style="color: green"><i class="fas fa-circle"></i></span></li>
-                    <li class="main_title"><a>{{ file_name }}</a></li>
+                    <li class="main_title"><a>{{ fileName }}</a></li>
                 </ul>
             </nav>
             
@@ -198,14 +198,28 @@
             <p>Glad to have you here, let's get started :)</p>
             <p>To login, type BreakTheAlgo.login(). Here for the first time ? Type BreakTheAlgo.join()</p>
             <span>Type your command: </span>
-            <input v-focus id="initial_command" v-model="input_text" v-on:keyup.enter="onEnter" ref="first_command" autofocus>
-            <li v-for="index in displayed_commands" :key="index">
+            <input v-focus id="initial_command" v-model="input_text" v-on:keyup.enter="getInitialCommand" ref="first_command" autofocus>
+            <div v-if="!isLogin">
+                <li v-for="index in displayedCommands" :key="index">
                 <span v-if="commands[index - 1].id != 7">&#62 </span>
                 {{ commands[index - 1].text }}
                 <input v-on:keyup.enter="onEnter" v-if="(commands[index - 1].id === 4 || commands[index - 1].id === 5)" @input="getData" type="password">
                 <input v-on:keyup.enter="onEnter" v-if="!(commands[index - 1].id === 4 || commands[index - 1].id === 5) && (commands[index - 1].id != 6)" @input="getData" type="text">
-                <input v-on:keyup.enter="registerUser" v-if="commands[index - 1].id === 6" @input="getData" type="text">
+                <input v-on:keyup.enter="sendUserRequest" v-if="commands[index - 1].id === 6" @input="getData" type="text">
             </li>
+            </div>
+            
+
+            <div v-if="isLogin">
+                <li v-for="index in displayedCommands" :key="index">
+                <span v-if="commands[index - 1].id != 7">&#62 </span>
+                {{ commands[index - 1].text }}
+                <input v-on:keyup.enter="onEnter" v-if="commands[index - 1].id === 0" @input="getData" type="text">
+                <input v-on:keyup.enter="sendUserRequest" v-if="commands[index - 1].id === 1" @input="getData" type="password">
+            </li>
+            </div>
+            <!--Need a better way to do this so it is uniform in both register and login view-->
+            <p v-if="requestDone && isLogin">{{ status }}</p>
 
         </div>
         </div>
@@ -237,8 +251,10 @@ export default {
         return {
             // UI state control variables
             selected: 'Java',
-            file_name: 'JoinBTA.java',
-            displayed_commands: 0,
+            fileName: 'JoinBTA.java',
+            displayedCommands: 0,
+            selectedInitialCommand: '',
+            isLogin : false,
             date: Date(),
             commands: [
                 {id: id++, text:"Enter your name: "},
@@ -256,25 +272,50 @@ export default {
             studyYear: '',
             username: '',
             password: '',
-            email: ''
+            email: '',
+            status: '',
+            requestDone: false
         }
     },
     methods: {
         setSelected(tab) {
             this.selected = tab;
             if (tab === 'Java') {
-                this.file_name = 'JoinBTA.java'
+                this.fileName = 'JoinBTA.java'
             } else if (tab === 'Python') {
-                this.file_name = 'JoinBTA.py'
+                this.fileName = 'JoinBTA.py'
             } else if (tab === 'C++') {
-                this.file_name = 'JoinBTA.cpp'
+                this.fileName = 'JoinBTA.cpp'
             }
         },
         onEnter() {
-            this.displayed_commands = this.displayed_commands + 1
+            this.displayedCommands = this.displayedCommands + 1
         },
+        getInitialCommand(e) {
+           this.selectedInitialCommand = e.target.value 
+
+           if (this.selectedInitialCommand === "BreakTheAlgo.join()") {
+                console.log("Register")
+                this.displayedCommands = this.displayedCommands + 1
+           } else if (this.selectedInitialCommand === "BreakTheAlgo.login()") {
+                console.log("Login")
+                this.isLogin = true
+                this.commands = [
+                    {id: 0, text:"Enter your username: "},
+                    {id: 1, text:"Enter your password: "},
+                ]
+                this.id = 0
+                this.displayedCommands = this.displayedCommands + 1
+           } else {
+                console.log("You type in the wrong command, try again")
+           }
+
+
+        },  
         getData(e) {
-            switch(this.displayed_commands) {
+            // If this is true then we know the user wants to register
+            if (!this.isLogin) {
+                switch(this.displayedCommands) {
                 case 1:
                     this.name = e.target.value
                     break;
@@ -297,18 +338,45 @@ export default {
                     this.email = e.target.value
                     break;
             }
+            } else {
+                // If the code reaches here then the user wants to login
+                switch(this.displayedCommands) {
+                    case 1:
+                        this.username = e.target.value
+                        break;
+                    case 2:
+                        this.password = e.target.value
+                        break;
+                }
+            }
+            
         },
-        async registerUser() {
-            await UserService.addUser({
-                name: this.name,
-                studyMajor: this.studyMajor,
-                studyYear: this.studyYear,
-                username: this.username,
-                password: this.password,
-                email: this.email
-            })
-            this.displayed_commands = this.displayed_commands + 1
-            this.$router.push({name: 'Test'})
+        async sendUserRequest() {
+            if (!this.isLogin) {
+                await UserService.addUser({
+                    name: this.name,
+                    studyMajor: this.studyMajor,
+                    studyYear: this.studyYear,
+                    username: this.username,
+                    password: this.password,
+                    email: this.email
+                })
+                this.displayedCommands = this.displayedCommands + 1
+                // Use this to redirect to another page once sign in is done
+                //this.$router.push({name: 'home'})
+            } else {
+                await UserService.loginUser({
+                    username: this.username,
+                    password: this.password
+                }).then(res => {
+                    this.status = res.data.message   
+                    this.requestDone = true
+                }, err => {
+                    this.status = err.response.data.message
+                    this.requestDone = true
+                })
+            }
+            
         }
     }
 }

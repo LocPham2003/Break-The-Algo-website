@@ -9,12 +9,12 @@ import TestView from '../views/TestView'
 const routes = [  
   {
     path: '/',
-    name: 'Home',
+    name: 'home',
     component: HomeView
   },
   {
     path: '/test',
-    name: 'Test',
+    name: 'test',
     component: TestView
   },
   {
