@@ -196,7 +196,6 @@
             <span>Last login: </span>
             <span>{{ date }}</span>
             <p>Glad to have you here, let's get started :)</p>
-            <p> {{ name }} {{ studyMajor }} {{ studyYear }} {{ username }} {{ password }} {{ emailAddress }}</p>
             <p>To login, type BreakTheAlgo.login(). Here for the first time ? Type BreakTheAlgo.join()</p>
             <span>Type your command: </span>
             <input v-focus id="initial_command" v-model="input_text" v-on:keyup.enter="onEnter" ref="first_command" autofocus>
@@ -217,11 +216,10 @@
 <script>
 import TabNav from '../components/TabNav.vue'
 import Tab from '../components/Tab.vue'
-import AuthenticationService from '../service/AuthenticationService.js'
+import UserService from '@/services/UserService'
 
 // Give each commands an unique id
 let id = 0
-
 // for autofocusing on the terminal when the page is loaded
 const focus = {
     mounted: (el) => el.focus()
@@ -258,7 +256,7 @@ export default {
             studyYear: '',
             username: '',
             password: '',
-            emailAddress: ''
+            email: ''
         }
     },
     methods: {
@@ -296,25 +294,24 @@ export default {
                     this.password = e.target.value
                     break;
                 case 7: 
-                    this.emailAddress = e.target.value
+                    this.email = e.target.value
                     break;
             }
         },
         async registerUser() {
-            const response = await AuthenticationService.register({
+            await UserService.addUser({
                 name: this.name,
+                studyMajor: this.studyMajor,
+                studyYear: this.studyYear,
                 username: this.username,
                 password: this.password,
-                studyMajor: this.studyMajor,
-                studyYear: this.studyYear,                
-		        email: this.emailAddress 
+                email: this.email
             })
-            console.log(response.data)
             this.displayed_commands = this.displayed_commands + 1
+            this.$router.push({name: 'Test'})
         }
     }
 }
-
 </script>
 
 <style>
