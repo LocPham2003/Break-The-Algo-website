@@ -203,9 +203,9 @@
                 <li v-for="index in displayedCommands" :key="index">
                 <span v-if="commands[index - 1].id != 7">&#62 </span>
                 {{ commands[index - 1].text }}
-                <input v-on:keyup.enter="onEnter" v-if="(commands[index - 1].id === 4 || commands[index - 1].id === 5)" @input="getData" type="password">
-                <input v-on:keyup.enter="onEnter" v-if="!(commands[index - 1].id === 4 || commands[index - 1].id === 5) && (commands[index - 1].id != 6)" @input="getData" type="text">
-                <input v-on:keyup.enter="sendUserRequest" v-if="commands[index - 1].id === 6" @input="getData" type="text">
+                <input v-bind:id="commands[index - 1].id" v-if="(commands[index - 1].id === 4 || commands[index - 1].id === 5)" v-on:keyup.enter="onEnter" @input="getData" @click="editField" type="password">
+                <input v-bind:id="commands[index - 1].id" v-if="!(commands[index - 1].id === 4 || commands[index - 1].id === 5) && (commands[index - 1].id != 6)" v-on:keyup.enter="onEnter" @input="getData" @click="editField" type="text">
+                <input v-bind:id="commands[index - 1].id" v-if="commands[index - 1].id === 6" v-on:keyup.enter="sendUserRequest" @input="getData" @click="editField" type="text">
             </li>
             </div>
             
@@ -214,12 +214,12 @@
                 <li v-for="index in displayedCommands" :key="index">
                 <span v-if="commands[index - 1].id != 7">&#62 </span>
                 {{ commands[index - 1].text }}
-                <input v-on:keyup.enter="onEnter" v-if="commands[index - 1].id === 0" @input="getData" type="text">
-                <input v-on:keyup.enter="sendUserRequest" v-if="commands[index - 1].id === 1" @input="getData" type="password">
+                <input v-bind:id="commands[index - 1].id" v-if="commands[index - 1].id === 0" v-on:keyup.enter="onEnter" @input="getData" type="text">
+                <input v-bind:id="commands[index - 1].id" v-if="commands[index - 1].id === 1" v-on:keyup.enter="sendUserRequest" @input="getData" type="password">
             </li>
             </div>
             <!--Need a better way to do this so it is uniform in both register and login view-->
-            <p v-if="requestDone && isLogin">{{ status }}</p>
+            <p v-if="requestDone">{{ status }}</p>
 
         </div>
         </div>
@@ -264,7 +264,6 @@ export default {
                 {id: id++, text:"Enter your password: "},
                 {id: id++, text:"Re-enter your password: "},
                 {id: id++, text:"(Optional) Enter your email for future notification and newsletter: "},
-                {id: id++, text:"Congrats! You've been registered, welcome to BTA :D"}
             ],
             // User authentication variables
             name: '',
@@ -272,7 +271,10 @@ export default {
             studyYear: '',
             username: '',
             password: '',
+            passwordReEntry: '',
             email: '',
+
+            // Terminal control variables
             status: '',
             requestDone: false
         }
@@ -289,7 +291,13 @@ export default {
             }
         },
         onEnter() {
-            this.displayedCommands = this.displayedCommands + 1
+            // If the request is not sent, display the next message
+            if (!this.requestDone) {
+                this.displayedCommands = this.displayedCommands + 1
+            // If the request has already been sent, then resend the user request if the user press enter
+            } else {
+                this.sendUserRequest()
+            }
         },
         getInitialCommand(e) {
            this.selectedInitialCommand = e.target.value 
@@ -304,53 +312,52 @@ export default {
                     {id: 0, text:"Enter your username: "},
                     {id: 1, text:"Enter your password: "},
                 ]
+                // Reset the id so when iterating through the list, it starts from the beginning
                 this.id = 0
                 this.displayedCommands = this.displayedCommands + 1
            } else {
                 console.log("You type in the wrong command, try again")
            }
-
-
         },  
         getData(e) {
             // If this is true then we know the user wants to register
             if (!this.isLogin) {
-                switch(this.displayedCommands) {
-                case 1:
+                switch(parseInt(e.target.id)) {
+                case 0:
                     this.name = e.target.value
                     break;
-                case 2:
+                case 1:
                     this.studyMajor = e.target.value
                     break;
-                case 3: 
+                case 2: 
                     this.studyYear = e.target.value
                     break;
-                case 4:
+                case 3:
                     this.username = e.target.value
                     break;
-                case 5: 
+                case 4: 
                     this.password = e.target.value
+                    break;
+                case 5: 
+                    this.passwordReEntry = e.target.value
                     break;
                 case 6: 
-                    this.password = e.target.value
-                    break;
-                case 7: 
                     this.email = e.target.value
                     break;
             }
             } else {
                 // If the code reaches here then the user wants to login
-                switch(this.displayedCommands) {
-                    case 1:
+                switch(parseInt(e.target.id)) {
+                    case 0:
                         this.username = e.target.value
                         break;
-                    case 2:
+                    case 1:
                         this.password = e.target.value
                         break;
                 }
             }
             
-        },
+        }, 
         async sendUserRequest() {
             if (!this.isLogin) {
                 await UserService.addUser({
@@ -359,9 +366,16 @@ export default {
                     studyYear: this.studyYear,
                     username: this.username,
                     password: this.password,
+                    passwordReEntry: this.passwordReEntry,
                     email: this.email
+                }).then(res => {
+                    this.status = res.data.message
+                    this.requestDone = true
+                }, err => {
+                    this.status = err.response.data.message
+                    console.log(this.status)
+                    this.requestDone = true
                 })
-                this.displayedCommands = this.displayedCommands + 1
                 // Use this to redirect to another page once sign in is done
                 //this.$router.push({name: 'home'})
             } else {
@@ -376,7 +390,6 @@ export default {
                     this.requestDone = true
                 })
             }
-            
         }
     }
 }

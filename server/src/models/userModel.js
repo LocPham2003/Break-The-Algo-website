@@ -9,6 +9,7 @@ const userSchema = new Schema({
     studyYear: String,
     username: String,
     password: String,
+    passwordReEntry: String,
     email: String
 })
 
