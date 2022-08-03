@@ -9,5 +9,5 @@ router.post('/signin', userSignin)
 router.get('/isLoggedIn', isLoggedIn)
 
 router.get('/signout', userSignout)
-
+ 
 module.exports = router

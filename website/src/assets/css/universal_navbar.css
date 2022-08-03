@@ -20,32 +20,6 @@ nav {
     list-style: none;
     float: left;
   }
-  
-  ul.topnav li a{
-    font-size: 1rem;
-    color: white;
-    text-decoration: none;
-    padding: 0.5rem 0.5rem;
-    text-align: center;
-    font-weight: bold;
-    font-family: Jetbrains-mono;
-    position: relative;
-    display: inline-block;
-  }
-  
-  ul.topnav li.register_button {
-    position: relative;
-    float: right;
-    margin: 0px 10px 0px 10px;
-    text-decoration: none;
-    color: white;
-    background-color: red;
-    padding: 2px;
-    border-radius: 5px;
-    font-size: 1em;
-    font-weight: bold;
-    font-family: Jetbrains-mono;
-  }
 
   ul.topnav li.dropdown_icon {
     display: none;
@@ -58,8 +32,90 @@ nav {
   ul.topnav li.collapse_icon {
     display: none;
   }
+
+  /*Customize the logo container of the navigation bar*/
+  ul.topnav li.logo_container a{
+    font-size: 1rem;
+    color: white;
+    text-decoration: none;
+    padding-top: 0.5rem;
+    padding-bottom: 0.45rem;
+    padding-right: 0.25rem;
+    padding-left: 0.25rem;
+    text-align: center;
+    font-weight: bold;
+    font-family: Jetbrains-mono;
+    position: relative;
+    display: inline-block;
+  }
+
+  /*Customize the other contents of the navigation bar*/
+  ul.topnav li.text a{
+    font-size: 1rem;
+    color: white;
+    text-decoration: none;
+    padding-top: 0.6rem;
+    padding-bottom: 0.4rem;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+    text-align: center;
+    font-weight: bold;
+    font-family: Jetbrains-mono;
+    position: relative;
+    display: inline-block;
+  }
   
-  ul.topnav li a:after {
+  /*Customize the register/ sign in button of the navigation bar*/
+  ul.topnav li.button {
+    position: relative;
+    float: right;
+    margin: 0px 10px 0px 10px;
+    text-decoration: none;
+    color: white;
+    background-color: red;
+    padding: 2px;
+    border-radius: 5px;
+    font-size: 1em;
+    font-weight: bold;
+    font-family: Jetbrains-mono;
+  }
+  
+  ul.topnav li.button a{
+    font-size: 1rem;
+    color: white;
+    text-decoration: none;
+    padding-top: 0.6rem;
+    padding-bottom: 0.4rem;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+    text-align: center;
+    font-weight: bold;
+    font-family: Jetbrains-mono;
+    position: relative;
+    display: inline-block;
+  }
+  
+/*Hover animation for the logo in the navigation bar */
+  ul.topnav li.logo_container a:after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    transform: scaleX(0);
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    background-color: red;
+    transform-origin: bottom right;
+    transition: transform 0.25s ease-out;
+  }
+
+  ul.topnav li.logo_container a:hover:after {
+    transform: scaleX(1);
+    transform-origin: bottom left;
+  }
+  
+  /*Hover animation for texts in the navigation bar */
+  ul.topnav li.text a:after {
     content: '';
     position: absolute;
     width: 100%;
@@ -72,14 +128,19 @@ nav {
     transition: transform 0.25s ease-out;
   }
   
-  ul.topnav li a:hover:after {
+  ul.topnav li.text a:hover:after {
     transform: scaleX(1);
     transform-origin: bottom left;
   }
 
-  ul.topnav li.register_button:hover {
+  /*Hover animation for the register button*/
+  ul.topnav li.button:hover {
     background-color: darkred;
     transition: all 0.1s ease-in;
+  }
+
+  ul.topnav li.button a:hover{
+    cursor: pointer;
   }
 
   @media screen and (max-width: 650px) {

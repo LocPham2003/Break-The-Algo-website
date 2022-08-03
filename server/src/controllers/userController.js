@@ -6,7 +6,7 @@ dotenv.config({ path: './.env' });
 
 const salt = 10
 var isLoggedIn = false 
-var detectedUsername = ''
+
 // Route for signing up a new user
 exports.userSignup = (req, res) => {
 	const body = req.body;
@@ -49,7 +49,7 @@ exports.userSignup = (req, res) => {
 									} else {
 										isLoggedIn = true
 										return res.json({
-											message: "Success! Welcome to Break The Algo, " + user.name + " :D. Redirecting you to Homepage..."
+											message: "Success! Welcome to Break The Algo, " + user.name + " :D. You are now a member, so you can login"
 										})
 									}
 								})
@@ -120,27 +120,46 @@ exports.userSignin = (req, res) => {
 
 exports.userSignout = (req, res) => {
 	isLoggedIn = false
-	detectedUsername = ''
 	console.log("User has signed out")
 	return res.clearCookie("accessToken", {path: '/'}).status(200).json({ message : "You have successfully logged out "})
 }
 
 exports.isLoggedIn = (req, res) => {
 	// Parse the token from the browser cookie
+	var name = ''
 	var token = req.cookies.accessToken
 	if (!token) {
 		console.log("Token does not exist")
 	} else {
 		console.log(token)
 		const data = jwt.verify(token, process.env.TOKEN_KEY)
-		detectedUsername = data.username
 		isLoggedIn = true
+
+		User.findOne({username: data.username}, function (err, docs) {
+			if (err){
+				res.status(400).json({
+					message: "Something happened"
+				})		
+				console.log("Something happened")
+			}
+			else{
+				if (docs != null) {
+					name = docs.name
+					console.log(docs.name)	
+					return res.status(200).json({
+						isLoggedIn: isLoggedIn,
+						name: name,
+					})
+				} else {
+					console.log("Unable to find user")
+				}
+			}
+		});
+
+		
 	}
 
-	res.status(200).json({
-		isLoggedIn: isLoggedIn,
-		detectedUsername: detectedUsername,
-	})
+	
 }
 
 // Data verification functions

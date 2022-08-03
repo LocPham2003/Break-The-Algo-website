@@ -12,5 +12,8 @@ export default {
   },
   logoutUser() {
     return Api().get('signout')
+  },
+  getUser() {
+    return Api().get('getUser')
   }
 }

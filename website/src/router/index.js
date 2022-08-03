@@ -7,6 +7,7 @@ import AboutView from '../non_member_views/AboutView.vue'
 import RegisterView from '../non_member_views/RegisterView.vue'
 import TestView from '../non_member_views/TestView'
 import MemberHomeView from '../member_views/MemberHomeView.vue'
+import DashboardView from '../member_views/DashboardView.vue'
 const routes = [  
   {
     path: '/',
@@ -47,6 +48,11 @@ const routes = [
     path: '/memberHome',
     name: 'memberHome',
     component: MemberHomeView
+  },
+  {
+    path: '/dashboard',
+    name: 'dashboard',
+    component: DashboardView
   }
 ]
 

@@ -231,6 +231,8 @@ import TabNav from '../components/TabNav.vue'
 import Tab from '../components/Tab.vue'
 import UserService from '@/services/UserService'
 
+var isReloaded = false
+
 // for autofocusing on the terminal when the page is loaded
 const focus = {
     mounted: (el) => el.focus()
@@ -380,7 +382,7 @@ export default {
                     password: this.password
                 }).then(res => {
                     this.status = res.data.message
-                    //this.setCookie('accessToken', res.data.token)
+                    //this.setCookie('accessToken', res.data.token)]
                     this.requestDone = true
                     setTimeout(() => this.$router.push({name: 'memberHome'}), 2000);
                 }, err => {
@@ -389,7 +391,7 @@ export default {
                 })
             }
         }
-    }
+    },
 }
 </script>
 
