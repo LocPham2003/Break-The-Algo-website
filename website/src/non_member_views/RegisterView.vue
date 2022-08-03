@@ -220,7 +220,6 @@
             </div>
             <!--Need a better way to do this so it is uniform in both register and login view-->
             <p v-if="requestDone">{{ status }}</p>
-
         </div>
         </div>
         
@@ -232,8 +231,6 @@ import TabNav from '../components/TabNav.vue'
 import Tab from '../components/Tab.vue'
 import UserService from '@/services/UserService'
 
-// Give each commands an unique id
-let id = 0
 // for autofocusing on the terminal when the page is loaded
 const focus = {
     mounted: (el) => el.focus()
@@ -257,13 +254,13 @@ export default {
             isLogin : false,
             date: Date(),
             commands: [
-                {id: id++, text:"Enter your name: "},
-                {id: id++, text:"Enter your study major: "},
-                {id: id++, text:"Enter your current study year: "},
-                {id: id++, text:"Enter your username: "},
-                {id: id++, text:"Enter your password: "},
-                {id: id++, text:"Re-enter your password: "},
-                {id: id++, text:"(Optional) Enter your email for future notification and newsletter: "},
+                {id: 0, text:"Enter your name: "},
+                {id: 1, text:"Enter your study major: "},
+                {id: 2, text:"Enter your current study year: "},
+                {id: 3, text:"Enter your username: "},
+                {id: 4, text:"Enter your password: "},
+                {id: 5, text:"Re-enter your password: "},
+                {id: 6, text:"(Optional) Enter your email for future notification and newsletter: "},
             ],
             // User authentication variables
             name: '',
@@ -280,6 +277,9 @@ export default {
         }
     },
     methods: {
+        setCookie(cookieName, cookieValue) {
+            document.cookie = cookieName + "=" + cookieValue
+        },
         setSelected(tab) {
             this.selected = tab;
             if (tab === 'Java') {
@@ -303,17 +303,14 @@ export default {
            this.selectedInitialCommand = e.target.value 
 
            if (this.selectedInitialCommand === "BreakTheAlgo.join()") {
-                console.log("Register")
                 this.displayedCommands = this.displayedCommands + 1
            } else if (this.selectedInitialCommand === "BreakTheAlgo.login()") {
-                console.log("Login")
                 this.isLogin = true
                 this.commands = [
                     {id: 0, text:"Enter your username: "},
                     {id: 1, text:"Enter your password: "},
                 ]
                 // Reset the id so when iterating through the list, it starts from the beginning
-                this.id = 0
                 this.displayedCommands = this.displayedCommands + 1
            } else {
                 console.log("You type in the wrong command, try again")
@@ -371,20 +368,21 @@ export default {
                 }).then(res => {
                     this.status = res.data.message
                     this.requestDone = true
+                    setTimeout(() => this.$router.push({name: 'memberHome'}), 2000);
                 }, err => {
                     this.status = err.response.data.message
-                    console.log(this.status)
                     this.requestDone = true
                 })
                 // Use this to redirect to another page once sign in is done
-                //this.$router.push({name: 'home'})
             } else {
                 await UserService.loginUser({
                     username: this.username,
                     password: this.password
                 }).then(res => {
-                    this.status = res.data.message   
+                    this.status = res.data.message
+                    //this.setCookie('accessToken', res.data.token)
                     this.requestDone = true
+                    setTimeout(() => this.$router.push({name: 'memberHome'}), 2000);
                 }, err => {
                     this.status = err.response.data.message
                     this.requestDone = true

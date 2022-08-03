@@ -2,30 +2,25 @@ const express = require('express')
 const dotenv = require('dotenv');
 dotenv.config({ path: './.env' });
 const cors = require('cors')
+// This cors option is enabled so that when the client side send a request, the server side can access the data stored in the cookie with the given security properties.
+// For example, the user authentication token is created in the server side and we would like to store it in the cookie with httpOnly flag set to true. We can only do this in the server side,
+// not with the client side. Hence, when an user access the website on the client side (port 8080), they will unable to access the data stored in the cookie as we do not authorize them to do so. 
+// however, with this option, the auth token generated on the server side with httponly flag on will also be accessible to the client, so the client can access the token in the cookie, send it to
+// the backend for authorization everytime they visit the site. 
+// Without this, it would not work
+const corsOptions = {
+    origin: 'http://localhost:8080',
+    credentials: true 
+};
 const morgan = require('morgan')
 const mongoose = require('mongoose')
 const bodyParser = require('body-parser')
 const app = express()
+const cookieParser = require('cookie-parser');
+app.use(cookieParser())
 app.use(morgan('combine'))
-app.use(cors())
+app.use(cors(corsOptions))
 app.use(bodyParser.json())
-
-
-
-// app.get('/users', bodyParser.json(), (req, res) => {
-// 	res.send([
-// 	{
-// 		name: "Loc Pham",
-// 		password: "24092003"
-// 	},
-// 	{
-// 		name: "Nidhish Shah",
-// 		password: "909092354"
-// 	}
-// 	])
-// })
-
-//const cookieParser = require('cookie-parser')
 
 // Note to self in the future. If an error caused via MongoServerSelection error then fix it as follows:
 // A. Go to https://www.whatismyip.com/
@@ -44,6 +39,14 @@ mongoose.connect(process.env.DATABASE_URL, {
 const userRoutes = require('../src/routes/userRoutes')
 
 // Using routes
+/**
+ * Note to future self: Since you are defining the route in a different folder to help the code to be organized,
+ * any sorts of parsing library (e.g cookie parser, json parser, etc) needs to be defined in the file where the route
+ * is referred for usage.
+ * 
+ * In this case, app.use(the_route), hence, cookie-parser and body-parser must be declared in app.js in order for the libary
+ * to take effect
+ */
 app.use('/', userRoutes)
 // Note: in several cases, it will happen that you try to start the server using npm start, but your server does not start
 // and it returns the error: Error: listen EADDRINUSE: address already in use :::8081
@@ -51,7 +54,6 @@ app.use('/', userRoutes)
 app.listen(process.env.PORT, () => {
 	console.log("Server started at " + process.env.PORT)
 })
-
 
 // Add a new user
 // app.post('/users', (req, res) => {
@@ -88,3 +90,19 @@ app.listen(process.env.PORT, () => {
 // 	res.send({	users: users })
 // 	})
 // })
+
+
+// app.get('/users', bodyParser.json(), (req, res) => {
+// 	res.send([
+// 	{
+// 		name: "Loc Pham",
+// 		password: "24092003"
+// 	},
+// 	{
+// 		name: "Nidhish Shah",
+// 		password: "909092354"
+// 	}
+// 	])
+// })
+
+//const cookieParser = require('cookie-parser')

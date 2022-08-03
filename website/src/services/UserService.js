@@ -6,5 +6,11 @@ export default {
   },
   loginUser(params) {
     return Api().post('signin', params)
+  },
+  fetchLoginState() {
+    return Api().get('isLoggedIn')
+  },
+  logoutUser() {
+    return Api().get('signout')
   }
 }

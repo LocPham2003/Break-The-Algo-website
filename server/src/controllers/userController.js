@@ -1,14 +1,14 @@
 const User = require("../models/userModel.js")
 const bcrypt = require("bcrypt");
-//const jwt = require('jsonwebtoken')
-//const expressJwt = require('express-jwt')
+const jwt = require('jsonwebtoken')
 const dotenv = require('dotenv');
 dotenv.config({ path: './.env' });
 
 const salt = 10
-
+var isLoggedIn = false 
+var detectedUsername = ''
 // Route for signing up a new user
-exports.user_signup = (req, res) => {
+exports.userSignup = (req, res) => {
 	const body = req.body;
 	const username = req.body.username
 	const password = body.password
@@ -29,7 +29,6 @@ exports.user_signup = (req, res) => {
 					console.log("Something happened")
 				} else {
 					if (docs === null) {
-						
 						if (passwordReEntry != password) {
 							return res.status(400).json({
 								message: "Password does not match, please check again"
@@ -47,11 +46,12 @@ exports.user_signup = (req, res) => {
 										return res.status(400).json({
 											error: "Unable to add user"
 										})
+									} else {
+										isLoggedIn = true
+										return res.json({
+											message: "Success! Welcome to Break The Algo, " + user.name + " :D. Redirecting you to Homepage..."
+										})
 									}
-									
-									return res.json({
-										message: "Success! Welcome to Break The Algo, " + user.name + " :D"
-									})
 								})
 							})
 						}
@@ -67,7 +67,7 @@ exports.user_signup = (req, res) => {
 }
 
 // Route for signing in as a new user
-exports.user_signin = (req, res) => {
+exports.userSignin = (req, res) => {
 	const username = req.body.username
 	const password = req.body.password
 	
@@ -79,20 +79,35 @@ exports.user_signin = (req, res) => {
 
 	User.findOne({username: username }, function (err, docs) {
 		if (err){
+			res.status(400).json({
+				message: "Something happened"
+			})		
 			console.log("Something happened")
 		}
 		else{
-			// Logging for debug
-			console.log("Result : ", docs)
 			if (docs === null) {
 				return res.status(400).json({
 					message: "Username does not exist, please register first"
 				})			
 			} else {
 				bcrypt.compare(password, docs.password, (error, result) => {
+					/* If this succeeds then proceed to create a cookie to store the user token (generated via JWT)
+					 Since the token is stored in the cookie and the cookie is used to keep track whether the user
+					 need to sign in or not, you just need to delete the cookie from the user browser when making the
+					 log out function */
 					if(result) {
-						res.status(200).json({ message: "Login successful"}) 
-						console.log("Login Successful")
+						// Generate the unique token of the user based on the id
+						// Need to find a way to pass this token into the browser's cookie
+						const token = jwt.sign({username: docs.username}, process.env.TOKEN_KEY)
+						
+						isLoggedIn = true
+
+						// Store this token in the cookie
+						res.cookie("accessToken", token, {
+							httpOnly: true,
+						})
+						
+						res.status(200).json({ message: "Login successful. Redirecting you to Homepage...", token: token }) 
 					} else {
 						res.status(400).json({ message: "Login not successful, incorrect password "})
 						console.log("Login Unsuccessful, Incorrect username or password")
@@ -101,6 +116,31 @@ exports.user_signin = (req, res) => {
 			}	
 		}
 	});
+}
+
+exports.userSignout = (req, res) => {
+	isLoggedIn = false
+	detectedUsername = ''
+	console.log("User has signed out")
+	return res.clearCookie("accessToken", {path: '/'}).status(200).json({ message : "You have successfully logged out "})
+}
+
+exports.isLoggedIn = (req, res) => {
+	// Parse the token from the browser cookie
+	var token = req.cookies.accessToken
+	if (!token) {
+		console.log("Token does not exist")
+	} else {
+		console.log(token)
+		const data = jwt.verify(token, process.env.TOKEN_KEY)
+		detectedUsername = data.username
+		isLoggedIn = true
+	}
+
+	res.status(200).json({
+		isLoggedIn: isLoggedIn,
+		detectedUsername: detectedUsername,
+	})
 }
 
 // Data verification functions
