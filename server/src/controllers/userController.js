@@ -107,10 +107,10 @@ exports.userSignin = (req, res) => {
 							httpOnly: true,
 						})
 						
-						res.status(200).json({ message: "Login successful. Redirecting you to Homepage...", token: token }) 
+						return res.status(200).json({ message: "Login successful. Redirecting you to Homepage...", token: token }) 
 					} else {
-						res.status(400).json({ message: "Login not successful, incorrect password "})
 						console.log("Login Unsuccessful, Incorrect username or password")
+						return res.status(400).json({ message: "Login not successful, incorrect password "})
 					} 
 				})
 			}	
@@ -126,7 +126,6 @@ exports.userSignout = (req, res) => {
 
 exports.isLoggedIn = (req, res) => {
 	// Parse the token from the browser cookie
-	var name = ''
 	var token = req.cookies.accessToken
 	if (!token) {
 		console.log("Token does not exist")
@@ -144,11 +143,13 @@ exports.isLoggedIn = (req, res) => {
 			}
 			else{
 				if (docs != null) {
-					name = docs.name
-					console.log(docs.name)	
+					const name = docs.name
+					const username = docs.username
 					return res.status(200).json({
 						isLoggedIn: isLoggedIn,
 						name: name,
+						username: username,
+						role: docs.role
 					})
 				} else {
 					console.log("Unable to find user")

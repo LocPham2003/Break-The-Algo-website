@@ -1,6 +1,5 @@
 <template>
-    <h1 v-if="isLoggedIn">This is a dashboard</h1>
-    <h1 v-else>You need to login</h1>
+    <h1 v-if="isLoggedIn === true">This is a dashboard</h1>
 </template>
 
 <script>
@@ -10,30 +9,27 @@ export default {
     name: 'Dashboard',
     data() {
         return {
-            isLoggedIn: false,
+            isLoggedIn: '',
+            role: '',
             detectedUsername: '',
             message: ''
         }
     }, 
     methods: {
-        reloadPage() {
-            console.log("Reloading")
-            window.location.reload();  
-        },
-        // Run this function when this view loads
-        async fetchLoginState() {
-            const response = await UserService.fetchLoginState()
-            this.isLoggedIn = response.data.isLoggedIn
-            this.detectedUsername = response.data.detectedUsername
-        },
-        async logOut() {
-            const response = await UserService.logoutUser()
-            this.isLoggedIn = response.data.isLoggedIn
-            this.message = response.data.message
+        checkLoginState() {
+            if(!this.isLoggedIn) {
+                this.$router.push({name: 'test'})
+            }
         }
     },
     beforeMount() {
-        this.fetchLoginState()
+        const fetchData = async () => {
+            const response = await UserService.fetchLoginState()
+            this.isLoggedIn = response.data.isLoggedIn
+            this.detectedUsername = response.data.detectedUsername
+        }
+
+        fetchData()
     }
 }
 </script>

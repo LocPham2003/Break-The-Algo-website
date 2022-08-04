@@ -193,7 +193,7 @@
             <span>Copyright (C) BreakTheAlgo. All rights reserved</span>
             <br>
             <br>
-            <span>Last login: </span>
+            <span>Lastest visit: </span>
             <span>{{ date }}</span>
             <p>Glad to have you here, let's get started :)</p>
             <p>To login, type BreakTheAlgo.login(). Here for the first time ? Type BreakTheAlgo.join()</p>
@@ -227,11 +227,9 @@
 </template>
 
 <script>
-import TabNav from '../components/TabNav.vue'
-import Tab from '../components/Tab.vue'
+import TabNav from '../components/register_view_components/TabNav.vue'
+import Tab from '../components/register_view_components/Tab.vue'
 import UserService from '@/services/UserService'
-
-var isReloaded = false
 
 // for autofocusing on the terminal when the page is loaded
 const focus = {
@@ -270,6 +268,7 @@ export default {
             studyYear: '',
             username: '',
             password: '',
+            role: 'member',
             passwordReEntry: '',
             email: '',
 
@@ -364,13 +363,15 @@ export default {
                     studyMajor: this.studyMajor,
                     studyYear: this.studyYear,
                     username: this.username,
+                    role: this.role,
                     password: this.password,
                     passwordReEntry: this.passwordReEntry,
                     email: this.email
                 }).then(res => {
                     this.status = res.data.message
                     this.requestDone = true
-                    setTimeout(() => this.$router.push({name: 'memberHome'}), 2000);
+                    // Need to request the user to login again in here
+                    setTimeout(() => this.$router.go(), 2000);
                 }, err => {
                     this.status = err.response.data.message
                     this.requestDone = true

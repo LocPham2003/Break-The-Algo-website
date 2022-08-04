@@ -1,5 +1,5 @@
 <template>
-  <div class="about">
+  <!-- <div class="about">
     <h1>This is test view</h1>
     <input @input="inputName" placeholder="Enter your name">
     <br>
@@ -8,7 +8,8 @@
     <button @click="registerUser">Register</button>
     <button @click="loginUser">Login</button>
     <p>{{ status }}</p>
-</div>
+</div> -->
+    <h1>You need to login</h1>
 </template>
 
 <script>

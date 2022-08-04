@@ -8,6 +8,11 @@
   src: url(../media/TextFonts.net_jeko-font-family/Jeko\ Regular.ttf) format("truetype");
 }
 
+@font-face {
+  font-family: "Poppins";
+  src: url(../media/poppins/Poppins_Medium_500.ttf) format("truetype");
+}
+
 #app {
     font-family: Avenir, Helvetica, Arial, sans-serif, Jetbrains-mono, Jeko;
     -webkit-font-smoothing: antialiased;

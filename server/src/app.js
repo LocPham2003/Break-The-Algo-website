@@ -37,7 +37,7 @@ mongoose.connect(process.env.DATABASE_URL, {
 
 // Importing routes 
 const userRoutes = require('../src/routes/userRoutes')
-
+const eventRoutes = require('../src/routes/eventRoutes')
 // Using routes
 /**
  * Note to future self: Since you are defining the route in a different folder to help the code to be organized,
@@ -48,6 +48,7 @@ const userRoutes = require('../src/routes/userRoutes')
  * to take effect
  */
 app.use('/', userRoutes)
+app.use('/', eventRoutes)
 // Note: in several cases, it will happen that you try to start the server using npm start, but your server does not start
 // and it returns the error: Error: listen EADDRINUSE: address already in use :::8081
 // There is a simple fix to this. Go to Task Manager, search for Nodejs process and terminate it. Now it should work as normal

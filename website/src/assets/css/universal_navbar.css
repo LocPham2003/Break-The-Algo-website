@@ -1,169 +1,204 @@
 nav {
-    display: block;
-    overflow: hidden;
-    width: 100%;
-    margin: 0;
-  }
-  
-  .logo {
-    width: 1.5rem;
-    height: 1.5rem;
-  }
-  
-  nav ul{
-    margin: 0;
-    padding: 0;
-    margin: 0.5rem 0.75rem;
-  }
-  
-  ul.topnav li{
-    list-style: none;
-    float: left;
-  }
+  display: block;
+  overflow: hidden;
+  width: 100%;
+  margin: 0;
+}
 
-  ul.topnav li.dropdown_icon {
-    display: none;
-  }
+.logo {
+  width: 1.5rem;
+  height: 1.5rem;
+}
 
-  ul.topnav li.home_element {
-    display: none;
-  }
+nav ul{
+  margin: 0;
+  padding: 0;
+  margin: 0.5rem 0.75rem;
+}
 
-  ul.topnav li.collapse_icon {
-    display: none;
-  }
+ul.topnav li{
+  list-style: none;
+  float: left;
+}
 
-  /*Customize the logo container of the navigation bar*/
-  ul.topnav li.logo_container a{
-    font-size: 1rem;
-    color: white;
-    text-decoration: none;
-    padding-top: 0.5rem;
-    padding-bottom: 0.45rem;
-    padding-right: 0.25rem;
-    padding-left: 0.25rem;
-    text-align: center;
-    font-weight: bold;
-    font-family: Jetbrains-mono;
-    position: relative;
-    display: inline-block;
-  }
+ul.topnav li.dropdown_icon {
+  display: none;
+}
 
-  /*Customize the other contents of the navigation bar*/
-  ul.topnav li.text a{
-    font-size: 1rem;
-    color: white;
-    text-decoration: none;
-    padding-top: 0.6rem;
-    padding-bottom: 0.4rem;
-    padding-left: 0.5rem;
-    padding-right: 0.5rem;
-    text-align: center;
-    font-weight: bold;
-    font-family: Jetbrains-mono;
-    position: relative;
-    display: inline-block;
-  }
-  
-  /*Customize the register/ sign in button of the navigation bar*/
-  ul.topnav li.button {
-    position: relative;
-    float: right;
-    margin: 0px 10px 0px 10px;
-    text-decoration: none;
-    color: white;
-    background-color: red;
-    padding: 2px;
-    border-radius: 5px;
-    font-size: 1em;
-    font-weight: bold;
-    font-family: Jetbrains-mono;
-  }
-  
-  ul.topnav li.button a{
-    font-size: 1rem;
-    color: white;
-    text-decoration: none;
-    padding-top: 0.6rem;
-    padding-bottom: 0.4rem;
-    padding-left: 0.5rem;
-    padding-right: 0.5rem;
-    text-align: center;
-    font-weight: bold;
-    font-family: Jetbrains-mono;
-    position: relative;
-    display: inline-block;
-  }
-  
+ul.topnav li.home_element {
+  display: none;
+}
+
+ul.topnav li.collapse_icon {
+  display: none;
+}
+
+/*Customize the logo container of the navigation bar*/
+ul.topnav li.logo_container a{
+  font-size: 1rem;
+  color: white;
+  text-decoration: none;
+  padding-top: 0.5rem;
+  padding-bottom: 0.45rem;
+  padding-right: 0.25rem;
+  padding-left: 0.25rem;
+  text-align: center;
+  font-weight: bold;
+  font-family: Jetbrains-mono;
+  position: relative;
+  display: inline-block;
+}
+
+/*Customize the home text of the responsive mode of the navigation bar */
+
+ul.topnav li.home_element a {
+  font-size: 1rem;
+  color: white;
+  text-decoration: none;
+  padding-top: 0.6rem;
+  padding-bottom: 0.4rem;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+  text-align: center;
+  font-weight: bold;
+  font-family: Jetbrains-mono;
+  position: relative;
+  display: inline-block;
+}
+
+ul.topnav li.home_element a:after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  transform: scaleX(0);
+  height: 2px;
+  bottom: 0;
+  left: 0;
+  background-color: red;
+  transform-origin: bottom right;
+  transition: transform 0.25s ease-out;
+}
+
+ul.topnav li.home_element a:hover:after {
+  transform: scaleX(1);
+  transform-origin: bottom left;
+}
+
+/*Customize the other contents of the navigation bar*/
+ul.topnav li.text a{
+  font-size: 1rem;
+  color: white;
+  text-decoration: none;
+  padding-top: 0.6rem;
+  padding-bottom: 0.4rem;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+  text-align: center;
+  font-weight: bold;
+  font-family: Jetbrains-mono;
+  position: relative;
+  display: inline-block;
+}
+
+/*Customize the register/ sign in button of the navigation bar*/
+ul.topnav li.button {
+  position: relative;
+  float: right;
+  margin: 0px 10px 0px 10px;
+  text-decoration: none;
+  color: white;
+  background-color: red;
+  padding: 2px;
+  border-radius: 5px;
+  font-size: 1em;
+  font-weight: bold;
+  font-family: Jetbrains-mono;
+}
+
+ul.topnav li.button a{
+  font-size: 1rem;
+  color: white;
+  text-decoration: none;
+  padding-top: 0.6rem;
+  padding-bottom: 0.4rem;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+  text-align: center;
+  font-weight: bold;
+  font-family: Jetbrains-mono;
+  position: relative;
+  display: inline-block;
+}
+
 /*Hover animation for the logo in the navigation bar */
-  ul.topnav li.logo_container a:after {
-    content: '';
-    position: absolute;
-    width: 100%;
-    transform: scaleX(0);
-    height: 2px;
-    bottom: 0;
-    left: 0;
-    background-color: red;
-    transform-origin: bottom right;
-    transition: transform 0.25s ease-out;
-  }
+ul.topnav li.logo_container a:after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  transform: scaleX(0);
+  height: 2px;
+  bottom: 0;
+  left: 0;
+  background-color: red;
+  transform-origin: bottom right;
+  transition: transform 0.25s ease-out;
+}
 
-  ul.topnav li.logo_container a:hover:after {
-    transform: scaleX(1);
-    transform-origin: bottom left;
+ul.topnav li.logo_container a:hover:after {
+  transform: scaleX(1);
+  transform-origin: bottom left;
+}
+
+/*Hover animation for texts in the navigation bar */
+ul.topnav li.text a:after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  transform: scaleX(0);
+  height: 2px;
+  bottom: 0;
+  left: 0;
+  background-color: red;
+  transform-origin: bottom right;
+  transition: transform 0.25s ease-out;
+}
+
+ul.topnav li.text a:hover:after {
+  transform: scaleX(1);
+  transform-origin: bottom left;
+}
+
+/*Hover animation for the register button*/
+ul.topnav li.button:hover {
+  background-color: darkred;
+  transition: all 0.1s ease-in;
+}
+
+ul.topnav li.button a:hover{
+  cursor: pointer;
+}
+
+@media screen and (max-width: 650px) {
+  ul.topnav li {
+    display: none;   
   }
   
-  /*Hover animation for texts in the navigation bar */
-  ul.topnav li.text a:after {
-    content: '';
-    position: absolute;
-    width: 100%;
-    transform: scaleX(0);
-    height: 2px;
-    bottom: 0;
-    left: 0;
-    background-color: red;
-    transform-origin: bottom right;
-    transition: transform 0.25s ease-out;
+  ul.topnav li.dropdown_icon {
+    float: right;
+    display: block;
+    color: white;
   }
   
-  ul.topnav li.text a:hover:after {
-    transform: scaleX(1);
-    transform-origin: bottom left;
-  }
-
-  /*Hover animation for the register button*/
-  ul.topnav li.button:hover {
-    background-color: darkred;
-    transition: all 0.1s ease-in;
-  }
-
-  ul.topnav li.button a:hover{
+  ul.topnav li.dropdown_icon:hover {
     cursor: pointer;
   }
-
-  @media screen and (max-width: 650px) {
-    ul.topnav li {
-        display: none;   
-    }
-
-    ul.topnav li.dropdown_icon {
-      float: right;
-      display: block;
-      color: white;
-    }
-
-    ul.topnav li.dropdown_icon:hover {
-      cursor: pointer;
-    }
-
-    ul.topnav li.dropdown_icon a {
-      font-size: 1.5rem;
-      padding: 0;
-      margin-right: 5px;
-      margin-top: 3px;
-    }
+  
+  ul.topnav li.dropdown_icon a {
+    font-size: 1.5rem;
+    padding: 0;
+    margin-right: 5px;
+    margin-top: 3px;
+  }
 }
 @media screen and (max-width: 650px) {
   ul.topnav.responsive {
@@ -174,16 +209,16 @@ nav {
   /*
   Masks the burger icon so it is not visible from the user pov
   */
-
+  
   ul.topnav.responsive li:last-child {
-      display: none;
+    display: none;
   }
-
-
+  
+  
   ul.topnav.responsive {
-      position: relative;
-      margin: 0;
-      margin-top: 10px;
+    position: relative;
+    margin: 0;
+    margin-top: 10px;
   }
   
   ul.topnav.responsive li.collapse_icon {
@@ -191,15 +226,15 @@ nav {
     display: block;
     color: white;
   }
-
+  
   ul.topnav.responsive li.collapse_icon:hover {
     cursor: pointer;
   }
-
-
+  
+  
   ul.topnav.responsive li.logo_container {
-      float: none;
-      display: none;
+    float: none;
+    display: none;
   }
   
   ul.topnav.responsive li {
@@ -207,10 +242,11 @@ nav {
     display: block;
     color: white;
   }
-
-  ul.topnav.responsive li.home_element {
-    float: none;
-    display: block;
-    color: white;
+  
+  ul.topnav.responsive li.button {
+    margin-top: 5px;
+    margin-bottom: 5px;
   }
+  
+  
 }
