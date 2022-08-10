@@ -6,10 +6,10 @@ This is a website built using these following technologies
 
 Features:
 - Add a mock interview scheduling system and nomination system (Exclusive for BTA members).
-- Matchmaking tab for companies to recruit members.
 - Dashboard for upcoming events for the future.    
 - A gmail bot to send event notification if a person is subscribe. (send link from the website).
 - Newsletter (notify users with various stuff).
+- Matchmaking tab for companies to recruit members.
 
 Information:
 - Student highlights (nomination system in the feautures)

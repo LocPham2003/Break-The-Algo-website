@@ -1,0 +1,3 @@
+<template>
+    <h1>This is the user info</h1>
+</template>

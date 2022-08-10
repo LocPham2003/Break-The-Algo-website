@@ -7,11 +7,8 @@ export default {
   loginUser(params) {
     return Api().post('signin', params)
   },
-  signUpForEvent(params) {
-    return Api().post('signupevent', params)
-  },
-  fetchLoginState() {
-    return Api().get('isLoggedIn')
+  fetchUserState() {
+    return Api().get('userState')
   },
   logoutUser() {
     return Api().get('signout')

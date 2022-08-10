@@ -1,7 +1,6 @@
 <template>
     <div class="register_container">
-        <h1>One step closer to success</h1>
-        
+        <h1 style="font-family: Jeko; margin-top: 2.5%; margin-bottom: 3.5%;">One step closer to success</h1>
         <div class="ide_container">
             <nav class = "file_header">
                 <ul>
@@ -209,7 +208,6 @@
             </li>
             </div>
             
-
             <div v-if="isLogin">
                 <li v-for="index in displayedCommands" :key="index">
                 <span v-if="commands[index - 1].id != 7">&#62 </span>

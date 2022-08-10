@@ -5,37 +5,33 @@
             <svg width="1" height="40px">
                 <rect width="1" height="100" style="fill:#696969;stroke-width:0;stroke:rgb(0,0,0)" />
             </svg>
-            <h5>Facebook Networking event</h5>
+            <h5 class="event_title">{{title}}</h5>
+            <h5 class="event_code">Event code: {{code}}</h5>
         </div>
         <div class="card_body">
             <div class="card_body_time">
                 <h5>Start:</h5>
-                <p>Tuesday, May 25, 2021 - 12:30 PM</p>
+                <p>{{startTime}}</p>
 
                 <h5>End:</h5>
-                <p>Thursday, March 18, 2021 - 01:30 PM</p>
+                <p>{{endTime}}</p>
 
                 <h5>Location:</h5>
-                <p>Zoom</p>
+                <p>{{location}}</p>
             </div>
 
             <div class="card_body_description">
-                <p>Wondering how you get into Google? This talk is about the interview process at Google, and how 
-                to prepare for it. The host is Sander Alewijnse, who started his job as software engineer at Google 
-                London 7 years ago after graduating from the TU Eindhoven and being active at GEWIS. Besides 
-                his main job working on various software projects (Android, the Google Play store, Google Fit and 
-                Fitbit) he has led plenty of coding interviews and knows all the ins and outs about applying at 
-                Google, which this talk will focus on ..</p>
+                <p>{{description}}</p>
             </div>
 
             <div class="card_body_date">
                 <div class="date">
-                     <h3>MAY</h3>
-                    <h5>25</h5>
+                     <h3>{{startMonth}}</h3>
+                    <h5>{{startDate}}</h5>
                 </div>
 
                 <div class="sign_up_button">
-                    <a href="#">Sign up</a>
+                    <a @click="handleRegister" href="#">Sign up</a>
                 </div>
             </div>
         </div>    
@@ -43,13 +39,37 @@
 </template>
 
 <script>
-export default {
-    data() {
+import EventService from '@/services/EventService'
 
+export default {
+    name: "EventCard",
+    props: ["title","description", "startTime", "endTime", "location", "startMonth", "startDate", "code", "isLoggedIn"],
+    data() {
+        return {
+            name : '',
+            studyMajor : '',
+            status: '',
+        }
     }, 
     methods: {
-        async signUpForEvent() {
-            
+        handleRegister() {
+            if (this.isLoggedIn) {
+                this.sendEventRegisterRequest()
+            } else {
+                // Take the user to a page for the user to fill in their credentials
+                this.$router.push({name: "eventRegister", params: { code : this.code }})
+            }
+        }, 
+        async sendEventRegisterRequest() {
+            await EventService.eventRegister({
+                    code: this.code,
+                    name: this.name,
+                    studyMajor: this.studyMajor
+                }).then(res => {
+                    this.status = res.data.message
+                }, err => {
+                    this.status = err.response.data.message
+                })
         }
     }
 }
@@ -76,6 +96,11 @@ export default {
         align-items: center;
         flex-basis: 20%;
         margin: 0;
+    }
+
+    div.card div.card_title h5.event_code {
+        margin-right: 15px;
+        margin-left: auto;
     }
 
     div.card div.card_title i {
@@ -194,8 +219,9 @@ export default {
             margin-top: 5%;
             flex-direction: row;
             justify-content: center;
-            margin-top: 2.5%;
+            margin-top: 5%;
             align-items: center;
+            margin-bottom: 0;
         }  
 
         div.card div.card_body div.card_body_date div.sign_up_button {

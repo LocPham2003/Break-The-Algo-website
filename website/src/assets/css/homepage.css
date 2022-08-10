@@ -14,12 +14,12 @@
 }
 
 #app {
-    font-family: Avenir, Helvetica, Arial, sans-serif, Jetbrains-mono, Jeko;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    text-align: center;
-    color: #2c3e50;
-  }
+  font-family: Avenir, Helvetica, Arial, sans-serif, Jetbrains-mono, Jeko, Poppins;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+  color: #2c3e50;
+}
   
 .content {
   transform: translate(0, 25vh);

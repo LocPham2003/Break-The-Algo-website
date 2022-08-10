@@ -4,11 +4,11 @@
         href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" 
         integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" 
         crossorigin="anonymous">
-      <nav v-if="!isLoggedIn">
+      <nav v-if="isLoggedIn===false">
       <ul class = "topnav" id = "dropdown_menu">
         <li class = "logo_container"><router-link to="/"><img src = "./assets/media/bta-assets/bta.png" alt = "logo" class = "logo"/></router-link></li>
         <li class = "home_element"><router-link to="/">Home</router-link></li>
-        <li class = "text"><router-link to="/event">Event</router-link></li>
+        <li class = "text"><router-link to="/event">Events</router-link></li>
         <li class = "text"><router-link to="/blog">Blog</router-link></li>
         <li class = "text"><router-link to="/support">Support</router-link></li>
         <li class = "text"><router-link to="/about">About</router-link></li>
@@ -22,7 +22,7 @@
       <ul class = "topnav" id = "dropdown_menu">
         <li class = "logo_container"><router-link to="/memberHome"><img src = "./assets/media/bta-assets/bta.png" alt = "logo" class = "logo"/></router-link></li>
         <li class = "home_element"><router-link to="/">Home</router-link></li>
-        <li class="text"><router-link to="/event">Event</router-link></li>
+        <li class="text"><router-link to="/event">Events</router-link></li>
         <li class="text"><router-link to="/blog">Blog</router-link></li>
         <li class="text"><router-link to="/support">Support</router-link></li>
         <li class="text"><router-link to="/about">About</router-link></li>
@@ -61,7 +61,7 @@ export default {
     },
     // Get the navigation bar display according to the login state of the user
     async selectDisplay() {
-        const response = await UserService.fetchLoginState()
+        const response = await UserService.fetchUserState()
         this.isLoggedIn = response.data.isLoggedIn
     },
     // Logout the user 

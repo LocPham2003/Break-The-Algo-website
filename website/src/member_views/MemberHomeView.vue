@@ -1,4 +1,5 @@
 <template>
+    <h1 v-if="fetchingData">Loading your homescreen...</h1>
     <div v-if="isLoggedIn === true">
         <h1>Welcome back, {{ name }}</h1>
         <h2>Your role is {{ role }}</h2>
@@ -14,21 +15,24 @@ export default {
         return {
             isLoggedIn: '',
             role: '',
+            fetchingData: true,
             name: '',
             message: ''
         }
     }, 
     methods: {
         // Run this function when this view loads
-        async fetchLoginState() {
-            const response = await UserService.fetchLoginState()
-            this.isLoggedIn = response.data.isLoggedIn
-            this.role = response.data.role
-            this.name = response.data.name
+        async fetchUserState() {
+            await UserService.fetchUserState().then(res => {
+                this.fetchingData = false
+                this.isLoggedIn = res.data.isLoggedIn
+                this.role = res.data.role
+                this.name = res.data.name
+            })
         }
     },
     created() {
-        this.fetchLoginState() 
+        this.fetchUserState() 
         if (localStorage.getItem('reloaded')) {
             // The page was just reloaded. Clear the value from local storage
             // so that it will reload the next time this page is visited.

@@ -8,6 +8,9 @@ import RegisterView from '../non_member_views/RegisterView.vue'
 import TestView from '../non_member_views/TestView'
 import MemberHomeView from '../member_views/MemberHomeView.vue'
 import DashboardView from '../member_views/DashboardView.vue'
+import UserInfoView from '../components/dashboard_view_component/UserInfoView.vue'
+import EventRegisterView from '../components/event_view_components/EventRegisterView.vue'
+
 const routes = [  
   {
     path: '/',
@@ -23,6 +26,12 @@ const routes = [
     path: '/event',
     name: 'event',
     component: EventView,
+  },
+  // Paths for event utilities
+  {
+    path: '/event/eventRegister',
+    name: 'eventRegister',
+    component: EventRegisterView,
   },
   {
     path: '/blog',
@@ -53,6 +62,12 @@ const routes = [
     path: '/dashboard',
     name: 'dashboard',
     component: DashboardView
+  },
+  // Paths for dashboard utilities
+  {
+    path: '/dashboard/userInfo',
+    name: 'userInfo',
+    component: UserInfoView
   }
 ]
 

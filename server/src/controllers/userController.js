@@ -5,7 +5,6 @@ const dotenv = require('dotenv');
 dotenv.config({ path: './.env' });
 
 const salt = 10
-var isLoggedIn = false 
 
 // Route for signing up a new user
 exports.userSignup = (req, res) => {
@@ -47,7 +46,6 @@ exports.userSignup = (req, res) => {
 											error: "Unable to add user"
 										})
 									} else {
-										isLoggedIn = true
 										return res.json({
 											message: "Success! Welcome to Break The Algo, " + user.name + " :D. You are now a member, so you can login"
 										})
@@ -100,8 +98,6 @@ exports.userSignin = (req, res) => {
 						// Need to find a way to pass this token into the browser's cookie
 						const token = jwt.sign({username: docs.username}, process.env.TOKEN_KEY)
 						
-						isLoggedIn = true
-
 						// Store this token in the cookie
 						res.cookie("accessToken", token, {
 							httpOnly: true,
@@ -119,20 +115,21 @@ exports.userSignin = (req, res) => {
 }
 
 exports.userSignout = (req, res) => {
-	isLoggedIn = false
 	console.log("User has signed out")
 	return res.clearCookie("accessToken", {path: '/'}).status(200).json({ message : "You have successfully logged out "})
 }
 
-exports.isLoggedIn = (req, res) => {
+exports.userState = (req, res) => {
 	// Parse the token from the browser cookie
 	var token = req.cookies.accessToken
 	if (!token) {
 		console.log("Token does not exist")
+		return res.status(200).json({
+			isLoggedIn: false,
+		})
 	} else {
 		console.log(token)
 		const data = jwt.verify(token, process.env.TOKEN_KEY)
-		isLoggedIn = true
 
 		User.findOne({username: data.username}, function (err, docs) {
 			if (err){
@@ -145,11 +142,18 @@ exports.isLoggedIn = (req, res) => {
 				if (docs != null) {
 					const name = docs.name
 					const username = docs.username
+					const studyMajor = docs.studyMajor
+					const studyYear = docs.studyYear
+					const role = docs.role
+					const email = docs.email
 					return res.status(200).json({
-						isLoggedIn: isLoggedIn,
+						isLoggedIn: true,
 						name: name,
+						studyYear: studyYear,
+						studyMajor: studyMajor,
 						username: username,
-						role: docs.role
+						role: role,
+						email : email
 					})
 				} else {
 					console.log("Unable to find user")
