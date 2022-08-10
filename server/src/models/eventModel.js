@@ -15,7 +15,8 @@ const eventSchema = new Schema({
     description: String,
     participants: [{
         name: String,
-        studyMajor: String
+        studyMajor: String,
+        email: String
     }]
 })
 

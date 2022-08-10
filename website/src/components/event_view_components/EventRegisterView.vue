@@ -3,30 +3,67 @@
     <p style=" color: white; font-size: 30px; font-family: Jeko; margin-bottom: 2.5%;">It seems you aren't a member. Please fill in your information below</p>
     <div class="content_container">
         <h2>Event code</h2>
-        <input>
+        <input v-bind:id="0" @input="getData">
         
         <h2>Name:</h2>
-        <input>
+        <input v-bind:id="1" @input="getData">
 
         <h2>Study major:</h2>
-        <input>
+        <input v-bind:id="2" @input="getData">
 
-        <h2>University</h2>
-        <input>
-
-        <h2>Email</h2>
-        <input>
+        <h2>Email (Optional)</h2>
+        <input v-bind:id="3" @input="getData">
 
         <a class="button" @click="submit">Submit</a>
+        <p style=" color: white; font-size: 30px; font-family: Jeko; margin-bottom: 2.5%;">{{status}}</p>
     </div>
 
 </template>
 
 <script>
+import EventService from '@/services/EventService';
+
 export default {
     data() {
         return {
-            
+            eventCode: '',
+            name: '',
+            studyMajor: '',
+            email: '',
+            hasSignup: false,
+            status: ''
+        }
+    },
+    methods: {
+        getData(e) {
+            switch(parseInt(e.target.id)) {
+                case 0:
+                    this.eventCode = e.target.value;
+                    break;
+                case 1:
+                    this.name = e.target.value;
+                    break;
+                case 2:
+                    this.studyMajor = e.target.value;
+                    break;
+                case 3:
+                    this.email = e.target.value;
+                    break;
+            }
+        },
+        async submit() {
+           if (this.name == '' || this.eventCode == '' || this.studyMajor == '') {
+                this.status = "Please fill in all required information"
+           } else {
+                await EventService.eventRegister({
+                    code: this.eventCode,
+                    name: this.name,
+                    studyMajor: this.studyMajor,
+                    email: this.email
+                }).then(res => {
+                    this.status = res.data.message;
+                })
+           }
         }
     }
 }

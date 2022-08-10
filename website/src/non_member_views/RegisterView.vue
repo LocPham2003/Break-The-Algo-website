@@ -276,9 +276,6 @@ export default {
         }
     },
     methods: {
-        setCookie(cookieName, cookieValue) {
-            document.cookie = cookieName + "=" + cookieValue
-        },
         setSelected(tab) {
             this.selected = tab;
             if (tab === 'Java') {
@@ -381,7 +378,6 @@ export default {
                     password: this.password
                 }).then(res => {
                     this.status = res.data.message
-                    //this.setCookie('accessToken', res.data.token)]
                     this.requestDone = true
                     setTimeout(() => this.$router.push({name: 'memberHome'}), 2000);
                 }, err => {

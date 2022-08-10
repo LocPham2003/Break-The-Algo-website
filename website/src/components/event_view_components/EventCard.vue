@@ -6,7 +6,6 @@
                 <rect width="1" height="100" style="fill:#696969;stroke-width:0;stroke:rgb(0,0,0)" />
             </svg>
             <h5 class="event_title">{{title}}</h5>
-            <h5 class="event_code">Event code: {{code}}</h5>
         </div>
         <div class="card_body">
             <div class="card_body_time">
@@ -31,10 +30,12 @@
                 </div>
 
                 <div class="sign_up_button">
-                    <a @click="handleRegister" href="#">Sign up</a>
+                    <a v-if="!isSignedUp" @click="handleRegister" href="#">Sign up</a>
+                    <a v-else @click="handleRegister" href="#">De-register</a>
                 </div>
             </div>
-        </div>    
+        </div>   
+    <p v-if="show" style="color: white; font-size: 30px; font-family: Jeko;">{{status}}</p>
     </div>
 </template>
 
@@ -43,12 +44,11 @@ import EventService from '@/services/EventService'
 
 export default {
     name: "EventCard",
-    props: ["title","description", "startTime", "endTime", "location", "startMonth", "startDate", "code", "isLoggedIn"],
+    props: ["name", "studyMajor", "title","description", "startTime", "endTime", "location", "startMonth", "startDate", "code", "isLoggedIn", "isSignedUp"],
     data() {
         return {
-            name : '',
-            studyMajor : '',
             status: '',
+            show: false
         }
     }, 
     methods: {
@@ -57,20 +57,36 @@ export default {
                 this.sendEventRegisterRequest()
             } else {
                 // Take the user to a page for the user to fill in their credentials
-                this.$router.push({name: "eventRegister", params: { code : this.code }})
+                this.$router.push({name: "eventRegister"})
             }
         }, 
         async sendEventRegisterRequest() {
-            await EventService.eventRegister({
+            if (!this.isSignedUp) {
+                await EventService.eventRegister({
                     code: this.code,
                     name: this.name,
                     studyMajor: this.studyMajor
                 }).then(res => {
+                    this.show = true
                     this.status = res.data.message
+                    setTimeout(() => this.$router.go(), 2000);
                 }, err => {
                     this.status = err.response.data.message
                 })
-        }
+            } else {
+                await EventService.eventDeregister({
+                    code: this.code,
+                    name: this.name,
+                    studyMajor: this.studyMajor
+                }).then(res => {
+                    this.show = true
+                    this.status = res.data.message
+                    setTimeout(() => this.$router.go(), 2000);
+                }, err => {
+                    this.status = err.response.data.message
+                })
+            }
+        }        
     }
 }
 </script>
@@ -149,7 +165,7 @@ export default {
     div.card div.card_body div.card_body_time p {
         text-align: left;
         margin: 0;
-        font-size: 12.5px;
+        font-size: 15px;
         text-decoration: none;
     }
 
