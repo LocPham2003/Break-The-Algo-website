@@ -1,5 +1,5 @@
 <template>
-    <div class="content_container">
+    <div v-if="!fetchingData && isLoggedIn" class="content_container">
         <h1 style="font-family: Jeko; margin-top: 2.5%; margin-bottom: 3.5%;">Upcoming interviews</h1>
         
         <div class="interview_container">
@@ -30,7 +30,9 @@ export default {
     data() {
         return {
             interviewer: '',
-            interviews: []
+            interviews: [],
+            isLoggedIn: false,
+            fetchingData: true
         }
     },
     methods: {
@@ -40,6 +42,7 @@ export default {
         const fetchData = async() => {
             await UserService.fetchUserState().then(res => {
                 this.interviewer = res.data.name
+                this.isLoggedIn = res.data.isLoggedIn
             })
 
             await InterviewService.getIntervewSchedule({
@@ -64,6 +67,8 @@ export default {
                         this.interviews.push(interviewRow)
                     }
                 }
+
+                this.fetchingData = false;
             }, err => {
                 console.log(err)
             })

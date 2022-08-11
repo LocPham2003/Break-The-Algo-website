@@ -1,3 +1,215 @@
 <template>
-    <h1>This is the user info</h1>
+    <div v-if="!fetchingData && isLoggedIn" class="content_container">
+        <h1 style="font-family: Jeko; margin-top: 2.5%; margin-bottom: 2.5%;">User Information</h1>
+        <div class="user_info_container">
+            <div class="profile_row">
+                <div class="profile_card">
+                    <i class="fa fa-user"></i>
+                    <h3>{{userInfoArr[1].data}}</h3>
+                    <p>Data Scientist Intern at Tesla</p>
+
+                <div class="socials">
+                    <i class="fab fa-twitter"></i>
+                    <i class="fab fa-instagram"></i>
+                    <i class="fab fa-facebook"></i>
+                    <i class="fab fa-linkedin"></i>
+                    <i class="fab fa-discord"></i>
+                </div>
+                </div>
+                
+            </div>
+
+            <div class="database_information">
+                <div class="information_row" v-for="attributes in userInfoArr">
+                    <h5 class="text">{{userInfoArr[attributes.id].text}}</h5>
+                    <h5 class="data">{{userInfoArr[attributes.id].data}}</h5>
+                </div>
+
+                <div class="button_container">
+                    <div class="button_row" style="margin-bottom: 25px; margin-top: 10px;">
+                        <a id="1" @click="onClick($event)" class="profile_button">Edit description</a>
+                        <a id="2" @click="onClick($event)" class="profile_button">Add social media</a>
+                        <a id="3" @click="onClick($event)" class="profile_button">Add profile picture</a>
+                    </div>
+                    <div class="button_row">
+                        <a id="4" @click="onClick($event)" class="profile_button">Change password</a>
+                        <a id="5" @click="onClick($event)" class="profile_button">Change information</a>
+                    </div>
+                    
+                </div>
+            </div>
+            
+        </div>
+    </div>
 </template>
+
+<script>
+import UserService from '@/services/UserService'
+export default {
+    data() {
+        return {
+            isLoggedIn: false,
+            fetchingData: true,
+            userInfoArr: [],
+
+        }
+    },
+    methods: {
+        onClick(event) {
+            console.log(event.currentTarget.id)
+        }
+    }, 
+    beforeMount() {
+        const fetchData = async() => {
+            await UserService.fetchUserState().then(res => {
+                this.isLoggedIn = res.data.isLoggedIn
+                this.userInfoArr.push({id: 0, text: "Username",data: res.data.username})
+                this.userInfoArr.push({id: 1, text: "Name",data: res.data.name})
+                this.userInfoArr.push({id: 2, text: "Study Major",data: res.data.studyMajor})
+                this.userInfoArr.push({id: 3, text: "Study Year",data: res.data.studyYear})
+                this.userInfoArr.push({id: 4, text: "Role",data: res.data.role})
+                this.userInfoArr.push({id: 5, text: "Email",data: res.data.email})
+                this.fetchingData = false
+            })
+        }
+
+        fetchData()
+    }
+}
+</script>
+
+<style>
+.content_container {
+    margin-bottom: 100px;
+}
+
+.content_container .user_info_container {
+    display: flex;
+    flex-direction: row;
+    justify-content: left;
+    align-items: left;
+    width: 100%;
+    height: 100%;
+}
+
+.content_container .user_info_container .profile_row {
+    display: flex;
+    flex-direction: column;
+    margin-right: 5%;
+    flex-basis: 30%;
+}
+
+.content_container .user_info_container .profile_row .profile_card {
+    border-style: solid;
+    padding-top: 75px;
+    padding-bottom: 75px;
+    padding-left: 30px;
+    padding-right: 30px;
+    border-color: white;
+}
+
+.content_container .user_info_container .profile_row .profile_card i {
+    color: white;
+    font-size: 60px;
+    padding: 10%;
+    border-style: solid;
+    border-radius: 50%;
+    margin-bottom: 5%;
+}
+
+
+.content_container .user_info_container .profile_row .profile_card h3 {
+    text-align: center;
+    color: white;
+    margin-left: 5%;
+    margin-right: 5%;
+}
+
+.content_container .user_info_container .profile_row .profile_card p {
+    text-align: center;
+    color: white;
+    margin-left: 5%;
+    margin-right: 5%;
+}
+
+.content_container .user_info_container .profile_row .profile_card .socials i {
+    padding: 0;
+    font-size: 16px;
+    margin: 10px;
+    border-radius: 0;
+    border-style: none;
+}
+
+.content_container .user_info_container .profile_row .profile_card .socials i:hover {
+    cursor:pointer;    
+    color: red;
+}
+
+.content_container .user_info_container .database_information {
+    display: flex;
+    flex-direction: column;
+    flex-basis: 70%;
+    border-style: solid;
+    border-color: white;
+}
+
+.content_container .user_info_container .database_information .information_row {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    padding: 12.5px;
+    
+}
+
+.content_container .user_info_container .database_information .information_row h5.text {
+    font-family: Poppins;
+    text-align: left;
+    margin: 0;
+}
+
+.content_container .user_info_container .database_information .information_row h5.data {
+    font-family: Poppins;
+    text-align: right;
+    margin: 0;
+}
+
+.content_container .user_info_container .database_information .button_container a.profile_button {
+    text-decoration: none;
+    margin: 10px;
+    padding: 5px;
+    border-radius: 5px;
+    color: white;
+    background-color: red;
+    font-family: Poppins;
+}
+
+.content_container .user_info_container .database_information .button_container a.profile_button:hover {
+    cursor: pointer;
+    background-color: darkred;   
+}
+
+@media screen and (max-width: 650px) {
+    .content_container .user_info_container {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        height: 100%;
+    }
+
+    .content_container .user_info_container .profile_row {
+        margin: 0;
+        margin-bottom: 2.5%;
+        width: 100%;
+    }
+
+    .content_container .user_info_container .database_information {
+        width: 100%;
+        padding-bottom: 20px;
+    }
+
+
+}
+
+</style>
