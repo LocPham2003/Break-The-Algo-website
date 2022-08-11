@@ -83,7 +83,7 @@ export default {
                     break;
                 case 2:
                     // Need to finish all other cases
-                    console.log("Yes")
+                    this.$router.push({name: 'userEvents'})
                     break;
                 case 3:
                     this.$router.push({name: 'resources'})
@@ -91,6 +91,22 @@ export default {
                 case 4:
                     this.$router.push({name: 'mockInterview'})
                     break;
+                case 5:
+                    this.$router.push({name: 'nominate'})
+                    break;
+                case 6:
+                    this.$router.push({name: 'schedule'})
+                    break;
+                case 7:
+                    this.$router.push({name: 'history'})
+                    break;
+                case 8: 
+                    this.$router.push({name: 'postEvent'})
+                    break;
+                case 9: 
+                    this.$router.push({name: 'manageEvent'})
+                    break;
+
             }
         }
     },

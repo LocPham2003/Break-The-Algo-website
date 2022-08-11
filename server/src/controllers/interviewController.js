@@ -15,3 +15,21 @@ exports.scheduleInterview = (req, res) => {
         }
     })
 }
+
+exports.getInterviewSchedule = (req, res) => {
+    const interviewer = req.body.interviewer
+
+    Interview.find({interviewer: interviewer}, function (err, docs) {
+        if (err){
+            res.status(400).json({
+                message: "Get interview list gone wrong"
+            })		
+            console.log("Something happened")
+        }
+        else{
+            res.send(docs)
+        }
+    });
+
+
+}

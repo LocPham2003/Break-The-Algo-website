@@ -53,7 +53,7 @@ export default {
         },
         async submit() {
             await InterviewService.scheduleInterview({
-                date: this.dates,
+                date: this.date,
                 time: this.time,
                 company: this.company,
                 interviewer: this.selectedInterviewer,
