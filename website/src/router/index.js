@@ -7,9 +7,19 @@ import AboutView from '../non_member_views/AboutView.vue'
 import RegisterView from '../non_member_views/RegisterView.vue'
 import TestView from '../non_member_views/TestView'
 import MemberHomeView from '../member_views/MemberHomeView.vue'
+import EventRegisterView from '../components/event_view_components/EventRegisterView.vue'
+
+// Dashboard utilities
 import DashboardView from '../member_views/DashboardView.vue'
 import UserInfoView from '../components/dashboard_view_component/UserInfoView.vue'
-import EventRegisterView from '../components/event_view_components/EventRegisterView.vue'
+import UserEventView from '../components/dashboard_view_component/UserEventView.vue'
+import ResourcesView from '../components/dashboard_view_component/ResourcesView.vue'
+import MockInterviewView from '../components/dashboard_view_component/MockInterviewView.vue'
+import NominateView from '../components/dashboard_view_component/NominateView.vue'
+import ScheduleView from '../components/dashboard_view_component/ScheduleView.vue'
+import HistoryView from '../components/dashboard_view_component/HistoryView.vue'
+import EventPostView from '../components/dashboard_view_component/EventPostView.vue'
+import EventManageView from '../components/dashboard_view_component/EventManageView.vue'
 
 const routes = [  
   {
@@ -64,10 +74,53 @@ const routes = [
     component: DashboardView
   },
   // Paths for dashboard utilities
+  // Member utilities
   {
     path: '/dashboard/userInfo',
     name: 'userInfo',
     component: UserInfoView
+  },
+  {
+    path: '/dashboard/userEvents',
+    name: 'userEvents',
+    component: UserEventView
+  },
+  {
+    path: '/dashboard/resources',
+    name: 'resources',
+    component: ResourcesView
+  },
+  {
+    path: '/dashboard/mockInterview',
+    name: 'mockInterview',
+    component: MockInterviewView
+  },
+  {
+    path: '/dashboard/nominate',
+    name: 'nominate',
+    component: NominateView
+  },
+  // Interview committee utilities
+  {
+    path: '/dashboard/schedule',
+    name: 'schedule',
+    component: ScheduleView
+  },
+  {
+    path: '/dashboard/history',
+    name: 'history',
+    component: HistoryView
+  },
+  // Activity committee utilities
+  {
+    path: '/dashboard/postEvent',
+    name: 'postEvent',
+    component: EventPostView
+  },
+  {
+    path: '/dashboard/manageEvent',
+    name: 'manageEvent',
+    component: EventManageView
   }
 ]
 

@@ -1,11 +1,11 @@
 <template>
     <p style="color: white; font-size: 30px; font-family: Jeko; margin-top: 10%" v-if="fetchingInfo">Please wait, fetching events from database...</p>
     <div class="header_container">
-        <a class="event_selector" id="0" @click="onClick($event)" v-if="fetchingInfo === false">Upcoming events</a>
+        <a class="event_selector" id="0" @click="onClick($event)">Upcoming events</a>
         <svg width="2.5" height="40px">
             <rect width="2.5" height="100" style="fill:white;stroke-width:0;stroke:rgb(0,0,0)" />
         </svg>
-        <a class="event_selector" id="1" @click="onClick($event)" v-if="fetchingInfo === false">Past events</a> 
+        <a class="event_selector" id="1" @click="onClick($event)">Past events</a> 
     </div>
     <div class="event_container">
         <div v-if="activeSession === 0" v-for="event in events">
@@ -71,12 +71,12 @@ export default {
                 })
             }
             })
-            
+
             const userResponse = await UserService.fetchUserState()
             this.isLoggedIn = userResponse.data.isLoggedIn
             this.name = userResponse.data.name
             this.studymajor = userResponse.data.studyMajor
-
+            
             if (this.isLoggedIn) {
                 await EventService.fetchSignedupEventList({ name: this.name }).then(res => {
                     if (res.data.length != 0) {
@@ -90,6 +90,8 @@ export default {
                     }
                     
                 })
+                this.fetchingInfo = false
+            } else {
                 this.fetchingInfo = false
             }
 

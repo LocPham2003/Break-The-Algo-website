@@ -85,6 +85,12 @@ export default {
                     // Need to finish all other cases
                     console.log("Yes")
                     break;
+                case 3:
+                    this.$router.push({name: 'resources'})
+                    break;
+                case 4:
+                    this.$router.push({name: 'mockInterview'})
+                    break;
             }
         }
     },
@@ -120,12 +126,13 @@ export default {
 <style>
 
 h1 {
-    font-family: Poppins;
+    font-family: Jeko;
 }
 
 div.dashboard_container div.row_container {
     display: flex;
     flex-direction: row;
+    font-family: Poppins;
     justify-content: center;
     align-items: center;
     height: fit-content;
