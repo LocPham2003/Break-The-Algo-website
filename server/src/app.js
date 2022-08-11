@@ -48,14 +48,17 @@ const interviewRoutes = require('../src/routes/interviewRoutes')
  * In this case, app.use(the_route), hence, cookie-parser and body-parser must be declared in app.js in order for the libary
  * to take effect
  */
-app.use('/', userRoutes)
-app.use('/', eventRoutes)
-app.use('/', interviewRoutes)
+app.use('/api', userRoutes)
+app.use('/api', eventRoutes)
+app.use('/api', interviewRoutes)
+
 // Note: in several cases, it will happen that you try to start the server using npm start, but your server does not start
 // and it returns the error: Error: listen EADDRINUSE: address already in use :::8081
 // There is a simple fix to this. Go to Task Manager, search for Nodejs process and terminate it. Now it should work as normal
-app.listen(process.env.PORT, () => {
-	console.log("Server started at " + process.env.PORT)
+const port = process.env.PORT || 5000
+
+app.listen(port, () => {
+	console.log("Server started at " + port)
 })
 
 // Add a new user
