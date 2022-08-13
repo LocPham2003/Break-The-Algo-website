@@ -45,6 +45,13 @@
                 <p>Manage Events</p>
             </div>
         </div>
+
+        <div v-if="role===0" class="row_container">
+            <div id="10" @click="onClick" class="utility">
+                <i class="fa fa-check"></i>
+                <p>Nominations</p>
+            </div>
+        </div>
     </div>
 </template>
 
@@ -105,6 +112,9 @@ export default {
                     break;
                 case 9: 
                     this.$router.push({name: 'manageEvent'})
+                    break;
+                case 10: 
+                    this.$router.push({name: 'nominations'})
                     break;
 
             }

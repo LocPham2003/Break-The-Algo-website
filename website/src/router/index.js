@@ -8,7 +8,6 @@ import RegisterView from '../non_member_views/RegisterView.vue'
 import TestView from '../non_member_views/TestView'
 import MemberHomeView from '../member_views/MemberHomeView.vue'
 import EventRegisterView from '../components/event_view_components/EventRegisterView.vue'
-
 // Dashboard utilities
 import DashboardView from '../member_views/DashboardView.vue'
 import UserInfoView from '../components/dashboard_view_component/UserInfoView.vue'
@@ -20,6 +19,7 @@ import ScheduleView from '../components/dashboard_view_component/ScheduleView.vu
 import HistoryView from '../components/dashboard_view_component/HistoryView.vue'
 import EventPostView from '../components/dashboard_view_component/EventPostView.vue'
 import EventManageView from '../components/dashboard_view_component/EventManageView.vue'
+import NominationsView from '../components/dashboard_view_component/NominationsView.vue'
 
 const routes = [  
   {
@@ -121,6 +121,11 @@ const routes = [
     path: '/dashboard/manageEvent',
     name: 'manageEvent',
     component: EventManageView
+  },
+  {
+    path: '/dashboard/nominations',
+    name: 'nominations',
+    component: NominationsView
   }
 ]
 

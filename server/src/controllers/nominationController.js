@@ -16,3 +16,17 @@ exports.nominationCreate = (req, res) => {
         }
     })
 }
+
+exports.getNominations = (req, res) => {
+    Nomination.find({}, function (err, docs) {
+        if (err){
+            res.status(400).json({
+                message: "Get nomination list gone wrong"
+            })		
+            console.log("Something happened")
+        }
+        else{
+            res.send(docs)
+        }
+    });
+}

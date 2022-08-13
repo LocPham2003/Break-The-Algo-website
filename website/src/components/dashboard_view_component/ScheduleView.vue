@@ -86,7 +86,6 @@ export default {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    margin-bottom: 100px;
 }
 
 .interview_container .interview_row {
