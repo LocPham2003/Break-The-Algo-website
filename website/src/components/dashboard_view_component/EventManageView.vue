@@ -1,0 +1,161 @@
+<template>
+    <div v-if="!fetchingData && isLoggedIn">
+        <h1 style="font-family: Jeko; margin-top: 2.5%; margin-bottom: 3.5%;">Manage Event</h1>
+        <div class="event_manage_card" v-for="event in events">
+            <h3>{{event.title}} - {{event.code}}</h3>
+            <div class="event_manage_card_body">
+                <div class="event_manage_card_time">
+                    <h5>Start time - End time</h5>
+                    <p>{{event.startTime}} - {{event.endTime}}</p>
+
+                    <h5>Month and date</h5>
+                    <p>{{event.startMonth}} {{event.startDate}}</p>
+
+                    <h5>Location</h5>
+                    <p>{{event.location}}</p>
+                </div>
+
+                <div class="event_manage_card_description">
+                    <h5>Description</h5>
+                    <p>{{event.description}}</p>
+                </div>
+
+                <div class="event_manage_card_buttons">
+                    <div style="display: flex; flex-direction: column; justify-content: center; align-items: center;">
+                        <a id="0" @click="onClick($event)" class="event_manage_button">Edit Event</a>
+                        <a id="1" @click="onClick($event)" class="event_manage_button">Delete Event</a>
+                        <a id="2" @click="onClick($event)" class="event_manage_button">Hide Event</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div v-else>
+        <h1>Fetching from database, please wait</h1>
+    </div>
+</template>
+
+<script>
+import EventService from '@/services/EventService'
+import UserService from '@/services/UserService'
+export default {
+    data() {
+        return {
+            isLoggedIn: false,
+            fetchingData: true,
+            events: []
+        }
+    }, 
+    methods: {
+
+    }, 
+    beforeMount() {
+        const fetchData = async() => {
+            await EventService.fetchEventList().then(res => {
+                for (var i = 0; i < res.data.length; i++) {
+                this.events.push({
+                    title: res.data[i].title,
+                    description: res.data[i].description,
+                    startTime: res.data[i].startTime,
+                    endTime: res.data[i].endTime,
+                    location: res.data[i].location,
+                    startMonth: res.data[i].startMonth,
+                    startDate: res.data[i].startDate,
+                    code: res.data[i].code
+                })
+            }
+            })
+
+            await UserService.fetchUserState().then(res =>{
+                this.isLoggedIn = res.data.isLoggedIn
+                this.fetchingData = false;
+            })
+        }
+        fetchData()
+    }
+}
+</script>
+
+<style>
+.event_manage_card {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: left;
+    background-color: #2E2E2F;
+    border-radius: 10px;
+    margin: 15px;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+.event_manage_card .event_manage_card_body {
+    display: flex;
+    flex-direction: row;
+}
+
+.event_manage_card h3 {
+    text-align: center;
+    font-family: Poppins;
+    color: white;
+}
+
+.event_manage_card h5{
+    text-align: left;
+    color: white;
+    font-family: Poppins;
+}
+
+.event_manage_card p{
+    text-align: justify;
+    display: block;
+    color: white;
+    font-family: Poppins;
+}
+
+.event_manage_card .event_manage_card_body .event_manage_card_description {
+    padding: 10px;
+    margin-left: 10px;
+    margin-right: 10px;
+    width: 40%;
+}
+
+.event_manage_card .event_manage_card_body .event_manage_card_time {
+    width: 30%;
+    padding: 10px;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.event_manage_card .event_manage_card_body .event_manage_card_buttons {
+    padding: 10px;
+    width: 30%;
+    margin-left: 10px;
+    margin-right: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.event_manage_card .event_manage_card_body .event_manage_card_buttons a.event_manage_button {
+    text-decoration: none;
+    font-family: Poppins;
+    color: white;
+    border-radius: 10px;
+    background-color: red;
+    margin: 10px;
+    padding: 10px 20px;
+}
+
+.event_manage_card .event_manage_card_body .event_manage_card_buttons a.event_manage_button:hover {
+    color: white;
+    background-color: darkred;
+    cursor: pointer;
+}
+
+
+</style>

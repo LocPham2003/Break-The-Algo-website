@@ -3,18 +3,18 @@
     <p style=" color: white; font-size: 30px; font-family: Jeko; margin-bottom: 2.5%;">It seems you aren't a member. Please fill in your information below</p>
     <div class="event_register_container">
         <h2>Event code</h2>
-        <input v-bind:id="0" @input="getData">
+        <input placeholder="Enter event code" v-bind:id="0" @input="getData">
         
         <h2>Name:</h2>
-        <input v-bind:id="1" @input="getData">
+        <input placeholder="Enter your name" v-bind:id="1" @input="getData">
 
         <h2>Study major:</h2>
-        <input v-bind:id="2" @input="getData">
+        <input placeholder="Enter your study major" v-bind:id="2" @input="getData">
 
         <h2>Email (Optional)</h2>
-        <input v-bind:id="3" @input="getData">
+        <input placeholder="Enter your email" v-bind:id="3" @input="getData">
 
-        <a class="button" @click="submit">Submit</a>
+        <a class="submit_button" @click="submit">Submit</a>
         <p style=" color: white; font-size: 30px; font-family: Jeko; margin-bottom: 2.5%;">{{status}}</p>
     </div>
 
@@ -97,7 +97,7 @@ export default {
     width: 100%;
 }
 
-a.button {
+a.submit_button {
     background-color: red;
     color: white;
     font-family: Poppins;
@@ -109,7 +109,7 @@ a.button {
     margin-bottom: 30px;
 }
 
-a.button:hover {
+a.submit_button:hover {
     cursor: pointer;
     color: white;
     background-color: darkred;

@@ -7,6 +7,9 @@ export default {
     eventDeregister(params) {
         return Api().post('eventDeregister', params)
     },
+    eventCreate(params) {
+        return Api().post('eventCreate', params)
+    },
     fetchEventList() {
         return Api().get('eventList')
     },

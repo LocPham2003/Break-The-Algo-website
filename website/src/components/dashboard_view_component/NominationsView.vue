@@ -1,6 +1,6 @@
 <template>
     <div class="nominations_container">
-        <h1 style="font-family: Jeko; margin-top: 2.5%; margin-bottom: 3.5%;">List of Nominations</h1>
+            <h1 style="font-family: Jeko; margin-top: 2.5%; margin-bottom: 3.5%;">List of Nominations</h1>
         <div class="nomination_container">
             <div class="nomination_row" v-for="nominationrow in nominations">
             <div class="nomination_card" v-for="nomination in nominationrow">

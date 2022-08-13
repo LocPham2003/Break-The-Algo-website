@@ -33,13 +33,13 @@ const routes = [
     component: TestView
   },
   {
-    path: '/event',
-    name: 'event',
+    path: '/events',
+    name: 'events',
     component: EventView,
   },
   // Paths for event utilities
   {
-    path: '/event/eventRegister',
+    path: '/events/eventRegister',
     name: 'eventRegister',
     component: EventRegisterView,
   },

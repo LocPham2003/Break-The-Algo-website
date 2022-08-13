@@ -62,6 +62,7 @@ export default {
                 this.events.push({
                     title: res.data[i].title,
                     description: res.data[i].description,
+                    isSignedUp: false,
                     startTime: res.data[i].startTime,
                     endTime: res.data[i].endTime,
                     location: res.data[i].location,
@@ -72,31 +73,38 @@ export default {
             }
             })
 
-            const userResponse = await UserService.fetchUserState()
-            this.isLoggedIn = userResponse.data.isLoggedIn
-            this.name = userResponse.data.name
-            this.studymajor = userResponse.data.studyMajor
+            await UserService.fetchUserState().then(res => {
+                this.isLoggedIn = res.data.isLoggedIn
+                this.name = res.data.name
+                this.studymajor = res.data.studyMajor
+            })
             
             if (this.isLoggedIn) {
                 await EventService.fetchSignedupEventList({ name: this.name }).then(res => {
                     if (res.data.length != 0) {
                         var j = 0;
-                        for (var i = 0; i < this.events.length; i++) {
+                        var i = 0;
+                        while (i < this.events.length) {
+                            if (j === res.data.length) {
+                                break;
+                            }
+
                             if (this.events[i].code === res.data[j].code) {
+                                console.log(this.events[i].code + ' ' + res.data[j].code)
                                 this.events[i].isSignedUp = true;
                                 j++;
+                                i = 0;
                             }
+                            i++;
                         }
                     }
-                    
+                    this.fetchingInfo = false
                 })
-                this.fetchingInfo = false
             } else {
                 this.fetchingInfo = false
             }
-
-            
         }
+
 
         fetchData()
     }

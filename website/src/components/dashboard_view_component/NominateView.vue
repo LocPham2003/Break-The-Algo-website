@@ -60,7 +60,7 @@ export default {
             }
         },
         async postNomination() {
-            NominationService.nominationCreate({
+            await NominationService.nominationCreate({
                 name: this.name,
                 studyMajor: this.studyMajor,
                 description: this.description

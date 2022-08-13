@@ -5,7 +5,7 @@
             <svg width="1" height="40px">
                 <rect width="1" height="100" style="fill:#696969;stroke-width:0;stroke:rgb(0,0,0)" />
             </svg>
-            <h5 class="event_title">{{title}}</h5>
+            <h5 class="event_title">{{title}} - {{code}}</h5>
         </div>
         <div class="card_body">
             <div class="card_body_time">
@@ -69,7 +69,6 @@ export default {
                 }).then(res => {
                     this.show = true
                     this.status = res.data.message
-                    setTimeout(() => this.$router.go(), 2000);
                 }, err => {
                     this.status = err.response.data.message
                 })
@@ -81,7 +80,6 @@ export default {
                 }).then(res => {
                     this.show = true
                     this.status = res.data.message
-                    setTimeout(() => this.$router.go(), 2000);
                 }, err => {
                     this.status = err.response.data.message
                 })

@@ -8,7 +8,7 @@
       <ul class = "topnav" id = "dropdown_menu">
         <li class = "logo_container"><router-link to="/"><img src = "./assets/media/bta-assets/bta.png" alt = "logo" class = "logo"/></router-link></li>
         <li class = "home_element"><router-link to="/">Home</router-link></li>
-        <li class = "text"><router-link to="/event">Events</router-link></li>
+        <li class = "text"><router-link to="/events">Events</router-link></li>
         <li class = "text"><router-link to="/blog">Blog</router-link></li>
         <li class = "text"><router-link to="/support">Support</router-link></li>
         <li class = "text"><router-link to="/about">About</router-link></li>
@@ -22,7 +22,7 @@
       <ul class = "topnav" id = "dropdown_menu">
         <li class = "logo_container"><router-link to="/memberHome"><img src = "./assets/media/bta-assets/bta.png" alt = "logo" class = "logo"/></router-link></li>
         <li class = "home_element"><router-link to="/">Home</router-link></li>
-        <li class="text"><router-link to="/event">Events</router-link></li>
+        <li class="text"><router-link to="/events">Events</router-link></li>
         <li class="text"><router-link to="/blog">Blog</router-link></li>
         <li class="text"><router-link to="/support">Support</router-link></li>
         <li class="text"><router-link to="/about">About</router-link></li>

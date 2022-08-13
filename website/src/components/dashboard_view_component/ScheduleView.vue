@@ -2,7 +2,7 @@
     <div v-if="!fetchingData && isLoggedIn" class="content_container">
         <h1 style="font-family: Jeko; margin-top: 2.5%; margin-bottom: 3.5%;">Upcoming interviews</h1>
         
-        <div class="interview_container">
+        <div v-if="!isEmpty" class="interview_container">
             <div class="interview_row" v-for="interviewrow in interviews">
             <div class="interview_card" v-for="interview in interviewrow">
                 <h2 style="color: white;"><i class="fa fa-user"></i>{{interview.interviewee}}</h2>
@@ -19,6 +19,10 @@
             </div>
             
         </div>
+
+        <div v-else>
+            <h1>Your schedule is empty... for now</h1>
+        </div>
     </div>
 </template>
 
@@ -32,7 +36,8 @@ export default {
             interviewer: '',
             interviews: [],
             isLoggedIn: false,
-            fetchingData: true
+            fetchingData: true,
+            isEmpty: false
         }
     },
     methods: {
@@ -48,7 +53,8 @@ export default {
             await InterviewService.getIntervewSchedule({
                 interviewer: this.interviewer
             }).then(res => {
-                var size = 0;
+                if (res.data.length != 0) {
+                    var size = 0;
                 var interviewRow = []
                 for (var i = 0; i < res.data.length; i++) {
                     interviewRow.push({
@@ -67,7 +73,10 @@ export default {
                         this.interviews.push(interviewRow)
                     }
                 }
-
+                } else {
+                    this.isEmpty = true;
+                }
+                
                 this.fetchingData = false;
             }, err => {
                 console.log(err)
