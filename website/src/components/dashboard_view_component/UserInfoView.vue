@@ -1,5 +1,5 @@
 <template>
-    <div v-if="!fetchingData && isLoggedIn" class="content_container">
+    <div v-if="!fetchingData && isLoggedIn">
         <h1 style="font-family: Jeko; margin-top: 2.5%; margin-bottom: 2.5%;">User Information</h1>
         <div class="user_info_container">
             <div class="profile_row">
@@ -79,27 +79,26 @@ export default {
 </script>
 
 <style>
-.content_container {
-    margin-bottom: 100px;
-}
-
-.content_container .user_info_container {
+.user_info_container {
     display: flex;
     flex-direction: row;
     justify-content: left;
     align-items: left;
+    padding-left: 20px;
+    padding-right: 20px;
+    margin-bottom: 100px;
     width: 100%;
     height: 100%;
 }
 
-.content_container .user_info_container .profile_row {
+.user_info_container .profile_row {
     display: flex;
     flex-direction: column;
     margin-right: 5%;
     flex-basis: 30%;
 }
 
-.content_container .user_info_container .profile_row .profile_card {
+.user_info_container .profile_row .profile_card {
     border-style: solid;
     padding-top: 75px;
     padding-bottom: 75px;
@@ -108,7 +107,7 @@ export default {
     border-color: white;
 }
 
-.content_container .user_info_container .profile_row .profile_card i {
+.user_info_container .profile_row .profile_card i {
     color: white;
     font-size: 60px;
     padding: 10%;
@@ -118,21 +117,21 @@ export default {
 }
 
 
-.content_container .user_info_container .profile_row .profile_card h3 {
+.user_info_container .profile_row .profile_card h3 {
     text-align: center;
     color: white;
     margin-left: 5%;
     margin-right: 5%;
 }
 
-.content_container .user_info_container .profile_row .profile_card p {
+.user_info_container .profile_row .profile_card p {
     text-align: center;
     color: white;
     margin-left: 5%;
     margin-right: 5%;
 }
 
-.content_container .user_info_container .profile_row .profile_card .socials i {
+.user_info_container .profile_row .profile_card .socials i {
     padding: 0;
     font-size: 16px;
     margin: 10px;
@@ -140,12 +139,12 @@ export default {
     border-style: none;
 }
 
-.content_container .user_info_container .profile_row .profile_card .socials i:hover {
+.user_info_container .profile_row .profile_card .socials i:hover {
     cursor:pointer;    
     color: red;
 }
 
-.content_container .user_info_container .database_information {
+.user_info_container .database_information {
     display: flex;
     flex-direction: column;
     flex-basis: 70%;
@@ -153,7 +152,7 @@ export default {
     border-color: white;
 }
 
-.content_container .user_info_container .database_information .information_row {
+.user_info_container .database_information .information_row {
     width: 100%;
     display: flex;
     flex-direction: row;
@@ -161,19 +160,23 @@ export default {
     
 }
 
-.content_container .user_info_container .database_information .information_row h5.text {
+.user_info_container .database_information .information_row h5.text {
     font-family: Poppins;
+    color: white;
     text-align: left;
+    flex-basis: 50%;
     margin: 0;
 }
 
-.content_container .user_info_container .database_information .information_row h5.data {
+.user_info_container .database_information .information_row h5.data {
     font-family: Poppins;
     text-align: right;
+    color: white;
+    flex-basis: 50%;
     margin: 0;
 }
 
-.content_container .user_info_container .database_information .button_container a.profile_button {
+.user_info_container .database_information .button_container a.profile_button {
     text-decoration: none;
     margin: 10px;
     padding: 5px;
@@ -183,13 +186,13 @@ export default {
     font-family: Poppins;
 }
 
-.content_container .user_info_container .database_information .button_container a.profile_button:hover {
+.user_info_container .database_information .button_container a.profile_button:hover {
     cursor: pointer;
     background-color: darkred;   
 }
 
 @media screen and (max-width: 650px) {
-    .content_container .user_info_container {
+    .user_info_container {
         display: flex;
         flex-direction: column;
         justify-content: center;
@@ -198,18 +201,16 @@ export default {
         height: 100%;
     }
 
-    .content_container .user_info_container .profile_row {
+    .user_info_container .profile_row {
         margin: 0;
         margin-bottom: 2.5%;
         width: 100%;
     }
 
-    .content_container .user_info_container .database_information {
+    .user_info_container .database_information {
         width: 100%;
         padding-bottom: 20px;
     }
-
-
 }
 
 </style>

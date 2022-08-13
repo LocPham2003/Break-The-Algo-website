@@ -2,6 +2,9 @@ const express = require('express')
 const dotenv = require('dotenv');
 dotenv.config({ path: './.env' });
 const cors = require('cors')
+
+//'https://breakthealgo.herokuapp.com'
+const frontEndURL = 'http://localhost:8080'
 // This cors option is enabled so that when the client side send a request, the server side can access the data stored in the cookie with the given security properties.
 // For example, the user authentication token is created in the server side and we would like to store it in the cookie with httpOnly flag set to true. We can only do this in the server side,
 // not with the client side. Hence, when an user access the website on the client side (port 8080), they will unable to access the data stored in the cookie as we do not authorize them to do so. 
@@ -9,7 +12,7 @@ const cors = require('cors')
 // the backend for authorization everytime they visit the site. 
 // Without this, it would not work
 const corsOptions = {
-    origin: 'http://localhost:8080',
+    origin: frontEndURL,
     credentials: true 
 };
 const morgan = require('morgan')
@@ -39,6 +42,7 @@ mongoose.connect(process.env.DATABASE_URL, {
 const userRoutes = require('../src/routes/userRoutes')
 const eventRoutes = require('../src/routes/eventRoutes')
 const interviewRoutes = require('../src/routes/interviewRoutes')
+const nominationRoutes = require('../src/routes/nominationRoutes')
 // Using routes
 /**
  * Note to future self: Since you are defining the route in a different folder to help the code to be organized,
@@ -51,14 +55,21 @@ const interviewRoutes = require('../src/routes/interviewRoutes')
 app.use('/api', userRoutes)
 app.use('/api', eventRoutes)
 app.use('/api', interviewRoutes)
+app.use('/api', nominationRoutes)
+
+if (process.env.NODE_ENV === "production")  {
+  app.use(express.static(__dirname + "/dist/"))
+  app.get("*", (req, res) => {
+    res.sendFile(__dirname + "/dist/index.html")
+  })
+}
 
 // Note: in several cases, it will happen that you try to start the server using npm start, but your server does not start
 // and it returns the error: Error: listen EADDRINUSE: address already in use :::8081
 // There is a simple fix to this. Go to Task Manager, search for Nodejs process and terminate it. Now it should work as normal
-const port = process.env.PORT || 5000
 
-app.listen(port, () => {
-	console.log("Server started at " + port)
+app.listen(process.env.PORT || 8081, () => {
+	console.log("Server started at " + process.env.PORT)
 })
 
 // Add a new user

@@ -12,7 +12,7 @@ Features:
 - Matchmaking tab for companies to recruit members.
 
 Information:
-- Student highlights (nomination system in the feautures)
+- Student highlights (nomination system in the features)
 - Project showcase (projects that BTA members are doing)
 - About us (update the roster of the association)
 - Support section (donate or buy merch)

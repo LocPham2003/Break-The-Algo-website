@@ -5,7 +5,7 @@
         <div class="interview_container">
             <div class="interview_row" v-for="interviewrow in interviews">
             <div class="interview_card" v-for="interview in interviewrow">
-                <h2><i class="fa fa-user"></i>{{interview.interviewee}}</h2>
+                <h2 style="color: white;"><i class="fa fa-user"></i>{{interview.interviewee}}</h2>
                 <p><i class="fa fa-building"></i>{{interview.company}}</p>
                 <p><i class="fa fa-user-tag"></i>{{interview.role}}</p>
                 <p><i class="fa fa-calendar-alt"></i>{{interview.date}} - {{interview.time}}</p>
@@ -86,6 +86,7 @@ export default {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    margin-bottom: 100px;
 }
 
 .interview_container .interview_row {

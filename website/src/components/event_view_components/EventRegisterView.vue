@@ -1,7 +1,7 @@
 <template>
     <h1 style="font-family: Jeko; margin-top: 2.5%; margin-bottom: 2.5%;">Register for Event</h1>
     <p style=" color: white; font-size: 30px; font-family: Jeko; margin-bottom: 2.5%;">It seems you aren't a member. Please fill in your information below</p>
-    <div class="content_container">
+    <div class="event_register_container">
         <h2>Event code</h2>
         <input v-bind:id="0" @input="getData">
         
@@ -70,7 +70,7 @@ export default {
 </script>
 
 <style>
-.content_container {
+.event_register_container {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -79,7 +79,7 @@ export default {
     padding-right: 5%;
 }
 
-.content_container input {
+.event_register_container input {
     background-color: rgb(32,32,32);
     border: 1px solid white;
     color: white;
@@ -89,7 +89,7 @@ export default {
     padding-left: 10px;
 }
 
-.content_container h2 {
+.event_register_container h2 {
     font-family: Poppins;
     color: white;
     margin: 10px;

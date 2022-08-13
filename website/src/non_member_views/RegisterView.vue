@@ -392,5 +392,4 @@ export default {
 
 <style>
     @import '../assets/css/register_terminal_view.css';
-    @import url('http://fonts.cdnfonts.com/css/menlo');
 </style>

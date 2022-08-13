@@ -4,6 +4,11 @@
 }
 
 @font-face {
+  font-family: "Menlo";
+  src: url(../media/Menlo/Menlo-Regular.ttf)
+}
+
+@font-face {
   font-family: "Jeko";
   src: url(../media/TextFonts.net_jeko-font-family/Jeko\ Regular.ttf) format("truetype");
 }

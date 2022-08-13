@@ -1,5 +1,5 @@
 <template>
-    <div v-if="!fetchingData && isLoggedIn" class="content_container">
+    <div v-if="!fetchingData && isLoggedIn" class="mock_interview_container">
             <h1 style="font-family: Jeko; margin-top: 2.5%; margin-bottom: 3.5%;">Schedule your mock interview</h1>
             <h5>Pick a date within the next 2 weeks</h5>
             <input placeholder="Enter your available date here (e.g Jul 10)" v-bind:id="0" @input="getData">
@@ -98,23 +98,30 @@ export default {
 
 <style>
 
-.content_container {
+.mock_interview_container {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
 }
 
-.content_container h5 {
+.mock_interview_container h5 {
     color: white;
     font-family: Poppins;
     width: 80%;
     margin-bottom: 10px;
+    margin-top: 10px;
 }
 
-.content_container input {
-    margin-bottom: 20px;
+.mock_interview_container input {
+    background-color: rgb(32,32,32);
+    border: 1px solid white;
+    color: white;
     width: 50%;
+    height: 40px;
+    border-radius: 20px;
+    padding-left: 10px;
+    margin-bottom: 10px;
 }
 
 .dropbtn {
@@ -174,8 +181,9 @@ export default {
     background-color: darkred;
 }
 
-.content_container a.submit_button {
+.mock_interview_container a.submit_button {
     background-color: red;
+    font-family: Poppins;
     color: white;
     padding-left: 20px;
     padding-right: 20px;
@@ -190,7 +198,8 @@ export default {
     margin-bottom: 20px;
 }
 
-.content_container a.submit_button:hover {
+.mock_interview_container a.submit_button:hover {
     background-color: darkred;
+    color: white;
 }
 </style>
