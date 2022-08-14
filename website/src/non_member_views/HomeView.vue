@@ -1,24 +1,24 @@
 <template>
   <title>Break The Algo</title>
   <body>
-    <link rel="stylesheet" 
-        href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" 
-        integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" 
-        crossorigin="anonymous">
+
     <div class="content">
       <div class = "homepage_content">
         <h3>hi. let's</h3>
         <h1>break the algo.</h1>
 
         <a class="get_started">Get started.</a>
+        
+        <div style="margin: 10px 10px 10px 10px; display: flex; flex-direction: row; justify-content: center; align-items: center;">
+          <a class="social" href="https://twitter.com/breakthealgo"><i class="fab fa-twitter"></i></a>
+          <a class="social" href="https://www.facebook.com/breakthealgo/"><i class="fab fa-facebook"></i></a>
+          <a class="social" href="https://www.instagram.com/breakthealgo/"><i class="fab fa-instagram"></i></a>
+          <a class="social" href="https://www.instagram.com/breakthealgo/"><i class="fab fa-discord"></i></a>
+          <a class="social" href="https://www.linkedin.com/company/break-the-algo/"><i class="fab fa-linkedin"></i></a>     
+        </div>
 
         <div class = "social_container">
           <div>
-            <a class="social" href="../places"><i class="fab fa-twitter"></i></a>
-            <a class="social" href="../places"><i class="fab fa-facebook"></i></a>
-            <a class="social" href="../places"><i class="fab fa-instagram"></i></a>
-            <a class="social" href="../places"><i class="fab fa-discord"></i></a>
-            <a class="social" href="../places"><i class="fab fa-linkedin"></i></a>            
           </div>
         </div> 
       </div>

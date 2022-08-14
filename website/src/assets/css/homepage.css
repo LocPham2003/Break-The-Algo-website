@@ -84,18 +84,15 @@
   transition: all 0.1s ease-in;
 }
 
-.content .homepage_content .social_container {
-  margin-top: 10px;
-  margin-left: 10px;
-  align-self: center;
-}
-
-.content .homepage_content .social_container a.social {
-  margin-right: 15px;
-  margin-top: 20px;
+.content .homepage_content a.social {
   text-decoration: none;
+  margin-right: 10px;
   color: white;
   font-size: 1.25em;
+}
+
+.content .homepage_content a.social:hover {
+    color: red;
 }
 
 .content .bubble_effect {

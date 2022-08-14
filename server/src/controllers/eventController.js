@@ -80,3 +80,24 @@ exports.signedupEventList = (req, res) => {
         }
     })
 }
+
+exports.getEventByCode = (req, res) => {
+    Event.findOne({code : req.body.code}, function(err, docs) {
+        if (err) {
+            res.status(400).json({
+                message: "Get event by code gone wrong"
+            })
+        } else {
+            return res.json({
+                code: docs.code,
+                title: docs.title,
+                startTime: docs.startTime,
+                endTime: docs.endTime,
+                startMonth: docs.startMonth,
+                startDate: docs.startDate,
+                location: docs.location,
+                description: docs.description
+            })
+        }
+    })
+}

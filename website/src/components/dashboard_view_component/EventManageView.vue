@@ -22,9 +22,9 @@
 
                 <div class="event_manage_card_buttons">
                     <div style="display: flex; flex-direction: column; justify-content: center; align-items: center;">
-                        <a id="0" @click="onClick($event)" class="event_manage_button">Edit Event</a>
-                        <a id="1" @click="onClick($event)" class="event_manage_button">Delete Event</a>
-                        <a id="2" @click="onClick($event)" class="event_manage_button">Hide Event</a>
+                        <a v-bind:id="event.code + 0" @click="onClick($event)" class="event_manage_button">Edit Event</a>
+                        <a v-bind:id="event.code + 1" @click="onClick($event)" class="event_manage_button">Delete Event</a>
+                        <a v-bind:id="event.code + 2" @click="onClick($event)" class="event_manage_button">Hide Event</a>
                     </div>
                 </div>
             </div>
@@ -48,7 +48,31 @@ export default {
         }
     }, 
     methods: {
-
+        // The id is as follows: 
+        /**
+         * Event_code + number 
+         * -> Get the last char of the id to know what action you're supposed to do (0 = edit, 1 = delete, 2 = hide)
+         * Event code is to find the event whose content will be modified in the database
+         */
+        onClick(event) {
+            var action = event.currentTarget.id.substr(event.currentTarget.id.length - 1)
+            switch(parseInt(action)) {
+                case 0:
+                    // Edit
+                    this.$router.push({
+                        name: "editEvent",
+                        params: { code: event.currentTarget.id.slice(0, event.currentTarget.id.length - 1) }
+                    })
+                    break;
+                case 1: 
+                    // Delete
+                    break;
+                case 2: 
+                    // Hide
+                    break;
+            }
+            
+        }
     }, 
     beforeMount() {
         const fetchData = async() => {
@@ -157,5 +181,25 @@ export default {
     cursor: pointer;
 }
 
+@media screen and (max-width: 650px) {
+    .event_manage_card .event_manage_card_body {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .event_manage_card .event_manage_card_body .event_manage_card_description {
+        width: 100%;
+    }
+
+    .event_manage_card .event_manage_card_body .event_manage_card_time {
+        width: 100%;
+    }
+
+    .event_manage_card .event_manage_card_body .event_manage_card_buttons {
+        width: 100%;
+    }
+}
 
 </style>

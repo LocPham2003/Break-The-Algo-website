@@ -19,6 +19,7 @@ import ScheduleView from '../components/dashboard_view_component/ScheduleView.vu
 import HistoryView from '../components/dashboard_view_component/HistoryView.vue'
 import EventPostView from '../components/dashboard_view_component/EventPostView.vue'
 import EventManageView from '../components/dashboard_view_component/EventManageView.vue'
+import EventEditView from '../components/dashboard_view_component/EventEditView.vue'
 import NominationsView from '../components/dashboard_view_component/NominationsView.vue'
 
 const routes = [  
@@ -120,7 +121,15 @@ const routes = [
   {
     path: '/dashboard/manageEvent',
     name: 'manageEvent',
-    component: EventManageView
+    component: EventManageView,
+    meta: {
+      auth: true
+    }
+  },
+  {
+    path: '/dashboard/manageEvent/editEvent/:code',
+    name: 'editEvent',
+    component: EventEditView
   },
   {
     path: '/dashboard/nominations',

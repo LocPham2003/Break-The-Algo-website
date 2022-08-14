@@ -211,6 +211,11 @@ export default {
         width: 100%;
         padding-bottom: 20px;
     }
+
+    .user_info_container .database_information .button_container .button_row {
+        display: flex;
+        flex-direction: column;
+    }
 }
 
 </style>

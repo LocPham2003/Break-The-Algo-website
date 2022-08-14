@@ -10,6 +10,12 @@ export default {
     eventCreate(params) {
         return Api().post('eventCreate', params)
     },
+    getEventByCode(params) {
+        return Api().post('getEventByCode', params)
+    },
+    updateEvent(params) {
+        return Api().post('updateEvent', params)
+    },
     fetchEventList() {
         return Api().get('eventList')
     },
