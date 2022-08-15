@@ -101,3 +101,19 @@ exports.getEventByCode = (req, res) => {
         }
     })
 }
+
+exports.updateEvent = (req, res) => {
+    const event = req.body;
+
+    Event.findOneAndUpdate({code: req.body.code}, {
+        title: event.title,
+        description: event.description
+    }, function (err, docs) {
+        if (err){
+            console.log("Find event to update gone wrong")
+        } else {
+            console.log("Successfully update event code: " + docs.code)
+            return res.json({ message: "Successfully update event code: " + docs.code})
+        }
+    });
+}

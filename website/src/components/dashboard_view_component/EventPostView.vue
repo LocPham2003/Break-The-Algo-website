@@ -8,25 +8,28 @@
         <h2>Event title: </h2>
         <input @input="getData" v-bind:id="1" placeholder="Enter the title of the event">
 
+        <h2>Company logo</h2>
+        <label><input v-bind:id="2" type="file"/></label>
+
         <h2>Start time and end time: </h2>
         <div class="section">
-            <input @input="getData" v-bind:id="2" class="start_time" placeholder="Start time">
+            <input @input="getData" v-bind:id="3" class="start_time" placeholder="Start time">
             <h2 style="width: 5%; text-align: center;">-</h2>
-            <input @input="getData" v-bind:id="3" class="end_time" placeholder="End time">
+            <input @input="getData" v-bind:id="4" class="end_time" placeholder="End time">
         </div>
 
         <h2>Start Month and date</h2>
         <div class="section">
-            <input @input="getData" v-bind:id="4" class="start_time" placeholder="Month">
+            <input @input="getData" v-bind:id="5" class="start_time" placeholder="Month">
             <h2 style="width: 5%;  text-align: center;">&</h2>
-            <input @input="getData" v-bind:id="5" class="end_time" placeholder="Date">
+            <input @input="getData" v-bind:id="6" class="end_time" placeholder="Date">
         </div>
 
         <h2>Event location: </h2>
-        <input @input="getData" v-bind:id="6" placeholder="Enter the location of the event">
+        <input @input="getData" v-bind:id="7" placeholder="Enter the location of the event">
 
         <h2>Event description: </h2>
-        <textarea @input="getData" v-bind:id="7" style="height: 128px; margin-bottom: 30px;" placeholder="Enter the title of the event"></textarea>
+        <textarea @input="getData" v-bind:id="8" style="height: 128px; margin-bottom: 30px;" placeholder="Enter the title of the event"></textarea>
 
         <div style="
             display: flex;
@@ -58,6 +61,7 @@ export default {
             startDate: '',
             location: '',
             description: '',
+            img: '',
             participants: [],
             status: ''
         }
@@ -72,21 +76,24 @@ export default {
                     this.title = e.target.value
                     break;
                 case 2: 
+                    this.image = e.target.value
+                    break;
+                case 3: 
                     this.startTime = e.target.value
                     break
-                case 3: 
+                case 4: 
                     this.endTime = e.target.value
                     break
-                case 4: 
+                case 5: 
                     this.startMonth = e.target.value
                     break
-                case 5: 
+                case 6: 
                     this.startDate = e.target.value
                     break;
-                case 6: 
+                case 7: 
                     this.location = e.target.value
                     break
-                case 7: 
+                case 8: 
                     this.description = e.target.value
                     break;
             }
@@ -120,6 +127,14 @@ export default {
 </script>
 
 <style>
+.event_post_container label {
+    color: white; 
+    text-align: left; 
+    width: fit-content; 
+    font-family: Poppins;
+    border-radius: 5px;
+}
+
 .event_post_container {
     display: flex;
     flex-direction: column;
