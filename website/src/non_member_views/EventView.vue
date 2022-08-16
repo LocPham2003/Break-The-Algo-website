@@ -7,6 +7,7 @@
         </svg>
         <a class="event_selector" id="1" @click="onClick($event)">Past events</a> 
     </div>
+    <h1 v-if="events.length === 0 && !fetchingInfo" style="font-family: Jeko;">There are no existing events</h1>
     <div class="event_container">
         <div v-if="activeSession === 0" v-for="event in events">
             <EventCard

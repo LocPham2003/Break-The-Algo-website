@@ -48,6 +48,16 @@ exports.updateImageByCode = (req, res) => {
     })
 }
 
+exports.deleteImageByCode = (req, res) => {
+    Image.deleteOne({code: req.body.code}, (err, image) => {
+        if (err) {
+            res.status(500).send("Delete image of event " + image.code +  " failed", err)
+        } else {
+            res.send({message: "Delete image of event " + image.code +  " successful"})
+        }
+    })
+}
+
 exports.getImage = (req, res) => {
     Image.find({}, (err, image) => {
         if (err) {

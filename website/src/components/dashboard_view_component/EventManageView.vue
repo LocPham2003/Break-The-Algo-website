@@ -1,6 +1,7 @@
 <template>
     <div v-if="!fetchingData && isLoggedIn">
         <h1 style="font-family: Jeko; margin-top: 2.5%; margin-bottom: 3.5%;">Manage Event</h1>
+        <h1 v-if="events.length === 0" style="font-family: Jeko;">There are no existing events</h1>
         <div class="event_manage_card" v-for="event in events">
             <div style="display: flex; flex-direction: row; justify-content: center; align-items: center;">
                 <img style="width: 64px; height: 64px; margin-right: 10px;" v-bind:src="event.image">
@@ -30,6 +31,8 @@
                         <a v-bind:id="event.code + 2" @click="onClick($event)" class="event_manage_button">Hide Event</a>
                     </div>
                 </div>
+
+                <p v-if="show" style="color: white; font-size: 30px; font-family: Jeko;">{{status}}</p>
             </div>
         </div>
     </div>
@@ -49,7 +52,8 @@ export default {
             isLoggedIn: false,
             fetchingData: true,
             events: [],
-            images: []
+            images: [],
+            status: ''
         }
     }, 
     methods: {
@@ -72,12 +76,22 @@ export default {
                     break;
                 case 1: 
                     // Delete
+                    const deleteImageAndEvent = async() => {
+                        await ImageService.deleteImageByCode({ code: code })
+
+                        await EventService.deleteEvent({ code: code }).then(res => {
+                            this.status = res.data.message
+                        }, err => {
+                            console.log(err)
+                        })
+                    }
+
+                    deleteImageAndEvent()
                     break;
                 case 2: 
                     // Hide
                     break;
             }
-            
         }
     }, 
     beforeMount() {

@@ -124,3 +124,16 @@ exports.updateEvent = (req, res) => {
         }
     });
 }
+
+exports.deleteEvent = (req, res) => {
+    const code = req.body.code;
+
+    Event.deleteOne({code: code}, (err, event) => {
+        if (err) {
+            console.log("Unable to delete the event")
+        } else {
+            console.log("Successfully delete the event cdoe: " + event.code)
+            return res.json({ message: "Successfully deleted the event"})
+        }
+    })
+}

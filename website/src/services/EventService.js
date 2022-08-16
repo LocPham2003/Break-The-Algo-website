@@ -16,6 +16,9 @@ export default {
     updateEvent(params) {
         return Api().post('updateEvent', params)
     },
+    deleteEvent(params) {
+        return Api().post('deleteEvent', params)
+    },
     fetchEventList() {
         return Api().get('eventList')
     },

@@ -10,6 +10,9 @@ export default {
     updateImageByCode(params) {
         return Api().post('updateImageByCode', params)
     },
+    deleteImageByCode(params) {
+        return Api().post('deleteImageByCode', params)
+    },
     getImage() {
         return Api().get('getImage')
     }

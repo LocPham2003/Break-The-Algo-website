@@ -1,6 +1,6 @@
 const multer = require('multer')
 const express = require('express')
-const { uploadImage, getImage, findImageByCode, updateImageByCode } = require('../controllers/imageController')
+const { uploadImage, getImage, findImageByCode, updateImageByCode, deleteImageByCode } = require('../controllers/imageController')
 const router = express.Router()
 
 const storage = multer.diskStorage({
@@ -16,6 +16,7 @@ const upload = multer({storage: storage})
 
 router.post('/uploadImage', upload.single('image'), uploadImage)
 router.post('/updateImageByCode', upload.single('image'), updateImageByCode)
+router.post('/deleteImageByCode', deleteImageByCode)
 router.post('/findImageByCode', findImageByCode)
 router.get('/getImage', getImage)
 
