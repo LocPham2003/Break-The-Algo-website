@@ -1,7 +1,7 @@
 <template>
     <div class="card" style="width: 80vw; height: fit-content">
         <div class="card_title">
-            <i style="color: #0089E8;" class="fab fa-facebook"></i>
+            <img v-bind:src="image" alt="company logo">
             <svg width="1" height="40px">
                 <rect width="1" height="100" style="fill:#696969;stroke-width:0;stroke:rgb(0,0,0)" />
             </svg>
@@ -44,7 +44,7 @@ import EventService from '@/services/EventService'
 
 export default {
     name: "EventCard",
-    props: ["name", "studyMajor", "title","description", "startTime", "endTime", "location", "startMonth", "startDate", "code", "isLoggedIn", "isSignedUp"],
+    props: ["name", "studyMajor", "title", "image", "description", "startTime", "endTime", "location", "startMonth", "startDate", "code", "isLoggedIn", "isSignedUp"],
     data() {
         return {
             status: '',
@@ -117,8 +117,9 @@ export default {
         margin-left: auto;
     }
 
-    div.card div.card_title i {
-        font-size: 32px;
+    div.card div.card_title img {
+        width: 32px;
+        height: 32px;
         margin-top: 0;
         padding: 0;
         margin-right: 15px;

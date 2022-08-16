@@ -4,46 +4,54 @@
         
         <h3>Title <i id="0" @click="toggleEdit($event)" class="fa fa-pen"></i></h3>
         <h4 v-if="!isEdit[0]">{{title}}</h4>
-        <div style="display: flex; flex-direction: row; width: 100%; align-items: center;">
-            <input ref="newTitle" placeholder="Enter new title" v-bind:value="title" v-if="isEdit[0]">
-            <a class="utility_button" @click="getData($event)" id="0" v-if="isEdit[0]">Save</a>
-            <a class="utility_button" @click="toggleEdit($event)" id="0" v-if="isEdit[0]">Cancel</a>
+        <div v-if="isEdit[0]" style="display: flex; flex-direction: row; width: 100%; align-items: center;">
+            <input ref="newTitle" placeholder="Enter new title" v-bind:value="title" >
+            <a class="utility_button" @click="getData($event)" id="0">Save</a>
+            <a class="utility_button" @click="toggleEdit($event)" id="0">Cancel</a>
+        </div>
+
+        <h3>Current company logo <img v-if="!hasNewImage" style="width: 64px; height: 64px;" v-bind:src="image"><img v-if="hasNewImage"  style="width: 64px; height: 64px;" v-bind:src="newURL"><i id="1" @click="toggleEdit($event)" class="fa fa-pen"></i></h3>
+        <div v-if="isEdit[1]" style="display: flex; flex-direction: row; width: 100%; align-items: center;">
+            <form enctype="multipart/form-data">
+                <input @change="onChange" ref="image" style="color: white;" type="file">
+            </form>
+        </div>
+        
+        
+
+        <h3>Start time - end time <i id="2" @click="toggleEdit($event)" class="fa fa-pen"></i></h3>
+        <h4 v-if="!isEdit[2]">{{startTime}} - {{endTime}}</h4>
+        <div v-if="isEdit[2]" style="display: flex; flex-direction: row; width: 100%; align-items: center;">
+            <input ref="newStartTime" v-bind:id="1" placeholder="Enter start new start time" v-bind:value="startTime">
+            <input ref="newEndTime" v-bind:id="2" placeholder="Enter start new end time" v-bind:value="endTime" >
+            <a class="utility_button" @click="getData($event)" id="1">Save</a>
+            <a class="utility_button" @click="toggleEdit($event)" id="1">Cancel</a>
+        </div>
+        
+        <h3>Start month and date <i id="3" @click="toggleEdit($event)" class="fa fa-pen"></i></h3>
+        <h4 v-if="!isEdit[3]">{{startMonth}} {{startDate}}</h4>
+        <div v-if="isEdit[3]" style="display: flex; flex-direction: row; width: 100%; align-items: center;">
+            <input ref="newStartMonth" placeholder="Enter start new start month" v-bind:value="startMonth">
+            <input ref="newStartDate" placeholder="Enter start new start date" v-bind:value="startDate">
+            <a class="utility_button" @click="getData($event)" id="2">Save</a>
+            <a class="utility_button" @click="toggleEdit($event)" id="2">Cancel</a>
         </div>
         
 
-        <h3>Start time - end time <i id="1" @click="toggleEdit($event)" class="fa fa-pen"></i></h3>
-        <h4 v-if="!isEdit[1]">{{startTime}} - {{endTime}}</h4>
-        <div style="display: flex; flex-direction: row; width: 100%; align-items: center;">
-            <input ref="newStartTime" v-bind:id="1" placeholder="Enter start new start time" v-bind:value="startTime" v-if="isEdit[1]">
-            <input ref="newEndTime" v-bind:id="2" placeholder="Enter start new end time" v-bind:value="endTime" v-if="isEdit[1]">
-            <a class="utility_button" @click="getData($event)" id="1" v-if="isEdit[1]">Save</a>
-            <a class="utility_button" @click="toggleEdit($event)" id="1" v-if="isEdit[1]">Cancel</a>
-        </div>
-        
-        <h3>Start month and date <i id="2" @click="toggleEdit($event)" class="fa fa-pen"></i></h3>
-        <h4 v-if="!isEdit[2]">{{startMonth}} {{startDate}}</h4>
-        <div style="display: flex; flex-direction: row; width: 100%; align-items: center;">
-            <input ref="newStartMonth" placeholder="Enter start new start month" v-bind:value="startMonth" v-if="isEdit[2]">
-            <input ref="newStartDate" placeholder="Enter start new start date" v-bind:value="startDate" v-if="isEdit[2]">
-            <a class="utility_button" @click="getData($event)" id="2"  v-if="isEdit[2]">Save</a>
-            <a class="utility_button" @click="toggleEdit($event)" id="2" v-if="isEdit[2]">Cancel</a>
-        </div>
-        
-
-        <h3>Location <i id="3" @click="toggleEdit($event)" class="fa fa-pen"></i></h3>
-        <h4 v-if="!isEdit[3]">{{location}}</h4>
-        <div style="display: flex; flex-direction: row; width: 100%; align-items: center;">
-            <input ref="newLocation" placeholder="Enter new location" v-bind:value="location" v-if="isEdit[3]">
-            <a class="utility_button" @click="getData($event)" id="3" v-if="isEdit[3]">Save</a>
-            <a class="utility_button" @click="toggleEdit($event)" id="3" v-if="isEdit[3]">Cancel</a>
+        <h3>Location <i id="4" @click="toggleEdit($event)" class="fa fa-pen"></i></h3>
+        <h4 v-if="!isEdit[4]">{{location}}</h4>
+        <div v-if="isEdit[4]" style="display: flex; flex-direction: row; width: 100%; align-items: center;">
+            <input ref="newLocation" placeholder="Enter new location" v-bind:value="location">
+            <a class="utility_button" @click="getData($event)" id="3">Save</a>
+            <a class="utility_button" @click="toggleEdit($event)" id="3">Cancel</a>
         </div>
 
-        <h3>Description <i id="4" @click="toggleEdit($event)" class="fa fa-pen"></i></h3>
-        <h4 v-if="!isEdit[4]" style="margin-bottom: 50px;">{{description}}</h4>
-        <div style="display: flex; flex-direction: row; width: 100%; align-items: center;">
-            <textarea ref="newDescription" placeholder="Enter new description" v-bind:value="description" v-if="isEdit[4]"></textarea>
-            <a class="utility_button" @click="getData($event)" id="4" v-if="isEdit[4]">Save</a>
-            <a class="utility_button" @click="toggleEdit($event)" id="4" v-if="isEdit[4]">Cancel</a>
+        <h3>Description <i id="5" @click="toggleEdit($event)" class="fa fa-pen"></i></h3>
+        <h4 v-if="!isEdit[5]" style="margin-bottom: 50px;">{{description}}</h4>
+        <div v-if="isEdit[5]" style="display: flex; flex-direction: row; width: 100%; align-items: center;">
+            <textarea ref="newDescription" placeholder="Enter new description" v-bind:value="description"></textarea>
+            <a class="utility_button" @click="getData($event)" id="4">Save</a>
+            <a class="utility_button" @click="toggleEdit($event)" id="4">Cancel</a>
         </div>
 
         <a @click="update" class="update_button">Update</a>
@@ -55,6 +63,7 @@
 
 <script>
 import EventService from '@/services/EventService';
+import ImageService from '@/services/ImageService';
 
 export default {
     data() {
@@ -67,7 +76,10 @@ export default {
             startDate: '',
             location: '',
             description: '',
-            isEdit: [false, false, false, false, false],
+            image: '',
+            newURL: '',
+            hasNewImage: false,
+            isEdit: [false, false, false, false, false, false],
             status: ''
         }  
     },
@@ -77,6 +89,7 @@ export default {
         },
         async update() {
             var checkAllFalse = true
+
             for (var i = 0; i < this.isEdit.length; i++) {
                 if (this.isEdit[i]) {
                     checkAllFalse = false;
@@ -85,6 +98,15 @@ export default {
             }
 
             if (checkAllFalse) {
+                const formData = new FormData()
+                formData.append('image', this.image)
+                formData.append('code', this.code)
+                await ImageService.updateImageByCode(formData).then(res => {
+                    console.log(res)
+                }, err => {
+                    console.log(err)
+                })
+
                 await EventService.updateEvent({
                 code: this.code,
                 title: this.title,
@@ -103,6 +125,13 @@ export default {
                 this.status = "Make sure you have already saved all fields"
             }
             
+        },
+        onChange() {
+            const image = this.$refs.image.files[0]
+            this.image = image
+            this.newURL = URL.createObjectURL(this.$refs.image.files[0]);
+            this.hasNewImage = true;
+            this.isEdit[1] = !this.isEdit[1]
         },
         getData(event) {
             switch(parseInt(event.currentTarget.id)) {
@@ -130,6 +159,12 @@ export default {
     beforeMount() {
         this.code = this.$route.params.code;
         const fetchData = async() => { 
+            await ImageService.findImageByCode({code : this.code}).then(res => {
+                this.image = "data:image/png;base64," + res.data.image
+            }, err => {
+                console.log(err)
+            })
+
             await EventService.getEventByCode({code: this.code}).then(res => {
                 this.description = res.data.description
                 this.location = res.data.location

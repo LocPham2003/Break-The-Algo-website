@@ -2,6 +2,12 @@ const express = require('express')
 const dotenv = require('dotenv');
 dotenv.config({ path: './.env' });
 const cors = require('cors')
+const morgan = require('morgan')
+const mongoose = require('mongoose')
+const bodyParser = require('body-parser')
+const app = express()
+const cookieParser = require('cookie-parser')
+
 
 //'https://breakthealgo.herokuapp.com'
 const frontEndURL = 'http://localhost:8080'
@@ -15,11 +21,7 @@ const corsOptions = {
     origin: frontEndURL,
     credentials: true 
 };
-const morgan = require('morgan')
-const mongoose = require('mongoose')
-const bodyParser = require('body-parser')
-const app = express()
-const cookieParser = require('cookie-parser');
+
 app.use(cookieParser())
 app.use(morgan('combine'))
 app.use(cors(corsOptions))
@@ -43,6 +45,8 @@ const userRoutes = require('../src/routes/userRoutes')
 const eventRoutes = require('../src/routes/eventRoutes')
 const interviewRoutes = require('../src/routes/interviewRoutes')
 const nominationRoutes = require('../src/routes/nominationRoutes')
+const imageRoutes = require('../src/routes/imageRoutes')
+
 // Using routes
 /**
  * Note to future self: Since you are defining the route in a different folder to help the code to be organized,
@@ -56,13 +60,15 @@ app.use('/api', userRoutes)
 app.use('/api', eventRoutes)
 app.use('/api', interviewRoutes)
 app.use('/api', nominationRoutes)
+app.use('/api', imageRoutes)
+app.use(express.static("uploads"))
 
-if (process.env.NODE_ENV === "production")  {
-  app.use(express.static(__dirname + "/dist/"))
-  app.get("*", (req, res) => {
-    res.sendFile(__dirname + "/dist/index.html")
-  })
-}
+// if (process.env.NODE_ENV === "production")  {
+//   app.use(express.static(__dirname + "/dist/"))
+//   app.get("*", (req, res) => {
+//     res.sendFile(__dirname + "/dist/index.html")
+//   })
+// }
 
 // Note: in several cases, it will happen that you try to start the server using npm start, but your server does not start
 // and it returns the error: Error: listen EADDRINUSE: address already in use :::8081

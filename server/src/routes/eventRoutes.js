@@ -1,4 +1,7 @@
 const express = require('express')
+
+
+
 const { eventCreate, eventRegister, eventDeregister, eventList, signedupEventList, getEventByCode, updateEvent } = require('../controllers/eventController')
 const router = express.Router()
 

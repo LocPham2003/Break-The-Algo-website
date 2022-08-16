@@ -12,7 +12,8 @@
             <EventCard
                     :name="name"
                     :studyMajor="studyMajor"
-                    :title="event.title"     
+                    :title="event.title"
+                    :image="event.image"     
                     :description="event.description" 
                     :startTime="event.startTime" 
                     :endTime="event.endTime"
@@ -27,6 +28,7 @@
 
         <div v-if="activeSession === 1">
             <h1>Display past events</h1>
+            <img src="http://localhost:8081/unknown.png">
         </div>
     </div>
     
@@ -34,6 +36,7 @@
 
 <script>
 import EventService from '@/services/EventService'
+import ImageService from '@/services/ImageService'
 import UserService from '@/services/UserService'
 import EventCard from '../components/event_view_components/EventCard.vue'
 
@@ -44,7 +47,10 @@ export default {
             isLoggedIn: false,
             fetchingInfo: true,
             activeSession: 0,
-            events: []
+            events: [],
+            images: [],
+            name: '',
+            studyMajor: ''
         }
     },  
     components : {
@@ -57,10 +63,20 @@ export default {
     },
     beforeMount() {
         const fetchData = async() => {
+            await ImageService.getImage().then(res => {
+                console.log(res)
+                for(var i = 0; i < res.data.images.length; i++){
+                    this.images.push("data:image/png;base64," + res.data.images[i].data)
+                    console.log(this.images[i])
+                }
+            })
+
             await EventService.fetchEventList().then(res => {
                 for (var i = 0; i < res.data.length; i++) {
                 this.events.push({
+                    code: res.data[i].code,
                     title: res.data[i].title,
+                    image: this.images[i],
                     description: res.data[i].description,
                     isSignedUp: false,
                     startTime: res.data[i].startTime,
@@ -68,7 +84,6 @@ export default {
                     location: res.data[i].location,
                     startMonth: res.data[i].startMonth,
                     startDate: res.data[i].startDate,
-                    code: res.data[i].code
                 })
             }
             })

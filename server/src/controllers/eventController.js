@@ -2,8 +2,8 @@ const Event = require("../models/eventModel.js")
 
 exports.eventCreate = (req, res) => {
     const body = req.body;
-    
     const event = new Event(body);
+
     event.save((err, event) => {
         if (err) {
             return res.status(400).json({
@@ -15,6 +15,8 @@ exports.eventCreate = (req, res) => {
             })
         }
     })
+
+    
 }
 
 // Need to make this function so that it append a new user object into the participants array 
@@ -107,7 +109,12 @@ exports.updateEvent = (req, res) => {
 
     Event.findOneAndUpdate({code: req.body.code}, {
         title: event.title,
-        description: event.description
+        description: event.description,
+        startTime: event.startTime,
+        endTime: event.endTime,
+        startMonth: event.startMonth,
+        startDate: event.startDate,
+        location: event.location
     }, function (err, docs) {
         if (err){
             console.log("Find event to update gone wrong")

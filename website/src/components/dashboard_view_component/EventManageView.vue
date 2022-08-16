@@ -2,7 +2,10 @@
     <div v-if="!fetchingData && isLoggedIn">
         <h1 style="font-family: Jeko; margin-top: 2.5%; margin-bottom: 3.5%;">Manage Event</h1>
         <div class="event_manage_card" v-for="event in events">
-            <h3>{{event.title}} - {{event.code}}</h3>
+            <div style="display: flex; flex-direction: row; justify-content: center; align-items: center;">
+                <img style="width: 64px; height: 64px; margin-right: 10px;" v-bind:src="event.image">
+                <h3 style="margin: 0;">{{event.title}} - {{event.code}}</h3>
+            </div>
             <div class="event_manage_card_body">
                 <div class="event_manage_card_time">
                     <h5>Start time - End time</h5>
@@ -39,12 +42,14 @@
 <script>
 import EventService from '@/services/EventService'
 import UserService from '@/services/UserService'
+import ImageService from '@/services/ImageService'
 export default {
     data() {
         return {
             isLoggedIn: false,
             fetchingData: true,
-            events: []
+            events: [],
+            images: []
         }
     }, 
     methods: {
@@ -56,12 +61,13 @@ export default {
          */
         onClick(event) {
             var action = event.currentTarget.id.substr(event.currentTarget.id.length - 1)
+            var code = event.currentTarget.id.slice(0, event.currentTarget.id.length - 1)
             switch(parseInt(action)) {
                 case 0:
                     // Edit
                     this.$router.push({
                         name: "editEvent",
-                        params: { code: event.currentTarget.id.slice(0, event.currentTarget.id.length - 1) }
+                        params: { code: code }
                     })
                     break;
                 case 1: 
@@ -76,10 +82,18 @@ export default {
     }, 
     beforeMount() {
         const fetchData = async() => {
+            await ImageService.getImage().then(res => {
+                for(var i = 0; i < res.data.images.length; i++){
+                    this.images.push("data:image/png;base64," + res.data.images[i].data)
+                    console.log(this.images[i])
+                }
+            })
+
             await EventService.fetchEventList().then(res => {
                 for (var i = 0; i < res.data.length; i++) {
                 this.events.push({
                     title: res.data[i].title,
+                    image: this.images[i],
                     description: res.data[i].description,
                     startTime: res.data[i].startTime,
                     endTime: res.data[i].endTime,

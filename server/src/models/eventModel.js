@@ -6,7 +6,6 @@ const Schema = mongoose.Schema
 const eventSchema = new Schema({
     code: String,
     title: String,
-    // Add an image property here soon
     startTime: String,
     endTime: String,
     startMonth: String,

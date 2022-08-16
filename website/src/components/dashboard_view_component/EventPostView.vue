@@ -8,28 +8,30 @@
         <h2>Event title: </h2>
         <input @input="getData" v-bind:id="1" placeholder="Enter the title of the event">
 
-        <h2>Company logo</h2>
-        <label><input v-bind:id="2" type="file"/></label>
+        <h2>Company logo (Make sure the background is transparent!)</h2>
+         <form enctype="multipart/form-data">
+            <input @change="onChange" ref="image" style="color: white;" type="file">
+        </form>
 
         <h2>Start time and end time: </h2>
         <div class="section">
-            <input @input="getData" v-bind:id="3" class="start_time" placeholder="Start time">
+            <input @input="getData" v-bind:id="2" class="start_time" placeholder="Start time">
             <h2 style="width: 5%; text-align: center;">-</h2>
-            <input @input="getData" v-bind:id="4" class="end_time" placeholder="End time">
+            <input @input="getData" v-bind:id="3" class="end_time" placeholder="End time">
         </div>
 
         <h2>Start Month and date</h2>
         <div class="section">
-            <input @input="getData" v-bind:id="5" class="start_time" placeholder="Month">
+            <input @input="getData" v-bind:id="4" class="start_time" placeholder="Month">
             <h2 style="width: 5%;  text-align: center;">&</h2>
-            <input @input="getData" v-bind:id="6" class="end_time" placeholder="Date">
+            <input @input="getData" v-bind:id="5" class="end_time" placeholder="Date">
         </div>
 
         <h2>Event location: </h2>
-        <input @input="getData" v-bind:id="7" placeholder="Enter the location of the event">
+        <input @input="getData" v-bind:id="6" placeholder="Enter the location of the event">
 
         <h2>Event description: </h2>
-        <textarea @input="getData" v-bind:id="8" style="height: 128px; margin-bottom: 30px;" placeholder="Enter the title of the event"></textarea>
+        <textarea @input="getData" v-bind:id="7" style="height: 128px; margin-bottom: 30px;" placeholder="Enter the title of the event"></textarea>
 
         <div style="
             display: flex;
@@ -37,7 +39,7 @@
             justify-content: center;
             align-items: center;
             ">
-            <a @click="onClick()" class="event_submit_button">Submit</a>
+        <a @click="onClick()" class="event_submit_button">Submit</a>
         </div>
 
         <p style="color: white; font-size: 16px; margin-bottom: 100px;">{{status}}</p>
@@ -49,6 +51,7 @@
 
 <script>
 import EventService from '@/services/EventService';
+import ImageService from '@/services/ImageService.js'
 
 export default {
     data() {
@@ -61,9 +64,10 @@ export default {
             startDate: '',
             location: '',
             description: '',
-            img: '',
+            image: '',
             participants: [],
-            status: ''
+            status: '',
+            image: ''
         }
     }, 
     methods: {
@@ -76,32 +80,34 @@ export default {
                     this.title = e.target.value
                     break;
                 case 2: 
-                    this.image = e.target.value
-                    break;
-                case 3: 
                     this.startTime = e.target.value
                     break
-                case 4: 
+                case 3: 
                     this.endTime = e.target.value
                     break
-                case 5: 
+                case 4: 
                     this.startMonth = e.target.value
                     break
-                case 6: 
+                case 5: 
                     this.startDate = e.target.value
                     break;
-                case 7: 
+                case 6: 
                     this.location = e.target.value
                     break
-                case 8: 
+                case 7: 
                     this.description = e.target.value
                     break;
             }
+        },
+        onChange() {
+            const image = this.$refs.image.files[0]
+            this.image = image
         },
         onClick() {
             if (!this.title || !this.code || !this.startDate || !this.startMonth || !this.startTime || !this.endTime || !this.description || !this.location) {
                 this.status = "Please fill in all required fields!"
             } else {
+                this.addImage();
                 this.addEvent();
             }
         },
@@ -121,6 +127,16 @@ export default {
             }, err => {
                 console.log(err)
             })
+        },
+        async addImage() {
+            const formData = new FormData()
+            formData.append('image', this.image)
+            formData.append('code', this.code)
+            try {
+                await ImageService.uploadImage(formData)
+            } catch (err) {
+                console.log(err)
+            }
         }
     }
 }

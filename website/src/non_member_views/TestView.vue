@@ -1,51 +1,39 @@
 <template>
-  <!-- <div class="about">
-    <h1>This is test view</h1>
-    <input @input="inputName" placeholder="Enter your name">
-    <br>
-    <input @input="inputPassword" placeholder="Enter your password">
-    <br>
-    <button @click="registerUser">Register</button>
-    <button @click="loginUser">Login</button>
-    <p>{{ status }}</p>
-</div> -->
-    <h1>You need to login</h1>
+    <div>
+        <form enctype="multipart/form-data">
+            <input @change="onSelect" ref="file" style="color: white;" type="file">
+        </form>
+        <button @click="submit">Submit</button>
+
+        </div>
 </template>
 
 <script>
-import UserService from '@/services/UserService'
+import ImageService from '@/services/ImageService.js'
 export default {
     data() {
         return {
             status: '',
             username: '',
             password: '',
+            image: ''
         }
     },
     methods : {
-        async registerUser() {
-            await UserService.addUser({
-                username: this.username,
-                password: this.password
-            })
+        onSelect() {
+            const image = this.$refs.file.files[0]
+            this.image = image
         },
-        inputName(e) {
-            this.username = e.target.value 
-        },
-        inputPassword(e) {
-            this.password = e.target.value
-        },
-        async loginUser() {
-            await UserService.loginUser({
-                username: this.username,
-                password: this.password
-            }).then(res => {
-                this.status = res.data.message
-                this.$router.push({name: 'home'})
-            }, err => {
-                this.status = err.response.data.message
-            })
+        async submit() {
+            const formData = new FormData()
+            formData.append('image', this.image)
+            try {
+                await ImageService.uploadImage(formData)
+            } catch (err) {
+                console.log(err)
+            }
         }
+
     }
 }
 </script>
