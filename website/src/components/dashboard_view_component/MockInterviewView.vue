@@ -47,7 +47,6 @@
                 <p><i class="fa fa-user-tag"></i>{{interview.role}}</p>
                 <p><i class="fa fa-calendar-alt"></i>{{interview.availability}}</p>
                 <p><i class="fa fa-file"></i>{{interview.status}}</p>
-                
             </div>
             </div>
             

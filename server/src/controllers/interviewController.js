@@ -5,7 +5,7 @@ exports.scheduleInterview = (req, res) => {
 
     const interview = new Interview(body);
     //Randomly generate the id of the interview
-    interview.code = "id" + Math.random().toString(16).slice(2)
+    interview.code = "iv" + Math.random().toString(16).slice(2)
     var token = req.cookies.accessToken
     if (!token) {
         return res.json({

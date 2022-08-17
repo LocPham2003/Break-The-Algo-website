@@ -4,11 +4,14 @@ dotenv.config({ path: './.env' });
 const Schema = mongoose.Schema
 
 const nominationSchema = new Schema({
-    name: String,
+    code: String,
+    nominee: String,
+    nominator: String,
     studyMajor: String,
-    // CV
-    // fileName: Data_Type?
-    description: String
+    cvLink: String,
+    description: String,
+    status: String,
+    reason: String
 })
 
 module.exports = mongoose.model("Nomination", nominationSchema)

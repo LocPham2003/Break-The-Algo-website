@@ -138,6 +138,8 @@ export default {
     background-color: #2E2E2F;
     border-radius: 10px;
     margin: 15px;
+    margin-left: 5%;
+    margin-right: 5%;
     padding-left: 10px;
     padding-right: 10px;
     padding-top: 20px;

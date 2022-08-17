@@ -4,15 +4,24 @@
         <div class="nomination_container">
             <div class="nomination_row" v-for="nominationrow in nominations">
             <div class="nomination_card" v-for="nomination in nominationrow">
-                <h2 style="color: white;"><i class="fa fa-user"></i>{{nomination.name}}</h2>
+                <h2 style="color: white;"><i class="fa fa-user"></i>{{nomination.nominee}}</h2>
+                <p><i class="fa fa-star"></i>{{nomination.nominator}}</p>
                 <p><i class="fa fa-graduation-cap"></i>{{nomination.studyMajor}}</p>
-                <a style="color: white; text-align: left; margin-left: 5px; margin-bottom: 10px;"><i class="fa fa-paperclip"></i>LocPhamCV.pdf</a>
+                <a v-bind:href="nomination.cvLink" style="color: white; text-align: left; font-family: Poppins; margin-left: 5px; margin-bottom: 10px; word-wrap: break-word;"><i class="fa fa-paperclip"></i>Nominee CV</a>
                 <p><i class="fa fa-clipboard"></i>{{nomination.description}}</p>
 
-                <div class="buttons">
-                    <a class="action_button">Accept</a>
-                    <a class="action_button">Deny</a>
+                <div style="margin-bottom: 10px;" class="buttons">
+                    <a v-bind:id="nomination.code + 1" @click="onClick($event)" class="action_button">Accept</a>
+                    <a @click="showRefusalReasonInput()" class="action_button">Deny</a>
                 </div>
+
+                <div style="margin-bottom: 5px;" v-if="showReasonInput">
+                    <textarea @input="getData" style="width: 100%; margin-bottom: 5px;" placeholder="Enter the reason this request is denied"></textarea>
+                    <a v-bind:id="nomination.code + 2" @click="onClick($event)" class="action_button">OK</a>
+                    <a @click="showRefusalReasonInput()" class="action_button">Cancel</a>
+                </div>
+
+                <p style="text-align: center;">{{message}}</p>
             </div>
             </div>
         </div>
@@ -22,15 +31,38 @@
 <script>
 import UserService from '@/services/UserService'
 import NominationService from '@/services/NominationService'
+
 export default {
     data() {
         return {
             isLoggedIn: '',
+            message: '',
+            reason: '',
+            showReasonInput: false,
             nominations: []
         }
     },
     methods: {
-
+        showRefusalReasonInput() {
+            this.showReasonInput = !this.showReasonInput
+        },
+        async onClick(event) {
+            const nominationCode = event.currentTarget.id.substring(0, event.currentTarget.id.length - 1)
+            const status = event.currentTarget.id.slice(-1)
+            console.log(this.reason)
+            NominationService.updateNomination({
+                code: nominationCode,
+                status: status,
+                reason: this.reason
+            }).then(res => {
+                this.message = res.data.message
+            }, err => {
+                console.log(err)
+            })
+        },
+        getData(e) {
+            this.reason = e.target.value
+        }
     },
     beforeMount() {
         const fetchData = async() => {
@@ -43,7 +75,10 @@ export default {
                 var nominationRow = []
                 for (var i = 0; i < res.data.length; i++) {
                     nominationRow.push({
-                        name: res.data[i].name,
+                        code: res.data[i].code,
+                        nominee: res.data[i].nominee,
+                        nominator: res.data[i].nominator,
+                        cvLink: res.data[i].cvLink,
                         studyMajor: res.data[i].studyMajor,
                         description: res.data[i].description,
                     })
@@ -56,7 +91,6 @@ export default {
                         this.nominations.push(nominationRow)
                     }
                 }
-                console.log(this.nominations[0][1].name)
             }, err => {
                 console.log(err)
             })
@@ -117,6 +151,7 @@ export default {
     text-decoration: none;
     color: white;
     background-color: red;
+    font-family: Poppins;
     margin-left: 5px;
     margin-right: 5px;
     padding-top: 5px;
