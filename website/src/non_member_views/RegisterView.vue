@@ -258,7 +258,7 @@ export default {
                 {id: 3, text:"Enter your username: "},
                 {id: 4, text:"Enter your password: "},
                 {id: 5, text:"Re-enter your password: "},
-                {id: 6, text:"(Optional) Enter your email for future notification and newsletter: "},
+                {id: 6, text:"Enter your email: "},
             ],
             // User authentication variables
             name: '',
@@ -361,7 +361,8 @@ export default {
                     role: this.role,
                     password: this.password,
                     passwordReEntry: this.passwordReEntry,
-                    email: this.email
+                    email: this.email,
+                    events: []
                 }).then(res => {
                     this.status = res.data.message
                     this.requestDone = true

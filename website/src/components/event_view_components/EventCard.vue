@@ -41,10 +41,11 @@
 
 <script>
 import EventService from '@/services/EventService'
+import UserService from '@/services/UserService'
 
 export default {
     name: "EventCard",
-    props: ["name", "studyMajor", "title", "image", "description", "startTime", "endTime", "location", "startMonth", "startDate", "code", "isLoggedIn", "isSignedUp"],
+    props: ["email", "name", "studyMajor", "title", "image", "description", "startTime", "endTime", "location", "startMonth", "startDate", "code", "isLoggedIn", "isSignedUp"],
     data() {
         return {
             status: '',
@@ -65,23 +66,35 @@ export default {
                 await EventService.eventRegister({
                     code: this.code,
                     name: this.name,
-                    studyMajor: this.studyMajor
+                    studyMajor: this.studyMajor,
+                    email: this.email
                 }).then(res => {
                     this.show = true
                     this.status = res.data.message
                 }, err => {
                     this.status = err.response.data.message
                 })
+
+                await UserService.userSignUpEvent({
+                    email: this.email,
+                    code: this.code
+                })
             } else {
                 await EventService.eventDeregister({
                     code: this.code,
                     name: this.name,
-                    studyMajor: this.studyMajor
+                    studyMajor: this.studyMajor,
+                    email: this.email
                 }).then(res => {
                     this.show = true
                     this.status = res.data.message
                 }, err => {
                     this.status = err.response.data.message
+                })
+
+                await UserService.userDeregisterEvent({
+                    code: this.code,
+                    email: this.email
                 })
             }
         }        
@@ -145,7 +158,7 @@ export default {
 
 
     div.card div.card_body div.card_body_time {
-        flex-basis: 25%;
+        width: 20%;
         display: flex;
         flex-direction: column;
         justify-content: left;
@@ -169,7 +182,7 @@ export default {
     }
 
     div.card div.card_body div.card_body_description {
-        flex-basis: 50%;
+        width: 60%;
         margin-right: 5%;
         display: flex;
         flex-direction: column;
@@ -194,6 +207,7 @@ export default {
         margin-left: 2.5%;
         align-items: center;
         margin-bottom: 0;
+        width: 20%;
     }
 
     div.card div.card_body div.card_body_date h3{

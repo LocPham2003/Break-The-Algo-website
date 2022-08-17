@@ -7,6 +7,15 @@ export default {
   loginUser(params) {
     return Api().post('signin', params)
   },
+  userSignUpEvent(params) {
+    return Api().post('userSignUpEvent', params)
+  },
+  userDeregisterEvent(params) {
+    return Api().post('userDeregisterEvent', params)
+  },
+  getUserListOfEvents(params) {
+    return Api().post('getUserListOfEvents', params)
+  },
   fetchUserState() {
     return Api().get('userState')
   },

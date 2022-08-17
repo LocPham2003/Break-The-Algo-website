@@ -71,17 +71,17 @@ exports.eventList = (req, res) => {
     });
 }
 
-exports.signedupEventList = (req, res) => {
-    Event.find({participants : {$elemMatch: {name: req.body.name}}}, function(err, docs) {
-        if (err) {
-            res.status(400).json({
-                message: "Get sign up event gone wrong"
-            })
-        } else {
-            res.send(docs)
-        }
-    })
-}
+// exports.signedupEventList = (req, res) => {
+//     Event.find({participants : {$elemMatch: {name: req.body.name}}}, function(err, docs) {
+//         if (err) {
+//             res.status(400).json({
+//                 message: "Get sign up event gone wrong"
+//             })
+//         } else {
+//             res.send(docs)
+//         }
+//     })
+// }
 
 exports.getEventByCode = (req, res) => {
     Event.findOne({code : req.body.code}, function(err, docs) {

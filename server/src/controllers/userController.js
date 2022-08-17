@@ -13,7 +13,7 @@ exports.userSignup = (req, res) => {
 	const password = body.password
 	const passwordReEntry = body.passwordReEntry
 
-	if (!body.name || !body.studyMajor || !body.studyYear || !username || !password) {
+	if (!body.name || !body.studyMajor || !body.studyYear || !username || !password || !body.email) {
 		return res.status(400).json({
 			message: "Please make sure you have fully filled in all necessary information"
 		})
@@ -117,6 +117,42 @@ exports.userSignin = (req, res) => {
 exports.userSignout = (req, res) => {
 	console.log("User has signed out")
 	return res.clearCookie("accessToken", {path: '/'}).status(200).json({ message : "You have successfully logged out "})
+}
+
+exports.userSignUpEvent = (req, res) => {
+	User.findOneAndUpdate({email: req.body.email}, {$push: {events: {code: req.body.code}}}, function(err, user) {
+		if (err) {
+			console.log(err)
+			return res.json({ message: "Failed to add event to user's event list"})
+		} else {
+			return res.json({ message: "Successfully added event " + req.body.code + " to " + user.name + "'s list of events."})
+		}
+	})
+}
+
+exports.userDeregisterEvent = (req, res) => {
+	User.findOneAndUpdate({ email: req.body.email}, {$pull: {events: {code: req.body.code}}}, function(err, user) {
+		if (err) {
+			console.log(err)
+			return res.json({ message: "Failed to deregister the user"})
+		} else {
+			return res.json({ message: "Successfully remove event " + req.body.code + " from " + user.name + "'s list of events"})
+		}
+	})
+}
+
+exports.getUserListOfEvents = (req, res) => {
+	User.findOne({email: req.body.email}, function(err, user) {
+		if (err) {
+			return res.json({ message: "Error in getUserListOfEvents"})
+		} else {
+			if (user.events === null) {
+				return res.json({ events: [] })
+			} else {
+				return res.json({ events: user.events })
+			}
+		}
+	})
 }
 
 exports.userState = (req, res) => {

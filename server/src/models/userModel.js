@@ -11,7 +11,10 @@ const userSchema = new Schema({
     role: String,
     password: String,
     passwordReEntry: String,
-    email: String
+    email: String,
+    events: [{
+        code: String
+    }]
 })
 
 module.exports = mongoose.model("User", userSchema)

@@ -12,6 +12,7 @@
         <div v-if="activeSession === 0" v-for="event in events">
             <EventCard
                     :name="name"
+                    :email="email"
                     :studyMajor="studyMajor"
                     :title="event.title"
                     :image="event.image"     
@@ -45,6 +46,7 @@ export default {
     data() {
         return {
             name: '',
+            username: '',
             isLoggedIn: false,
             fetchingInfo: true,
             activeSession: 0,
@@ -65,10 +67,8 @@ export default {
     beforeMount() {
         const fetchData = async() => {
             await ImageService.getImage().then(res => {
-                console.log(res)
                 for(var i = 0; i < res.data.images.length; i++){
                     this.images.push("data:image/png;base64," + res.data.images[i].data)
-                    console.log(this.images[i])
                 }
             })
 
@@ -93,29 +93,49 @@ export default {
                 this.isLoggedIn = res.data.isLoggedIn
                 this.name = res.data.name
                 this.studymajor = res.data.studyMajor
+                this.email = res.data.email
             })
             
             if (this.isLoggedIn) {
-                await EventService.fetchSignedupEventList({ name: this.name }).then(res => {
-                    if (res.data.length != 0) {
+                await UserService.getUserListOfEvents({ email: this.email}).then(res => {
+                    if (res.data.events.length != 0) {
                         var j = 0;
                         var i = 0;
                         while (i < this.events.length) {
-                            if (j === res.data.length) {
+                            if (j === res.data.events.length) {
                                 break;
                             }
 
-                            if (this.events[i].code === res.data[j].code) {
-                                console.log(this.events[i].code + ' ' + res.data[j].code)
+                            if (this.events[i].code === res.data.events[j].code) {
                                 this.events[i].isSignedUp = true;
                                 j++;
-                                i = 0;
+                                i = -1;
                             }
                             i++;
                         }
                     }
                     this.fetchingInfo = false
                 })
+                // await EventService.fetchSignedupEventList({ name: this.name }).then(res => {
+                //     // if (res.data.length != 0) {
+                //     //     var j = 0;
+                //     //     var i = 0;
+                //     //     while (i < this.events.length) {
+                //     //         if (j === res.data.length) {
+                //     //             break;
+                //     //         }
+
+                //     //         if (this.events[i].code === res.data[j].code) {
+                //     //             console.log(this.events[i].code + ' ' + res.data[j].code)
+                //     //             this.events[i].isSignedUp = true;
+                //     //             j++;
+                //     //             i = 0;
+                //     //         }
+                //     //         i++;
+                //     //     }
+                //     // }
+                //     // this.fetchingInfo = false
+                // })
             } else {
                 this.fetchingInfo = false
             }

@@ -8,13 +8,21 @@
                 <h2 style="color: white;"><i class="fa fa-user"></i>{{interview.interviewee}}</h2>
                 <p><i class="fa fa-building"></i>{{interview.company}}</p>
                 <p><i class="fa fa-user-tag"></i>{{interview.role}}</p>
-                <p><i class="fa fa-calendar-alt"></i>{{interview.date}} - {{interview.time}}</p>
-
+                <p><i class="fab fa-discord"></i>{{interview.contactInfo}}</p>
+                <p><i class="fa fa-calendar-alt"></i>{{interview.availability}}</p>
                 <div class="buttons">
-                    <a class="action_button">Accept</a>
-                    <a class="action_button">Transfer</a>
-                    <a class="action_button">Deny</a>
+                    <a v-bind:id="interview.code + 1" @click="onClick($event)" class="action_button">Accept</a>
+                    <a v-bind:id="interview.code + 2" @click="onClick($event)" class="action_button">Deny</a>
+                    <a v-bind:id="interview.code" @click="showConfirm()" class="action_button">Done</a>
                 </div>
+                <p v-if="displayConfirm">By clicking done, this interview will be deleted from the database. Are you sure you want to continue ?</p>
+                <div v-if="displayConfirm" class="buttons">
+                    <a v-bind:id="interview.code" @click="getConfirmInput($event)" class="action_button">Yes</a>
+                    <a v-bind:id="0" @click="getConfirmInput($event)" class="action_button">No</a>
+                </div>
+                
+                <p style="text-align: center">{{message}}</p>
+
             </div>
             </div>
             
@@ -37,11 +45,47 @@ export default {
             interviews: [],
             isLoggedIn: false,
             fetchingData: true,
-            isEmpty: false
+            isEmpty: false,
+            displayConfirm: false,
+            message: ''
         }
     },
     methods: {
+        onClick(event) {
+            const interviewCode = event.currentTarget.id.substring(0, event.currentTarget.id.length - 1)
+            const status = event.currentTarget.id.slice(-1)
+            const updateInterviewStatus = async() => {
+                await InterviewService.updateInterviewScheduleStatus({
+                    code: interviewCode,
+                    status: status
+                }).then(res => {
+                    this.message = res.data.message
+                }, err => {
+                    console.log(err)
+                })
+            }
 
+            updateInterviewStatus()
+        },
+        showConfirm() {
+            this.displayConfirm = true;
+        },
+        async getConfirmInput(event) {
+            if (event.currentTarget.id == 0) {
+                this.displayConfirm = false;
+            } else {
+                const interviewCode = event.currentTarget.id
+
+                await InterviewService.deleteInterview({
+                    code: interviewCode
+                }).then(res => {
+                    this.message = res.data.message
+                }, err => {
+                    console.log(err)
+                })
+            }
+
+        }
     },
     beforeMount() {
         const fetchData = async() => {
@@ -50,7 +94,7 @@ export default {
                 this.isLoggedIn = res.data.isLoggedIn
             })
 
-            await InterviewService.getIntervewSchedule({
+            await InterviewService.getInterviewerSchedule({
                 interviewer: this.interviewer
             }).then(res => {
                 if (res.data.length != 0) {
@@ -58,11 +102,12 @@ export default {
                 var interviewRow = []
                 for (var i = 0; i < res.data.length; i++) {
                     interviewRow.push({
+                        code: res.data[i].code,
                         interviewee: res.data[i].interviewee,
                         role: res.data[i].role,
                         company: res.data[i].company,
-                        date: res.data[i].date,
-                        time: res.data[i].time
+                        availability: res.data[i].availability,
+                        contactInfo: res.data[i].contactInfo
                     })
                     size++
                     if (size == 2){
@@ -131,8 +176,13 @@ export default {
     margin-right: 5px;    
 }
 
+.interview_container .interview_row .interview_card .buttons {
+    margin-bottom: 10px;
+}
+
 .interview_container .interview_row .interview_card a.action_button {
     text-decoration: none;
+    font-family: Poppins;
     color: white;
     background-color: red;
     margin-left: 5px;
