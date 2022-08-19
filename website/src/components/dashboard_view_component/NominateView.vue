@@ -133,7 +133,7 @@ export default {
                             currentStatus = 'Congratulations! Your nomination request has been approved'
                             break;
                         case 2:
-                            currentStatus = 'Sorry, your nomination request is denied. Reason for denial: ' + res.data[i].reason
+                            currentStatus = 'Sorry, your nomination request is denied. Reason for denial:  ' + res.data[i].reason
                             break;
                     }
 
