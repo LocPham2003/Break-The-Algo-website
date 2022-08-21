@@ -7,39 +7,20 @@
         <h3>hi. let's</h3>
         <h1>break the algo.</h1>
 
-        <a class="get_started">Get started.</a>
+        <a @click="redirectToRegister()" class="get_started">Get started.</a>
         
         <div style="margin: 10px 10px 10px 10px; display: flex; flex-direction: row; justify-content: center; align-items: center;">
           <a class="social" href="https://twitter.com/breakthealgo"><i class="fab fa-twitter"></i></a>
           <a class="social" href="https://www.facebook.com/breakthealgo/"><i class="fab fa-facebook"></i></a>
           <a class="social" href="https://www.instagram.com/breakthealgo/"><i class="fab fa-instagram"></i></a>
-          <a class="social" href="https://www.instagram.com/breakthealgo/"><i class="fab fa-discord"></i></a>
+          <a class="social" href="https://discord.gg/3daSHa7"><i class="fab fa-discord"></i></a>
           <a class="social" href="https://www.linkedin.com/company/break-the-algo/"><i class="fab fa-linkedin"></i></a>     
         </div>
-
-        <div class = "social_container">
-          <div>
-          </div>
-        </div> 
       </div>
-      <div class = "bubble_effect">
-        <div>
-          <img class = "asfandyar" src = "../assets/media/asfandyar.jpg" alt = "coding_picture">
-        </div>
 
-        <div>
-          <img class = "marissa" src = "../assets/media/marissa.jpg" alt = "coding_picture">
-        </div>
-
-        <div>
-          <img class = "diako" src = "../assets/media/diako.jpg" alt = "coding_picture">
-        </div>
-
-        <div>
-          <img class = "nidhish" src = "../assets/media/nidhish.jpg" alt = "coding_picture">     
-        </div>
-
-      </div>      
+      <div class="picture_container">
+        <img style="width: 100%; height: 100%;" src="@/assets/media/homepagepicture.png">
+      </div>
     </div>
   </body>
   
@@ -52,8 +33,10 @@ export default {
 
     }
   },
-  methods() {
-
+  methods: {
+    redirectToRegister() {
+      this.$router.push({name: 'register'})
+    }
   },
   mounted() {
     if (localStorage.getItem('reloaded')) {

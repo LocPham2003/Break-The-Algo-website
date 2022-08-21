@@ -1,10 +1,10 @@
 <template>
     <div class="join_us_card">
-        <div style="height: 30%; margin-bottom: 20px;">
+        <div style="flex-basis: 30%; display: flex; flex-direction: column; justify-content: center; align-items: center;">
             <i :class="iconName"></i>
             <h4>{{cardTitle}}</h4>
         </div>
-        <div style="height: 70%; display: flex; flex-direction: row; justify-content: top; align-items: top;">
+        <div style="flex-basis: 70%;">
             <p>{{cardDescription}}</p>
         </div>
     </div>
@@ -27,7 +27,7 @@ export default {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    width: 375px;
+    width: 350px;
     height: 425px;
     background-color: #2E2E2F;
     border-radius: 10px;
@@ -45,7 +45,7 @@ export default {
     color: white;
     background-color: red;
     font-size: 20px;
-    padding: 15px;
+    padding: 20px;
     margin-top: 15px;
     margin-bottom: 15px; 
     border-radius: 50%;
@@ -61,7 +61,8 @@ export default {
     color: white;
     font-family: Poppins;
     text-align: left;
-    font-size: 18px;
+    font-size: 16px;
+    margin-top: 10px;
     margin-bottom: 30px;
 }
 </style>

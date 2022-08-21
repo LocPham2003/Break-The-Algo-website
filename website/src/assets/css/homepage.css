@@ -27,18 +27,20 @@
 }
   
 .content {
-  transform: translate(0, 25vh);
   display: flex;
   flex-direction: row;
+  justify-content: center;
   flex-wrap: wrap;
+  align-items: center;
   text-align: center;
-  margin: 20px 0px 0px 20px;
+  margin-left: 5%;
+  margin-right: 2.5%;
 }
 
 .content .homepage_content {
   display: flex;
   flex-direction: column;
-  flex-basis: 30%;
+  flex-basis: 40%;
   flex-wrap: wrap;
 }
 
@@ -95,73 +97,30 @@
     color: red;
 }
 
-.content .bubble_effect {
-  flex-basis: 70%;
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  grid-template-rows: repeat(2, 1fr);
-  grid-gap: 10px;
-  transform: translate(0, -20vh);
+.content .picture_container {
+  flex-basis: 60%;
 }
 
 
-.content .bubble_effect img.asfandyar {
-  display: inline-block;
-  border-radius: 50%;
-  object-fit: cover;
-  width: 70%;
-  height: 70%;
-  margin-left: 50%;
-}
-
-.content .bubble_effect img.marissa {
-  display: inline-block;
-  width: 65%;
-  height: 65%; 
-  border-radius: 50%;
-  object-fit: cover;
-  margin-left: -5%;
-  margin-top: 30%;
-}
-
-.content .bubble_effect img.diako {
-  display: inline-block;
-  position: relative;
-  width: 60%;
-  height: 60%;
-  border-radius: 50%;
-  margin-left: 65%;
-  margin-top: -28%;
-  object-fit: cover;
-}
-
-.content .bubble_effect img.nidhish {
-  display: inline-block;
-  position: relative;
-  width: 40%;
-  height: 40%;
-  margin-left: -15%;
-  margin-top: -3%;
-  border-radius: 50%;
-  object-fit: cover;
-}
 
 @media screen and (max-width: 650px) {
   .content {
     flex-direction: column;
     justify-content: center;
+    align-items: center;
     flex-wrap: wrap;
     margin-top: 0;
     padding-top: 0;
   }
 
   .content .homepage_content {
-    margin-left: auto;
-    margin-right: auto;
+    margin-left: 0;
+    margin-right: 0;
     margin-top: 0;
     text-align: center;
     padding: 0;
   }
+
 
   .content .bubble_effect {
     padding: 0;

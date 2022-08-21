@@ -22,9 +22,8 @@
             ></EventCard>
         </div>
 
-        <div v-if="activeSession === 1">
-            <h1>Display past events</h1>
-            <img src="http://localhost:8081/unknown.png">
+        <div v-if="events.length === 0">
+            <h1 style="margin: 10px;">You haven't signed up to any events yet. Go to Event section to sign up for one now!</h1>
         </div>
     </div>
     </div>

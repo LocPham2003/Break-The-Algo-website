@@ -2,9 +2,8 @@
   <div class="about_container">    
     <div class="who_we_are_container">
       <div>
-        <h1 style="color: white; font-family: Poppins; font-size: 80px; text-align: justify; margin-left: 5%;">Who we are</h1>
-        <h4 style="color: white; font-family: Poppins; text-align: justify; margin-left: 5%; margin-right: 5%;">{{whoWeAreMessage}}</h4>
-        <br>
+        <h1 class="who_we_are_header">Who we are</h1>
+        <h5 style="color: white; font-family: Poppins; text-align: justify; margin-left: 5%; margin-right: 5%;">{{whoWeAreMessage}}</h5>
       </div>
       <img style="height: 500px; margin: 5%;" src="@/assets/media/teamup.svg">
     </div>
@@ -45,6 +44,18 @@
           :iconName="iconNames[5]"
         ></JoinUsCard>
       </div>
+    </div>
+
+    <div class="join_discord_container">
+      <div style="margin: 5%; padding: 10px;">
+        <img style="height: 100%;" src="@/assets/media/joincommunity.svg">
+      </div>
+      <div style="margin: 5%">
+        <h1 class="join_discord_header">Join our community!</h1>
+        <h5 style="color: white; font-family: Poppins; text-align: justify; margin-bottom: 30px;">{{joinDiscord}}</h5> 
+        <a class="join_now_button" href="https://discord.gg/3daSHa7">Join now!</a>
+      </div>
+
     </div>
 
     <div style="width: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center">
@@ -201,6 +212,19 @@
 
     </div>
 
+    <div class="contact_information_container">
+      <h1 class="members_header">Contact us!</h1>
+      <h5 style="color: white; font-family: Poppins; text-align: center; margin-left: 5%; margin-right: 5%;">For any business inquiries or other questions, please don't be hesistant to reach us through these following platforms</h5>
+      <div style="display: flex; flex-direction: column; justify-content: center; align-items: center;">
+        <p class="contact_info_links"><i style="margin-right: 5px; color: red;" class="fa fa-envelope"></i>Gmail: info@breakthealgo.com</p>
+        <p class="contact_info_links"><i style="margin-right: 5px; padding: 1px; background: #d6249f;background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%,#d6249f 60%,#285AEB 90%);border-radius: 25%;" class="fab fa-instagram"></i>Instagram: @breakthealgo</p>
+        <p class="contact_info_links"><i style="margin-right: 5px; color: #1195F5;" class="fab fa-facebook"></i>Facebook: @breakthealgo</p>
+        <p class="contact_info_links"><i style="margin-right: 5px; color: #1D9BF0;" class="fab fa-twitter"></i>Twitter: @breakthealgo</p>
+        <p class="contact_info_links"><i style="margin-right: 5px; color: #0A66C2;" class="fab fa-linkedin"></i>Linkedin: Break The Algo</p>
+      </div>
+      
+    </div>
+
   </div>
 </template>
 
@@ -238,6 +262,8 @@ export default {
       ],
       whoWeAreMessage: 
       "Break The Algo is a student-led career association whose goal is to establish the necessary foundation for students to get internships in (Big-tech) companies. We seek to bring students a holistic career-based education complementary to your studies at the university, as we want to set-up our future computer science and data science graduates for an advantageous head start in the industry.",
+      joinDiscord: 
+      "A discord server was created as a medium for all the members in the BTA community to chat, discuss and collaborate with each others and with the committee/ board members themselves. Joining our discord is a great way for you to expand your network with like-minded students and acquire new knowledge through other members in the BTA, so we urge you to do so!"
     }
   },
   methods: {
@@ -269,10 +295,18 @@ export default {
   align-items: center;
 }
 
+h1.who_we_are_header {
+  color: white; 
+  font-family: Poppins; 
+  font-size: 65px; 
+  text-align: justify; 
+  margin-left: 5%;
+}
+
 h1.join_us_header {
   color: white; 
   font-family: Poppins; 
-  font-size: 80px; 
+  font-size: 65px; 
   text-align: center;
 }
  
@@ -282,6 +316,35 @@ h1.join_us_header {
   flex-wrap: wrap;
   justify-content: center; 
   align-items: center;
+}
+
+.join_discord_container {
+  display: flex; 
+  flex-direction: row; 
+  justify-content: center; 
+  align-items: center; 
+  width: 100%;
+}
+
+h1.join_discord_header {
+  color: white; 
+  font-family: Poppins; 
+  font-size: 65px; 
+  text-align: left;
+}
+
+a.join_now_button {
+  padding: 10px 20px;
+  text-decoration: none;
+  font-family: Poppins;
+  border-radius: 10px;
+  color: white;
+  background-color: red;
+}
+
+a.join_now_button:hover {
+  background-color: darkred;
+  color: white;
 }
 
 h1.members_header {
@@ -363,6 +426,30 @@ a.view_more_button:hover {
     background-color: darkred;
 }
 
+p.contact_info_links {
+  color: white;
+  text-decoration: none;
+  font-family: Poppins;
+  font-size: 24px;
+  text-align: left;
+  width: 40%;
+  margin-left: 7.5%;
+}
+
+@media screen and (max-width: 1026px) {
+    .who_we_are_container {
+      flex-direction: column;
+    }
+
+    .join_discord_container {
+      flex-direction: column-reverse;
+    }
+
+    .join_discord_container img {
+      width: 80%;
+    }
+}
+
 
 @media screen and (max-width: 700px) {
     h1.join_us_header {
@@ -371,8 +458,9 @@ a.view_more_button:hover {
     .join_us_card_section {
         flex-direction: column;   
     }
-    .who_we_are_container {
-      flex-direction: column;
+
+    h1.join_discord_header {
+      font-size: 48px;
     }
 
     h1.members_header {
@@ -388,13 +476,19 @@ a.view_more_button:hover {
     }
 
     .card_parent_container .lower_half {
-      transform: translateY(50%);
+      transform: translateY(35%);
     }
 
     .card_parent_container .lower_half h3 {
       font-size: 48px;
       margin: 0;
       margin-bottom: 10px;
-}
+    }
+
+    p.contact_info_links {
+      width: 90%;
+      margin-left: 5%;
+      margin-right: 5%;
+    }
 }
 </style>
