@@ -116,26 +116,6 @@ export default {
                     }
                     this.fetchingInfo = false
                 })
-                // await EventService.fetchSignedupEventList({ name: this.name }).then(res => {
-                //     // if (res.data.length != 0) {
-                //     //     var j = 0;
-                //     //     var i = 0;
-                //     //     while (i < this.events.length) {
-                //     //         if (j === res.data.length) {
-                //     //             break;
-                //     //         }
-
-                //     //         if (this.events[i].code === res.data[j].code) {
-                //     //             console.log(this.events[i].code + ' ' + res.data[j].code)
-                //     //             this.events[i].isSignedUp = true;
-                //     //             j++;
-                //     //             i = 0;
-                //     //         }
-                //     //         i++;
-                //     //     }
-                //     // }
-                //     // this.fetchingInfo = false
-                // })
             } else {
                 this.fetchingInfo = false
             }

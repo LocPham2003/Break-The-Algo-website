@@ -213,12 +213,11 @@
     </div>
 
     <div class="contact_information_container">
-      <h1 class="members_header">Contact us!</h1>
-      <h5 style="color: white; font-family: Poppins; text-align: center; margin-left: 5%; margin-right: 5%;">For any business inquiries or other questions, please don't be hesistant to reach us through these following platforms</h5>
+      <h1 class="members_header">Let's connect!</h1>
+      <h5 style="color: white; font-family: Poppins; text-align: center; margin-left: 5%; margin-right: 5%;">We are available through these platforms as well! Follow us to get the latest update on events, workshops and information!</h5>
       <div style="display: flex; flex-direction: column; justify-content: center; align-items: center;">
-        <p class="contact_info_links"><i style="margin-right: 5px; color: red;" class="fa fa-envelope"></i>Gmail: info@breakthealgo.com</p>
-        <p class="contact_info_links"><i style="margin-right: 5px; padding: 1px; background: #d6249f;background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%,#d6249f 60%,#285AEB 90%);border-radius: 25%;" class="fab fa-instagram"></i>Instagram: @breakthealgo</p>
         <p class="contact_info_links"><i style="margin-right: 5px; color: #1195F5;" class="fab fa-facebook"></i>Facebook: @breakthealgo</p>
+        <p class="contact_info_links"><i style="margin-right: 5px; padding: 1px; background: #d6249f;background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%,#d6249f 60%,#285AEB 90%);border-radius: 25%;" class="fab fa-instagram"></i>Instagram: @breakthealgo</p>
         <p class="contact_info_links"><i style="margin-right: 5px; color: #1D9BF0;" class="fab fa-twitter"></i>Twitter: @breakthealgo</p>
         <p class="contact_info_links"><i style="margin-right: 5px; color: #0A66C2;" class="fab fa-linkedin"></i>Linkedin: Break The Algo</p>
       </div>
