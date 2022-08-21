@@ -32,6 +32,11 @@
             <h1>Your schedule is empty... for now</h1>
         </div>
     </div>
+
+    <div v-if="!fetchingData && !isLoggedIn">
+        <h1>You need to login first</h1>
+    </div>
+
 </template>
 
 <script>

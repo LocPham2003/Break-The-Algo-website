@@ -1,8 +1,12 @@
 <template>
     <h1 v-if="fetchingData">Loading your homescreen...</h1>
-    <div v-if="isLoggedIn === true">
+    <div v-if="!fetchingData && isLoggedIn === true">
         <h1>Welcome back, {{ name }}</h1>
         <h2>Your role is {{ role }}</h2>
+    </div>
+
+    <div v-if="!fetchingData && !isLoggedIn">
+        <h1>You need to login first</h1>
     </div>
 </template>
 

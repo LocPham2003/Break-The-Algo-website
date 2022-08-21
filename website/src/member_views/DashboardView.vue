@@ -1,6 +1,7 @@
 <template>
-    <h1>Your dashboard</h1>
-    <div v-if="isLoggedIn" class="dashboard_container">
+    <div v-if="!fetchingData && isLoggedIn" class="dashboard_container">
+        <h1>Your dashboard</h1>
+
         <div class="row_container">
             <div id="1" @click="onClick($event)" class="utility">
                 <i class="fa fa-user"></i>
@@ -53,6 +54,10 @@
             </div>
         </div>
     </div>
+
+    <div v-if="!fetchingData && !isLoggedIn">
+        <h1>You need to login first</h1>
+    </div>
 </template>
 
 <script>
@@ -65,7 +70,8 @@ export default {
             role: 0,
             isTasked: false, // Is tasked means check if one of the button is clicked
             detectedUsername: '',
-            message: ''
+            message: '',
+            fetchingData: true
         }
     }, 
     methods: {
@@ -122,17 +128,17 @@ export default {
     },
     beforeMount() {
         const fetchData = async () => {
-            const response = await UserService.fetchUserState()
-            this.isLoggedIn = response.data.isLoggedIn
-            this.detectedUsername = response.data.detectedUsername
+            await UserService.fetchUserState().then(res => {
+                this.isLoggedIn = res.data.isLoggedIn
+                this.detectedUsername = res.data.detectedUsername
 
-            /**
+                /**
              * The role system: Assign the role variable with a number that corresponds to the detected role of the user in the database
              * If admin -> role = 0
              * If interviewCommittee -> role = 1
              * If activityCommittee -> role = 2
              */
-            switch(response.data.role) {
+            switch(res.data.role) {
                 case "admin":
                     this.role = 0;
                     break;
@@ -143,6 +149,14 @@ export default {
                     this.role = 2;
                     break;
             }
+
+            this.fetchingData = false
+            }, err => {
+                console.log(err)
+            })
+            
+
+            
         }
         fetchData()
     }
