@@ -9,7 +9,7 @@
         <li class = "logo_container"><router-link to="/"><img src = "./assets/media/bta-assets/bta.png" alt = "logo" class = "logo"/></router-link></li>
         <li class = "home_element"><router-link to="/">Home</router-link></li>
         <li class = "text"><router-link to="/events">Events</router-link></li>
-        <li class = "text"><router-link to="/blog">Blog</router-link></li>
+        <li class = "text"><router-link to="/community">Community</router-link></li>
         <li class = "text"><router-link to="/support">Support</router-link></li>
         <li class = "text"><router-link to="/about">About</router-link></li>
         <li class = 'button'><router-link to = "/register">Register</router-link></li>
@@ -23,7 +23,7 @@
         <li class = "logo_container"><router-link to="/memberHome"><img src = "./assets/media/bta-assets/bta.png" alt = "logo" class = "logo"/></router-link></li>
         <li class = "home_element"><router-link to="/">Home</router-link></li>
         <li class="text"><router-link to="/events">Events</router-link></li>
-        <li class="text"><router-link to="/blog">Blog</router-link></li>
+        <li class="text"><router-link to="/community">Community</router-link></li>
         <li class="text"><router-link to="/support">Support</router-link></li>
         <li class="text"><router-link to="/about">About</router-link></li>
         <li class = 'button'><a @click="logOut">Log out</a></li>

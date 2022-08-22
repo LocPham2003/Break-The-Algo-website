@@ -1,7 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../non_member_views/HomeView.vue'
 import EventView from '../non_member_views/EventView.vue'
-import BlogView from '../non_member_views/BlogView.vue'
+import CommunityView from '../non_member_views/CommunityView.vue'
 import SupportView from '../non_member_views/SupportView.vue'
 import AboutView from '../non_member_views/AboutView.vue'
 import RegisterView from '../non_member_views/RegisterView.vue'
@@ -45,9 +45,9 @@ const routes = [
     component: EventRegisterView,
   },
   {
-    path: '/blog',
-    name: 'blog',
-    component: BlogView,
+    path: '/community',
+    name: 'community',
+    component: CommunityView,
   },
   {
     path: '/support',

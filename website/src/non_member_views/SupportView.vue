@@ -10,11 +10,11 @@
     </div>
     
     <div class="student_support_section" v-if="selectedTarget == 0">\
-        <div>
-            <img src="@/assets/media/appreciation.svg">
+        <div class="student_support_image">
+            <img style="width: 100%; height: 100%;" src="@/assets/media/appreciation.svg">
         </div>
-        <div style="margin: 10px;">
-             <p>For now, we do not have any merchandises or products to be purchased via monetary means, so to support, you can introduce us to other students in TU/e or other university in the Netherlands, we would greatly appreciate it!</p>
+        <div class="student_support_content">
+            <p>For now, we do not have any merchandises or products to be purchased via monetary means, so to support, you can introduce us to other students in TU/e or other university in the Netherlands, we would greatly appreciate it!</p>
             <br>
             <p>You can also reach out to one of our board members via discord to request to be contributed in our open source projects such as the Leetcode problems scraping bot or BTA's full-stack website. Any contributions will be acknowledged by us and it's a great opportunity to add more experience to your CV :D.</p>
 
@@ -31,7 +31,7 @@
     </div>
 
     <div class="company_support_section" v-if="selectedTarget == 1">
-        <div style="margin: 10px; width: 60%;">
+        <div class="company_support_content">
             <p>We believe that companies could also benefit from our community of talented, industrious and studious students. 
             Hence, we openly welcome companies that reach out to us to host talks, networking events or technical seminars. 
             <br>
@@ -46,10 +46,10 @@
 
             <br>
 
-            <p>Are you interested in supporting us ? Click <a href="#">here</a> to send us your support! We are looking forward to hearing from you :)</p>
+            <p>Are you interested in collaborating with us ? Click <a href="#">here</a> to send us your idea or send an email to info@breakthealgo.com! We are looking forward to hearing from you :)</p>
         </div>
         
-        <div style="width: 40%;">
+        <div class="company_support_image">
             <img style="width: 100%; height: 100%;" src="@/assets/media/connection.svg">
         </div>
     </div>
@@ -61,9 +61,9 @@
 export default {
     data() {
         return {
-            selectedTarget: 1,
-            selector1 : 'unselected',
-            selector2 : 'selected',
+            selectedTarget: 0,
+            selector1 : 'selected',
+            selector2 : 'unselected',
         }
     },
     methods : {
@@ -117,11 +117,20 @@ export default {
 }
 
 .student_support_section {
-    margin: 2.5% 5% 5% 2.5%;
+    margin: 10px;
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
+}
+
+.student_support_content {
+    width: 60%;
+}
+
+.student_support_image {
+    width: 40%;
+    margin: 10px;
 }
 
 .student_support_section p{
@@ -142,7 +151,7 @@ export default {
 }
 
 .company_support_section {
-    margin: 2.5% 5% 5% 2.5%;
+    margin: 10px;
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -156,6 +165,16 @@ export default {
     text-align: left;
 }
 
+.company_support_content {
+    margin: 10px; 
+    width: 60%;
+}
+
+.company_support_image {
+    margin: 10px;
+    width: 40%;
+}
+
 .company_support_section a {
     color: white;
     font-family: Poppins;
@@ -165,6 +184,33 @@ export default {
 .company_support_section a:hover {
     color: red;
 }
+
+@media screen and (max-width: 1026px) {
+    .company_support_section {
+        flex-direction: column;
+    }
+
+    .company_support_content {
+        width: 95%;    
+    }
+
+    .company_support_image {
+        width: 80%;
+    }
+
+    .student_support_section{
+        flex-direction: column-reverse;
+    }
+
+    .student_support_content {
+        width: 95%;
+    }
+
+    .student_support_image {
+        width: 80%;
+    }
+}
+
 
 </style>
 

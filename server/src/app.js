@@ -63,12 +63,12 @@ app.use('/api', nominationRoutes)
 app.use('/api', imageRoutes)
 app.use(express.static("uploads"))
 
-// if (process.env.NODE_ENV === "production")  {
-//   app.use(express.static(__dirname + "/dist/"))
-//   app.get("*", (req, res) => {
-//     res.sendFile(__dirname + "/dist/index.html")
-//   })
-// }
+if (process.env.NODE_ENV === "production")  {
+  app.use(express.static(__dirname + "/dist/"))
+  app.get("*", (req, res) => {
+    res.sendFile(__dirname + "/dist/index.html")
+  })
+}
 
 // Note: in several cases, it will happen that you try to start the server using npm start, but your server does not start
 // and it returns the error: Error: listen EADDRINUSE: address already in use :::8081

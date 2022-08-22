@@ -19,7 +19,7 @@
         <input v-bind:id='2' @input="getData" style="margin: 5px;" placeholder="Link to nominee's CV (e.g Google Drive, Microsoft Outlook, etc)">
 
         <h3 style="text-align: center; color: white; font-family: Poppins; margin: 5px;">Other descriptions</h3>
-        <input v-bind:id='3' @input="getData" style="margin: 5px;" placeholder="Other achievements, community contributions, etc">
+        <textarea v-bind:id='3' @input="getData" style="margin: 5px;" placeholder="Other achievements, community contributions, etc. Please input as bullet points"></textarea>
 
         <a @click="onClick()" class="button">Submit</a>
 
@@ -182,6 +182,16 @@ export default {
     color: white;
     width: 50%;
     height: 40px;
+    border-radius: 20px;
+    padding-left: 10px;
+}
+
+.nominate_container textarea {
+    background-color: rgb(32,32,32);
+    border: 1px solid white;
+    color: white;
+    width: 50%;
+    height: 100px;
     border-radius: 20px;
     padding-left: 10px;
 }
