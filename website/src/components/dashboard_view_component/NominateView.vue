@@ -12,14 +12,26 @@
         <h3 style="text-align: center; color: white; font-family: Poppins; margin: 5px;">Nominee's name:</h3>
         <input v-bind:id='0' @input="getData" style="margin: 5px;" placeholder="Enter the name of the nominee">
 
+        <h3 style="text-align: center; color: white; font-family: Poppins; margin: 5px;">Nominee's portrait (Optional):</h3>
+         <form enctype="multipart/form-data">
+            <input class="portrait_input" @change="onChange" ref="image" style="color: white;" type="file">
+        </form>
+
         <h3 style="text-align: center; color: white; font-family: Poppins; margin: 5px;">Nominee's study major:</h3>
         <input v-bind:id='1' @input="getData" style="margin: 5px;" placeholder="Enter the study major of the nominee">
 
-        <h3 style="text-align: center; color: white; font-family: Poppins; margin: 5px;">Nominee's CV:</h3>
-        <input v-bind:id='2' @input="getData" style="margin: 5px;" placeholder="Link to nominee's CV (e.g Google Drive, Microsoft Outlook, etc)">
+        <h3 style="text-align: center; color: white; font-family: Poppins; margin: 5px;">Nominee's CV or personal website:</h3>
+        <input v-bind:id='2' @input="getData" style="margin: 5px;" placeholder="Link to nominee's CV (e.g Google Drive, Microsoft Outlook, etc) or personal website">
 
-        <h3 style="text-align: center; color: white; font-family: Poppins; margin: 5px;">Other descriptions</h3>
-        <textarea v-bind:id='3' @input="getData" style="margin: 5px;" placeholder="Other achievements, community contributions, etc. Please input as bullet points"></textarea>
+        <h3 style="text-align: center; color: white; font-family: Poppins; margin: 5px;">Descriptions</h3>
+        <input v-bind:id='3' @input="getData" style="margin: 5px;" placeholder="Other achievements, community contributions, etc. Example: Data Scientist at Tesla">
+
+        <h3 style="text-align: center; color: white; font-family: Poppins; margin: 5px;">Discord</h3>
+        <input v-bind:id='4' @input="getData" style="margin: 5px;" placeholder="Enter nominee's discord">
+
+        <h3 style="text-align: center; color: white; font-family: Poppins; margin: 5px;">Linkedin</h3>
+        <input v-bind:id='5' @input="getData" style="margin: 5px;" placeholder="Enter nominee's linked in">
+
 
         <a @click="onClick()" class="button">Submit</a>
 
@@ -42,7 +54,7 @@
         </div>
 
         <div v-else>
-            <h1>Your schedule is empty... for now</h1>
+            <h1>Your nominations are empty... create one now if you can!</h1>
         </div>
     </div>
 </template>
@@ -50,6 +62,7 @@
 <script>
 import NominationService from '@/services/NominationService'
 import UserService from '@/services/UserService';
+import ImageService from '@/services/ImageService';
 export default {
     data() {
         return {
@@ -59,8 +72,12 @@ export default {
             studyMajor: '',
             cvLink: '',
             description: '',
+            discord:'',
+            linkedin: '',
             status: '',
             nominations: [],
+            portrait: '',
+            code: '',
             isEmpty: false
         }
     },
@@ -82,6 +99,12 @@ export default {
                 case 3: 
                     this.description = e.target.value
                     break;
+                case 4:
+                    this.discord = e.target.value;
+                    break;
+                case 5: 
+                    this.linkedin = e.target.value;
+                    break;
             }
         },
         onClick() {
@@ -91,6 +114,10 @@ export default {
                     this.postNomination()
             }
         },
+        onChange() {
+            const portrait = this.$refs.image.files[0]
+            this.portrait = portrait
+        },
         async postNomination() {
             await NominationService.nominationCreate({
                 nominee: this.nominee,
@@ -98,14 +125,28 @@ export default {
                 studyMajor: this.studyMajor,
                 description: this.description,
                 cvLink: this.cvLink,
+                discord: this.discord,
+                linkedin: this.linkedin,
                 status: "0",
                 reason: ''
             }).then(res => {
                 this.status = res.data.message;
+                this.code = res.data.code
+                this.addImage()
                 setTimeout(() => this.$router.go(), 2000);
             }, err => {
                 this.status = err.response.data.message    
             })
+        },
+        async addImage() {
+            const formData = new FormData()
+            formData.append('image', this.portrait)
+            formData.append('code', this.code)
+            try {
+                await ImageService.uploadImage(formData)
+            } catch (err) {
+                console.log(err)
+            }
         }
     },
     beforeMount() {
@@ -150,7 +191,7 @@ export default {
                     if (size == 2){
                         size = 0
                         this.nominations.push(nominationRow)
-                        interviewRow = []
+                        nominationRow = []
                     } else if (i == res.data.length - 1) {
                         this.nominations.push(nominationRow)
                     }
@@ -184,6 +225,13 @@ export default {
     height: 40px;
     border-radius: 20px;
     padding-left: 10px;
+}
+
+.nominate_container input.portrait_input {
+    border: none;
+    width: 80%;
+    padding: none;
+
 }
 
 .nominate_container textarea {
@@ -238,6 +286,7 @@ export default {
     justify-content: left;
     align-items: left;
     width: 400px;
+    height: 250px;
 }
 
 .nominations_container .nomination_row .nomination_card i {

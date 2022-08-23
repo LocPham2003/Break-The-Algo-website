@@ -13,7 +13,8 @@ exports.nominationCreate = (req, res) => {
             })
         } else {
             return res.json({
-                message: "Nomination of " + nomination.nominee + " has been added! The admin team will review and respond to your request"
+                message: "Nomination of " + nomination.nominee + " has been added! The admin team will review and respond to your request",
+                code: nomination.code
             })
         }
     })

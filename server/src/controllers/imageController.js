@@ -23,11 +23,18 @@ exports.uploadImage = (req, res) => {
 }
 
 exports.findImageByCode = (req, res) => {
+    console.log(req.body.code)
+
     Image.find({code: req.body.code}, (err, image) => {
         if (err) {
-            res.status(500).send("Cannot get image by code", err)
+            res.send({ message: "An error occured while trying to get the image", err})
         } else {
-            res.send({image: image[0].img.data.toString('base64')})
+            try {
+                var valid_image = image[0].img.data.toString('base64')
+                res.send({image: valid_image})
+            } catch(error) {
+                res.send({ image: null})
+            }  
         }
     })
 }
@@ -37,6 +44,7 @@ exports.updateImageByCode = (req, res) => {
         data: fs.readFileSync(path.join('../server/uploads/' + req.file.filename)),
         contentType: 'image/png'
     }
+    
 
     Image.findOneAndUpdate({ code: req.body.code}, { img: img }, (err, image) => {
         if (err) {

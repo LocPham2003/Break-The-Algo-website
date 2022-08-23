@@ -10,6 +10,8 @@ const nominationSchema = new Schema({
     studyMajor: String,
     cvLink: String,
     description: String,
+    discord: String,
+    linkedin: String,
     status: String,
     reason: String
 })
