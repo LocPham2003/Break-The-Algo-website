@@ -1,5 +1,5 @@
 <template>
-    <p style="color: white; font-size: 30px; font-family: Jeko; margin-top: 10%" v-if="fetchingInfo">Please wait, fetching events from database...</p>
+    <p style="color: white; font-size: 30px; font-family: Poppins; margin-top: 10%" v-if="fetchingInfo">Please wait, fetching events from database...</p>
     <div class="header_container">
         <a class="event_selector" id="0" @click="onClick($event)">Upcoming events</a>
         <svg width="2.5" height="40px">
@@ -138,7 +138,7 @@ export default {
 .header_container a.event_selector{
     color: white; 
     font-size: 30px; 
-    font-family: Jeko;
+    font-family: Poppins;
     text-decoration: none;
     margin-top: 2.5%; 
     margin-bottom: 2.5%;

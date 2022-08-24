@@ -21,7 +21,7 @@
             </div>
         </div>
         
-        <h1 style="font-family: Poppins; margin-top: 2.5%; font-size: 64px;">Nomination list</h1>
+        <h1 style="font-family: Poppins; margin-top: 2.5%; font-size: 64px;">Featured Students</h1>
                 
         <div class="nominations_display">
             <div class="nomination_row" v-for="nomination_row in nominations">

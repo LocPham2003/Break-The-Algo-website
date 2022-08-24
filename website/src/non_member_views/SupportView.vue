@@ -9,7 +9,7 @@
         <a :class="selector2" id="1" @click="onClick($event)">For companies</a> 
     </div>
     
-    <div class="student_support_section" v-if="selectedTarget == 0">\
+    <div class="student_support_section" v-if="selectedTarget == 0">
         <div class="student_support_image">
             <img style="width: 100%; height: 100%;" src="@/assets/media/appreciation.svg">
         </div>
@@ -23,7 +23,7 @@
 
             <br>
 
-            <p>The form for signing up as committee members, volunteers and board members can be found <a href="https://docs.google.com/forms/d/1dacpxUuVk98_JSa_6OZ-zFwxlYwo5YL3F7wQwzt06T4/edit?usp=sharing">here</a></p> 
+            <p>The form for signing up as committee members, volunteers and board members can be found <a href="https://forms.gle/mnRtjM8bYKAAkJoQ6">here</a></p> 
 
             <p>Looking forward to seeing your active contributions for the BTA!</p>
         </div>
@@ -46,7 +46,7 @@
 
             <br>
 
-            <p>Are you interested in collaborating with us ? Click <a href="#">here</a> to send us your idea or send an email to info@breakthealgo.com! We are looking forward to hearing from you :)</p>
+            <p>Are you interested in collaborating with us ? Click <a href="https://forms.gle/PNadM3xCRdw3vKt97">here</a> to send us your idea or send an email to info@breakthealgo.com! We are looking forward to hearing from you :)</p>
         </div>
         
         <div class="company_support_image">
