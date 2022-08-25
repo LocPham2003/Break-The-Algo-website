@@ -195,29 +195,31 @@
             <span>Lastest visit: </span>
             <span>{{ date }}</span>
             <p>Glad to have you here, let's get started :)</p>
-            <p>To login, type BreakTheAlgo.login(). Here for the first time ? Type BreakTheAlgo.join()</p>
-            <span>Type your command: </span>
-            <input v-focus id="initial_command" v-model="input_text" v-on:keyup.enter="getInitialCommand" ref="first_command" autofocus>
-            <div v-if="!isLogin">
-                <li v-for="index in displayedCommands" :key="index">
-                <span v-if="commands[index - 1].id != 7">&#62 </span>
-                {{ commands[index - 1].text }}
-                <input v-bind:id="commands[index - 1].id" v-if="(commands[index - 1].id === 4 || commands[index - 1].id === 5)" v-on:keyup.enter="onEnter" @input="getData" @click="editField" type="password">
-                <input v-bind:id="commands[index - 1].id" v-if="!(commands[index - 1].id === 4 || commands[index - 1].id === 5) && (commands[index - 1].id != 6)" v-on:keyup.enter="onEnter" @input="getData" @click="editField" type="text">
-                <input v-bind:id="commands[index - 1].id" v-if="commands[index - 1].id === 6" v-on:keyup.enter="sendUserRequest" @input="getData" @click="editField" type="text">
-            </li>
+            <div v-for="flow in terminalFlow">
+                <div v-if="flow.command != 'register' || flow.command != 'login'">   
+                    <p v-if="!isLoginOrRegister">{{flow.content}}</p>
+                </div>
+                <div v-if="flow.command === 'register'">
+                    <p>{{flow.content}}</p>
+                    <div v-for="displayedCommand in displayedCommands" :key="displayedCommand">
+                        <span>{{registerCommands[displayedCommand - 1].text}}</span>
+                        <input v-bind:id="displayedCommand - 1" v-focus v-on:keyup.enter="onEnter" @input="getData">
+                    </div>
+                    <p>{{status}}</p>
+                </div>
+                <div v-if="flow.command === 'login'">
+                    <p>{{flow.content}}</p>
+                    <div v-for="displayedCommand in displayedCommands" :key="displayedCommand">
+                        <span>{{loginCommands[displayedCommand - 1].text}}</span>
+                        <input v-bind:id="displayedCommand - 1" v-focus v-on:keyup.enter="onEnter" @input="getData">
+                    </div>
+                    <p>{{status}}</p>
+                </div>
+                <span v-if="!isLoginOrRegister">guest@breakthealgo.com:$ ~ </span>
+                <input v-if="flow.command === 'initial' && !isLoginOrRegister" v-focus v-model="input_text" v-on:keyup.enter="getCommand($event)">
+                <input v-if="flow.command != 'initial' && !isLoginOrRegister" v-focus v-on:keyup.enter="getCommand($event)">
+
             </div>
-            
-            <div v-if="isLogin">
-                <li v-for="index in displayedCommands" :key="index">
-                <span v-if="commands[index - 1].id != 7">&#62 </span>
-                {{ commands[index - 1].text }}
-                <input v-bind:id="commands[index - 1].id" v-if="commands[index - 1].id === 0" v-on:keyup.enter="onEnter" @input="getData" type="text">
-                <input v-bind:id="commands[index - 1].id" v-if="commands[index - 1].id === 1" v-on:keyup.enter="sendUserRequest" @input="getData" type="password">
-            </li>
-            </div>
-            <!--Need a better way to do this so it is uniform in both register and login view-->
-            <p v-if="requestDone">{{ status }}</p>
         </div>
         </div>
         
@@ -247,11 +249,12 @@ export default {
             // UI state control variables
             selected: 'Java',
             fileName: 'JoinBTA.java',
-            displayedCommands: 0,
+            // To manage how many commands are being displayed 
+            displayedCommands: 1,
             selectedInitialCommand: '',
             isLogin : false,
             date: Date(),
-            commands: [
+            registerCommands: [
                 {id: 0, text:"Enter your name: "},
                 {id: 1, text:"Enter your study major: "},
                 {id: 2, text:"Enter your current study year: "},
@@ -259,7 +262,14 @@ export default {
                 {id: 4, text:"Enter your password: "},
                 {id: 5, text:"Re-enter your password: "},
                 {id: 6, text:"Enter your email: "},
+                {id: 7, text: this.status}
             ],
+            registerCommandsFlow: [{id: 0, text:"Enter your name: "}],
+            loginCommands: [
+                {text: "Enter your username: "},
+                {text: "Enter your password: "}
+            ],
+            isLoginOrRegister: false,
             // User authentication variables
             name: '',
             studyMajor: '',
@@ -271,8 +281,25 @@ export default {
             email: '',
 
             // Terminal control variables
+            availableCommands: ['help', 'register', 'login', 'discord', 'linkedin', 'instagram', 'email', 'twitter', 'facebook', 'github', 'techstack', 'founders'],
+            availableContent: ['These are the following commands that are available to you: help, register, login, founders, discord, twitter, instagram, linkedin, email.\n You can also clear the terminal by typing the key \'c\' on your keyboard.', 
+            'You are currently in register mode. Please fill in the fields below.', 
+            'You are currently in login mode. Please fill in the fields below.',
+            'https://discord.gg/3daSHa7',
+            'https://www.linkedin.com/company/break-the-algo/',
+            'https://www.instagram.com/breakthealgo/',
+            'info@breakthealgo.com',
+            'https://twitter.com/breakthealgo',
+            'https://www.facebook.com/breakthealgo/',
+            'https://github.com/LocPham2003/Break-The-Algo-website',
+            'This website is developed using the MEVN (MongoDB + ExpressJS + VueJS + NodeJS) stack',
+            'Founded in 2020 by Asfandyar Azhar (Data Science Bachelor) & Marissa Manago (Computer Science Bachelor)'],
+            terminalFlow: [
+                {command: 'initial', content: 'Type \'help\' in the terminal to get a list of available commands'}
+            ], // This variable will decide how the kind of content the terminal would display based on the user input
             status: '',
-            requestDone: false
+            requestDone: false,
+            wrongCommand: false
         }
     },
     methods: {
@@ -286,32 +313,65 @@ export default {
                 this.fileName = 'JoinBTA.cpp'
             }
         },
-        onEnter() {
-            // If the request is not sent, display the next message
-            if (!this.requestDone) {
-                this.displayedCommands = this.displayedCommands + 1
-            // If the request has already been sent, then resend the user request if the user press enter
+        onEnter(e) {
+            console.log(e.target.id)
+            // If the target == 6 then we know this is the last field
+            if (!this.isLogin) {
+                if (parseInt(e.target.id) == 6) {
+                    this.sendUserRequest();
+                } else {
+                    this.displayedCommands = this.displayedCommands + 1
+                }
             } else {
-                this.sendUserRequest()
+                if (parseInt(e.target.id) == 1) {
+                    this.sendUserRequest();
+                } else {
+                    this.displayedCommands = this.displayedCommands + 1;
+                }
             }
-        },
-        getInitialCommand(e) {
-           this.selectedInitialCommand = e.target.value 
+            
 
-           if (this.selectedInitialCommand === "BreakTheAlgo.join()") {
-                this.displayedCommands = this.displayedCommands + 1
-           } else if (this.selectedInitialCommand === "BreakTheAlgo.login()") {
-                this.isLogin = true
-                this.commands = [
-                    {id: 0, text:"Enter your username: "},
-                    {id: 1, text:"Enter your password: "},
-                ]
-                // Reset the id so when iterating through the list, it starts from the beginning
-                this.displayedCommands = this.displayedCommands + 1
-           } else {
-                console.log("You type in the wrong command, try again")
-           }
-        },  
+            
+            // If the request is not sent, display the next message
+            // if (!this.requestDone) {
+                
+            // // If the request has already been sent, then resend the user request if the user press enter
+            // } else {
+            //     this.sendUserRequest()
+            // }
+        },
+        getCommand(event) {
+            var enteredCommand = event.currentTarget.value;
+
+            if (enteredCommand === 'register' || enteredCommand === 'login') {
+                this.isLoginOrRegister = true;
+                
+                if (enteredCommand === 'login') {
+                    this.isLogin = true;
+                }
+            }
+
+            var commandNotFound = true;
+            for (var i = 0; i < this.availableCommands.length; i++) {
+                if (this.availableCommands[i] === enteredCommand) {
+                    this.terminalFlow.push({
+                        command: enteredCommand,
+                        content: this.availableContent[i]
+                    })
+                    console.log(this.terminalFlow)
+                    commandNotFound = false
+                    break;
+                }
+            }
+
+            if (commandNotFound) {
+                this.terminalFlow.push({
+                    command: 'not found',
+                    content: 'Command \'' + enteredCommand + '\' is not found. Type help to see a list of available commands and try again'
+                })
+            }
+            
+        },
         getData(e) {
             // If this is true then we know the user wants to register
             if (!this.isLogin) {
@@ -388,6 +448,13 @@ export default {
             }
         }
     },
+    created() {
+         window.addEventListener('keydown', (e) => {
+            if (e.key == 'c') {
+                this.$router.go();
+            }
+    });
+    }
 }
 </script>
 

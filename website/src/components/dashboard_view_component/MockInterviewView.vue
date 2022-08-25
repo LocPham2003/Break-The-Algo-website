@@ -177,8 +177,9 @@ export default {
 .mock_interview_container {
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
+    min-height: 100vh;
 }
 
 .mock_interview_container h5 {

@@ -75,7 +75,8 @@ export default {
 
 <style>
 .member_home_container {
-    margin: 2.5% 5% 100px 5%;;
+    min-height: 100vh;
+    margin: 2.5% 5% 100px 5%;
 }
 
 .member_home_container i {

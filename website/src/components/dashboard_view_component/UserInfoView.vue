@@ -1,20 +1,11 @@
 <template>
-    <div v-if="!fetchingData && isLoggedIn">
-        <h1 style="font-family: Jeko; margin-top: 2.5%; margin-bottom: 2.5%;">User Information</h1>
+    <div style="min-height: 100vh;" v-if="!fetchingData && isLoggedIn">
+        <h1 style="font-family: Poppins; margin-top: 2.5%; margin-bottom: 2.5%;">User Information</h1>
         <div class="user_info_container">
             <div class="profile_row">
                 <div class="profile_card">
                     <i class="fa fa-user"></i>
                     <h3>{{userInfoArr[1].data}}</h3>
-                    <p>Data Scientist Intern at Tesla</p>
-
-                <div class="socials">
-                    <i class="fab fa-twitter"></i>
-                    <i class="fab fa-instagram"></i>
-                    <i class="fab fa-facebook"></i>
-                    <i class="fab fa-linkedin"></i>
-                    <i class="fab fa-discord"></i>
-                </div>
                 </div>
                 
             </div>
@@ -26,16 +17,8 @@
                 </div>
 
                 <div class="button_container">
-                    <div class="button_row" style="margin-bottom: 25px; margin-top: 10px;">
-                        <a id="1" @click="onClick($event)" class="profile_button">Edit description</a>
-                        <a id="2" @click="onClick($event)" class="profile_button">Add social media</a>
-                        <a id="3" @click="onClick($event)" class="profile_button">Add profile picture</a>
-                    </div>
-                    <div class="button_row">
-                        <a id="4" @click="onClick($event)" class="profile_button">Change password</a>
-                        <a id="5" @click="onClick($event)" class="profile_button">Change information</a>
-                    </div>
-                    
+                    <a id="4" @click="onClick($event)" class="profile_button">Change password</a>
+                    <a id="5" @click="onClick($event)" class="profile_button">Change information</a>                    
                 </div>
             </div>
             
@@ -82,16 +65,12 @@ export default {
 .user_info_container {
     display: flex;
     flex-direction: row;
-    justify-content: left;
-    align-items: left;
     padding-left: 20px;
     padding-right: 20px;
-    margin-bottom: 100px;
-    width: 100%;
-    height: 100%;
 }
 
 .user_info_container .profile_row {
+    flex: 1;
     display: flex;
     flex-direction: column;
     margin-right: 5%;
@@ -145,6 +124,7 @@ export default {
 }
 
 .user_info_container .database_information {
+    flex: 1;
     display: flex;
     flex-direction: column;
     flex-basis: 70%;
@@ -174,6 +154,13 @@ export default {
     color: white;
     flex-basis: 50%;
     margin: 0;
+}
+
+.user_info_container .database_information .button_container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
 }
 
 .user_info_container .database_information .button_container a.profile_button {
@@ -212,7 +199,7 @@ export default {
         padding-bottom: 20px;
     }
 
-    .user_info_container .database_information .button_container .button_row {
+    .user_info_container .database_information .button_container {
         display: flex;
         flex-direction: column;
     }

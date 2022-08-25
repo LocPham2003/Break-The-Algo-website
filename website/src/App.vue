@@ -4,7 +4,7 @@
         href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" 
         integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" 
         crossorigin="anonymous">
-      <nav v-if="isLoggedIn===false">
+    <nav v-if="isLoggedIn===false">
       <ul class = "topnav" id = "dropdown_menu">
         <li class = "logo_container"><router-link to="/"><img src = "./assets/media/bta-assets/bta.png" alt = "logo" class = "logo"/></router-link></li>
         <li class = "home_element"><router-link to="/">Home</router-link></li>
@@ -33,7 +33,10 @@
       </ul>
     </nav>
     <router-view/>
-    
+    <footer style="background-color: #2E2E2F; height: 100px; margin-top: 50px; display: flex; flex-direction: row; justify-content: center;
+     align-items: center;">
+      <h5 style="color: white; font-family: Poppins; margin: 0; padding: 0;">© Copyright Break The Algo. All Rights Reserved</h5>
+    </footer>
 </template>
 
 <script>
@@ -80,6 +83,8 @@ export default {
 
 <style type="text/css">
   @import './assets/css/universal_navbar.css';
-   body { background: rgb(32,32,32) !important; } /* Adding !important forces the browser to overwrite the default style applied by Bootstrap */
+   body { 
+    background: rgb(32,32,32) !important; /* Adding !important forces the browser to overwrite the default style applied by Bootstrap */
+    } 
 </style>
 

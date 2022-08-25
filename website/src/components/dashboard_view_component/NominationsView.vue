@@ -1,6 +1,6 @@
 <template>
     <div class="nominations_container">
-            <h1 style="font-family: Jeko; margin-top: 2.5%; margin-bottom: 3.5%;">List of Nominations</h1>
+            <h1 style="font-family: Poppins; margin-top: 2.5%; margin-bottom: 3.5%;">List of Nominations</h1>
         <div v-if="nominations.length != 0" class="nomination_container">
             <div class="nomination_row" v-for="nominationrow in nominations">
             <div class="nomination_card" v-for="nomination in nominationrow">
@@ -26,7 +26,7 @@
             </div>
         </div>
 
-        <div v-if="nominations.length == 0">
+        <div style="min-height: 100vh;" v-if="nominations.length == 0">
             <h1 style="font-family: Jeko; margin-top: 2.5%; margin-bottom: 3.5%;">There are currently no nominations</h1>
         </div>
     </div>
@@ -127,9 +127,10 @@ export default {
     border-radius: 10px;
     display: flex;
     flex-direction: column;
-    justify-content: left;
-    align-items: left;
+    justify-content: center;
+    align-items: center;
     width: 400px;
+    height: 350px;
 }
 
 .nominations_container .nomination_row .nomination_card i {

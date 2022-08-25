@@ -280,10 +280,10 @@ export default {
 .about_container {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   margin-top: 2.5%;
-  margin-bottom: 100px;
+  min-height: 100vh;
 }
 
 .who_we_are_container {

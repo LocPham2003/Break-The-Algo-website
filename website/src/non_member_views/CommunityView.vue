@@ -181,6 +181,10 @@ export default {
     cursor: pointer;
 }
 
+.student_community_section {
+    min-height: 100vh;
+}
+
 .student_community_header {
     display: flex;
     flex-direction: row;
@@ -195,6 +199,10 @@ export default {
 
 .student_community_content {
     width: 60%;
+}
+
+.partnership_community_section {
+    min-height: 100vh;
 }
 
 .partnership_community_header {

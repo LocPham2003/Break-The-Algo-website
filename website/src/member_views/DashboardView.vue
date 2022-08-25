@@ -1,6 +1,6 @@
 <template>
     <div v-if="!fetchingData && isLoggedIn" class="dashboard_container">
-        <h1>Your dashboard</h1>
+        <h1 style="margin: 2.5% 5%; font-family: Poppins;">Your dashboard</h1>
 
         <div class="row_container">
             <div id="1" @click="onClick($event)" class="utility">
@@ -167,6 +167,10 @@ export default {
 
 h1 {
     font-family: Jeko;
+}
+
+div.dashboard_container {
+    min-height: 100vh;
 }
 
 div.dashboard_container div.row_container {

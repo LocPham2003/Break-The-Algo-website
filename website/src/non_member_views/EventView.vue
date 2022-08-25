@@ -156,7 +156,8 @@ export default {
 .event_container {
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
+    min-height: 100vh;
 }
 </style>

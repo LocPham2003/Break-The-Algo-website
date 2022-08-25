@@ -35,6 +35,7 @@
   text-align: center;
   margin-left: 5%;
   margin-right: 2.5%;
+  min-height: 100vh;
 }
 
 .content .homepage_content {

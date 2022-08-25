@@ -117,11 +117,12 @@ export default {
 }
 
 .student_support_section {
-    margin: 10px;
+    min-height: 100vh;
+    padding-top: 5%;
     display: flex;
     flex-direction: row;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
 }
 
 .student_support_content {
@@ -151,11 +152,12 @@ export default {
 }
 
 .company_support_section {
-    margin: 10px;
+    min-height: 100vh;
+    padding-top: 5%;
     display: flex;
     flex-direction: row;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
 }
 
 .company_support_section p{

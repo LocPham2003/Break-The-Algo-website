@@ -28,7 +28,7 @@
             
         </div>
 
-        <div v-else>
+        <div style="min-height: 100vh;" v-else>
             <h1>Your schedule is empty... for now</h1>
         </div>
     </div>
@@ -143,8 +143,9 @@ export default {
 .interview_container {
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
+    min-height: 100vh;
 }
 
 .interview_container .interview_row {
