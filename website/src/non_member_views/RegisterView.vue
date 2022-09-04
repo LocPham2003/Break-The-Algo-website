@@ -1,6 +1,6 @@
 <template>
     <div class="register_container">
-        <h1 style="font-family: Poppins; margin-top: 2.5%; margin-bottom: 3.5%;">One step closer to success</h1>
+        <h1 style="font-family: Poppins; margin-top: 2.5%; margin-bottom: 2.5%; font-size: 64px;">One step closer to success</h1>
         <div class="ide_container">
             <nav class = "file_header">
                 <ul>
@@ -203,7 +203,9 @@
                     <p>{{flow.content}}</p>
                     <div v-for="displayedCommand in displayedCommands" :key="displayedCommand">
                         <span>{{registerCommands[displayedCommand - 1].text}}</span>
-                        <input v-bind:id="displayedCommand - 1" v-focus v-on:keyup.enter="onEnter" @input="getData">
+                        <input v-if="displayedCommand == 5 || displayedCommand == 6" type="password" autocomplete="off" v-bind:id="displayedCommand - 1" v-focus v-on:keyup.enter="onEnter" @input="getData">
+                        <input v-else type="text" v-bind:id="displayedCommand - 1" v-focus v-on:keyup.enter="onEnter" @input="getData" >
+
                     </div>
                     <p>{{status}}</p>
                 </div>
@@ -211,7 +213,9 @@
                     <p>{{flow.content}}</p>
                     <div v-for="displayedCommand in displayedCommands" :key="displayedCommand">
                         <span>{{loginCommands[displayedCommand - 1].text}}</span>
-                        <input v-bind:id="displayedCommand - 1" v-focus v-on:keyup.enter="onEnter" @input="getData">
+                        <input v-if="displayedCommand == 1" v-bind:id="displayedCommand - 1" v-focus v-on:keyup.enter="onEnter" @input="getData">
+                        <input v-if="displayedCommand == 2" v-bind:id="displayedCommand - 1" v-focus v-on:keyup.enter="onEnter" type="password" autocomplete="off" @input="getData">
+
                     </div>
                     <p>{{status}}</p>
                 </div>
@@ -282,7 +286,7 @@ export default {
 
             // Terminal control variables
             availableCommands: ['help', 'register', 'login', 'discord', 'linkedin', 'instagram', 'email', 'twitter', 'facebook', 'github', 'techstack', 'founders'],
-            availableContent: ['These are the following commands that are available to you: help, register, login, founders, discord, twitter, instagram, linkedin, email.\n You can also clear the terminal by typing the key \'c\' on your keyboard.', 
+            availableContent: ['These are the following commands that are available to you: help, register, login, founders, discord, twitter, instagram, linkedin, email, github.\n You can also clear the terminal by typing the Escape key on your keyboard.', 
             'You are currently in register mode. Please fill in the fields below.', 
             'You are currently in login mode. Please fill in the fields below.',
             'https://discord.gg/3daSHa7',
@@ -450,7 +454,7 @@ export default {
     },
     created() {
          window.addEventListener('keydown', (e) => {
-            if (e.key == 'c') {
+            if (e.key == 'Escape') {
                 this.$router.go();
             }
     });

@@ -1,7 +1,7 @@
 <template>
     <h1 v-if="fetchingInfo" style="font-family: Jeko; margin-top: 2.5%; margin-bottom: 3.5%;">Fetching info from database</h1>
     <div v-if="!fetchingInfo && isLoggedIn" class="content_container">
-        <h1 style="font-family: Poppins; margin-top: 2.5%; margin-bottom: 3.5%;">Your events</h1>
+        <h1 style="font-family: Poppins; margin-top: 2.5%; margin-bottom: 2.5%; font-size: 64px;">Your events</h1>
         <div class="event_container">
         <div v-for="event in events">
             <EventCard

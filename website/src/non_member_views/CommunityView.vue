@@ -12,7 +12,7 @@
         <div class="student_community_section" v-if="selectedTarget === 0">
         <div class="student_community_header">
             <div class="student_community_image">
-            <img style="width: 100%; height: 100%;" src="@/assets/media/outstandingmember.svg">
+            <img style="max-width: 100%; max-height: 100%;" src="@/assets/media/outstandingmember.svg">
             </div>
             <div class="student_community_content">
                 <h3 style="font-family: Poppins; color: white; text-align: left; margin: 10px;">The list of notable and outstanding students in the BTA can be found here! Each students are selected via nominations, which are made by other students and employees within the BreakTheAlgo community. Each nominated students have their CV, achievements and records 
@@ -21,23 +21,22 @@
             </div>
         </div>
         
-        <h1 style="font-family: Poppins; margin-top: 2.5%; font-size: 64px;">Featured Students</h1>
+        <h1 style="font-family: Poppins; margin-bottom: 2.5%; font-size: 64px; display: block;">Featured Students</h1>
                 
         <div class="nominations_display">
-            <div class="nomination_row" v-for="nomination_row in nominations">
-                <div class="nomination_card" v-for="nomination in nomination_row">
-                    <div style="display: flex; flex-direction: row; justify-content: center; align-items: center;" class="nominee_image">
-                        <img v-if="nomination.image != null" style="width: 100%; height: 100%; border-radius: 10px;" :src="nomination.image">
-                        <img v-if="nomination.image === null" style="max-width: 100%; max-height: 100%; border-radius: 10px;" src="@/assets/media/empty_profile.png">
-                    </div>
-                    <div class="nominee_information">
-                        <h2 style="font-family: sans-serif; color: white;">{{nomination.nominee}}</h2>
-                    <h5 style="color: white; font-family: Monospace;">{{nomination.studyMajor}} <br>{{nomination.description}}</h5>
-                    <h5 class="see_more">&#8594 See more of {{nomination.nominee.split(" ")[0]}}'s work</h5>
-                    <a class="social_plugins">Discord</a>
-                    <a class="social_plugins">Linkedin</a>
-                </div>
-                </div>
+            <div v-for="nomination in nominations">
+                <NominatedStudentView
+                    :image="nomination.image"
+                    :nominee="nomination.nominee"
+                    :studyMajor="nomination.studyMajor"
+                    :description="nomination.description"
+                    :discord="nomination.discord"
+                    :linkedin="nomination.linkedin"
+                    :cvLink="nomination.cvLink"
+                >
+
+                </NominatedStudentView>
+                    
             </div>
         </div>
 
@@ -73,7 +72,13 @@
 <script>
 import ImageService from '@/services/ImageService';
 import NominationService from '@/services/NominationService';
+
+import NominatedStudentView from '@/components/community_view_components/NominatedStudentView.vue';
+
 export default {
+    components: {
+    NominatedStudentView
+},
     data() {
         return {
             selectedTarget: 0,
@@ -100,45 +105,35 @@ export default {
     beforeMount() {
         const fetchData = async() => {
             await NominationService.getNominations().then(res => {
-                var size = 0;
-                var nominationRow = []
                 for (var i = 0; i < res.data.length; i++) {
-                    nominationRow.push({
+                    if (res.data[i].status === "1") {
+                        this.nominations.push({
                         code: res.data[i].code,
                         nominee: res.data[i].nominee,
                         cvLink: res.data[i].cvLink,
                         studyMajor: res.data[i].studyMajor,
                         description: res.data[i].description,
+                        discord: res.data[i].discord,
+                        linkedin: res.data[i].linkedin
                     })
-                    size++
-                    if (size == 2){
-                        size = 0
-                        this.nominations.push(nominationRow)
-                        nominationRow = []
-                    } else if (i == res.data.length - 1) {
-                        this.nominations.push(nominationRow)
                     }
+                    
                 }
             }, err => {
                 console.log(err)
             })
 
             for (var i = 0; i < this.nominations.length; i++) {
-                for (var j = 0; j < this.nominations[i].length; j++) {
-                    console.log(this.nominations[i][j].code)
-                    await ImageService.findImageByCode({code : this.nominations[i][j].code}).then(res => {
+                    await ImageService.findImageByCode({code : this.nominations[i].code}).then(res => {
                         var image = null
                         if (res.data.image != null) {
                             image = "data:image/png;base64," + res.data.image
                         }
-                        this.nominations[i][j]["image"] = image
+                        this.nominations[i]["image"] = image
                     }, err => {
                         console.log(err)
                     })
-                }
             }
-
-            console.log(this.nominations)
         }
 
         fetchData()
@@ -183,6 +178,10 @@ export default {
 
 .student_community_section {
     min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 .student_community_header {
@@ -226,68 +225,9 @@ export default {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    padding: 15px;
     margin-bottom: 100px;
 }
-
-.nomination_row {
-    display: flex;
-    margin-bottom: 100px;
-
-}
-
-.nomination_card {
-    flex: 1;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    margin: 20px;
-    background-color: black;
-    border-radius: 10px;
-}
-
-.nomination_card .nominee_image {
-    width: 40%;
-    height: 100%;
-}
-
-.nomination_card .nominee_information {
-    width: 60%;
-    padding: 10px;
-}
-
-.nomination_card .nominee_information h5.see_more {
-    color: white;
-    text-decoration: underline;
-    text-decoration-color: red;
-    text-underline-offset: 8px;
-    font-family: Menlo;
-    margin-bottom: 20px;
-    font-size: 16px;
-}
-
-.nomination_card .nominee_information h5.see_more:hover {
-    text-underline-offset: 12px;
-    cursor: pointer;
-}
-
-.nomination_card .nominee_information a.social_plugins {
-    font-family: Menlo;
-    color: white;
-    text-decoration: none;
-    margin: 15px 10px;
-    margin-top: 15px;
-    padding: 10px;
-    
-    border-radius: 10px;
-}
-
-.nomination_card .nominee_information a.social_plugins:hover {
-    background-color: red;
-    cursor: pointer;
-}
-
-
 
 @media screen and (max-width: 1026px) {
     .student_community_header {
@@ -316,15 +256,7 @@ export default {
         width: 80%;
     }
 
-    .nomination_row {
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-    }
 
-    .nomination_card {
-        width: 90%;
-    }
 }
 
 

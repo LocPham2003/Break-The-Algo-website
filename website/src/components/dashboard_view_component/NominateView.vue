@@ -1,14 +1,14 @@
 <template>
     <!-- Root component is in EventView.vue. Modify the header_container in EventView to change the appearance of this -->
-    <div class="header_container">
-        <a class="event_selector" id="0" @click="selectActiveSession($event)">Nominate a member</a>
+    <div class="selector_container">
+        <a :class="selector1" id="0" @click="chooseDisplay($event)">Nominate member</a>
         <svg width="2.5" height="40px">
             <rect width="2.5" height="100" style="fill:white;stroke-width:0;stroke:rgb(0,0,0)" />
         </svg>
-        <a class="event_selector" id="1" @click="selectActiveSession($event)">Pending nominations</a> 
+        <a :class="selector2" id="1" @click="chooseDisplay($event)">Pending nominations</a> 
     </div>
     
-    <div v-if="activeSession === 0" class="nominate_container">
+    <div v-if="selectedTarget === 0" class="nominate_container">
         <h3 style="text-align: center; color: white; font-family: Poppins; margin: 5px;">Nominee's name:</h3>
         <input v-bind:id='0' @input="getData" style="margin: 5px;" placeholder="Enter the name of the nominee">
 
@@ -20,7 +20,7 @@
         <h3 style="text-align: center; color: white; font-family: Poppins; margin: 5px;">Nominee's study major:</h3>
         <input v-bind:id='1' @input="getData" style="margin: 5px;" placeholder="Enter the study major of the nominee">
 
-        <h3 style="text-align: center; color: white; font-family: Poppins; margin: 5px;">Nominee's CV or personal website:</h3>
+        <h3 style="text-align: center; color: white; font-family: Poppins; margin: 5px;">Nominee's CV or personal website (please include https://):</h3>
         <input v-bind:id='2' @input="getData" style="margin: 5px;" placeholder="Link to nominee's CV (e.g Google Drive, Microsoft Outlook, etc) or personal website">
 
         <h3 style="text-align: center; color: white; font-family: Poppins; margin: 5px;">Descriptions</h3>
@@ -38,7 +38,7 @@
         <p style="color: white; font-family: Poppins;">{{status}}</p>
     </div>
 
-    <div v-if="activeSession === 1">
+    <div v-if="selectedTarget === 1">
         <div v-if="!isEmpty" class="nominations_container">
             <div class="nomination_row" v-for="nominationrow in nominations">
             <div class="nomination_card" v-for="nomination in nominationrow">
@@ -53,7 +53,7 @@
             </div>
         </div>
 
-        <div v-else>
+        <div style="min-height: 100vh;" v-else>
             <h1>Your nominations are empty... create one now if you can!</h1>
         </div>
     </div>
@@ -66,7 +66,9 @@ import ImageService from '@/services/ImageService';
 export default {
     data() {
         return {
-            activeSession: 0,
+            selectedTarget: 0,
+            selector1: 'selected',
+            selector2: 'unselected',
             nominee: '',
             nominator: '',
             studyMajor: '',
@@ -82,8 +84,15 @@ export default {
         }
     },
     methods: {
-        selectActiveSession(event) {
-            this.activeSession = parseInt(event.currentTarget.id)
+        chooseDisplay(event) {
+            this.selectedTarget = parseInt(event.currentTarget.id)
+            if (parseInt(event.currentTarget.id) == 0) {
+                this.selector1 = 'selected';
+                this.selector2 = 'unselected';
+            } else {
+                this.selector2 = 'selected';
+                this.selector1 = 'unselected';
+            }
         },
         getData(e) {
             switch(parseInt(e.target.id)) {

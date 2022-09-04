@@ -7,7 +7,6 @@ const interviewSchema = new Schema({
     code: String,
     availability: String,
     company: String,
-    interviewer: String,
     interviewee: String,
     role: String,
     contactInfo: String,

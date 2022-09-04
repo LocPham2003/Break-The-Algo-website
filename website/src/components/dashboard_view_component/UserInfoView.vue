@@ -1,6 +1,6 @@
 <template>
     <div style="min-height: 100vh;" v-if="!fetchingData && isLoggedIn">
-        <h1 style="font-family: Poppins; margin-top: 2.5%; margin-bottom: 2.5%;">User Information</h1>
+        <h1 style="font-family: Poppins; margin-top: 2.5%; margin-bottom: 2.5%; font-size: 64px;">User info</h1>
         <div class="user_info_container">
             <div class="profile_row">
                 <div class="profile_card">
@@ -39,7 +39,14 @@ export default {
     },
     methods: {
         onClick(event) {
-            console.log(event.currentTarget.id)
+            switch(parseInt(event.currentTarget.id)) {
+                case 4:
+                    // Change the password
+                    break;
+                case 5: 
+                    // change the information
+                    break;
+            }
         }
     }, 
     beforeMount() {

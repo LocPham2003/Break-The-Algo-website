@@ -4,8 +4,8 @@ export default {
     scheduleInterview(params) {
         return Api().post('scheduleInterview', params)
     },
-    getInterviewerSchedule(params) {
-        return Api().post('getInterviewerSchedule', params)
+    getInterviewerSchedule() {
+        return Api().get('getInterviewerSchedule')
     },
     getIntervieweeSchedule(params) {
         return Api().post('getIntervieweeSchedule', params)

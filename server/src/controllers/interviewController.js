@@ -17,7 +17,7 @@ exports.scheduleInterview = (req, res) => {
                 return res.status(400).json({error: "Unable to schedule the interview, please contact the board member"})
             } else {
                 return res.json({
-                    message: "Successfully scheduled an interview with " + interview.interviewer + ". If the selected interviewer accept your request, they will contact you via discord to discuss further details."
+                    message: "Successfully scheduled an interview. If the selected interviewer accept your request, they will contact you via discord to discuss further details."
                 })
             }
         })
@@ -27,9 +27,6 @@ exports.scheduleInterview = (req, res) => {
 exports.updateInterviewScheduleStatus = (req, res) => {
     const code = req.body.code
     const status = req.body.status
-
-    console.log(status)
-    console.log(code + "1")
 
     Interview.findOneAndUpdate({ code: code }, { status: status }, function (err, docs) {
         if (err) {
@@ -60,9 +57,7 @@ exports.deleteInterview = (req, res) => {
 }
 
 exports.getInterviewerSchedule = (req, res) => {
-    const interviewer = req.body.interviewer
-
-    Interview.find({interviewer: interviewer}, function (err, docs) {
+    Interview.find({}, function (err, docs) {
         if (err){
             res.status(400).json({
                 message: "Get interview list gone wrong"
@@ -78,7 +73,7 @@ exports.getInterviewerSchedule = (req, res) => {
 exports.getIntervieweeSchedule = (req, res) => {
     const interviewee = req.body.interviewee
 
-    Interview.find({ interviewee: interviewee}, function(err, docs) {
+    Interview.find({ interviewee: interviewee }, function(err, docs) {
         if (err) {
             res.status(400).json({
                 message: "Get interviewee list gone wrong"

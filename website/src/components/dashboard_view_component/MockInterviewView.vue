@@ -1,12 +1,12 @@
 <template>
-    <div class="header_container">
-        <a class="event_selector" id="0" @click="selectTab($event)">Schedule an interview</a>
+    <div class="selector_container">
+        <a :class="selector1" id="0" @click="chooseDisplay($event)">Schedule interview</a>
         <svg width="2.5" height="40px">
             <rect width="2.5" height="100" style="fill:white;stroke-width:0;stroke:rgb(0,0,0)" />
         </svg>
-        <a class="event_selector" id="1" @click="selectTab($event)">Upcoming interviews</a> 
+        <a :class="selector2" id="1" @click="chooseDisplay($event)">Upcoming interviews</a> 
     </div>
-    <div v-if="!fetchingData && isLoggedIn && selectedTab === 0" class="mock_interview_container">
+    <div v-if="!fetchingData && isLoggedIn && selectedTarget === 0" class="mock_interview_container">
             <h5>Enter (maximum) 5 different dates and time over the next 2 weeks to have your interview</h5>
             <textarea placeholder="Enter your availability as the following format: 
 - Monday 16th November - 10am-5pm CET 
@@ -21,23 +21,11 @@
             <h5>Discord account name</h5>
             <input placeholder="Enter your discord account name" v-bind:id="3" @input="getData">
 
-            <h5>Selected Interviewer: {{selectedInterviewer}}</h5>  
-
-            <div class="dropdown">
-            <button class="dropbtn">Pick your interviewer</button>
-            <div class="dropdown-content">
-                <a id="0" @click="onClick($event)">Yusef Ahmed <br> (Computer Science)</a>
-                <a id="1" @click="onClick($event)">Asfandyar Azhar <br>  (Data Science)</a>
-                <a id="2" @click="onClick($event)">Jeroen Schols <br> (Computer Science)</a>
-                <a id="3" @click="onClick($event)">All interviewers</a>
-            </div>
-            </div>
-            
             <a class="submit_button" @click="submit">Submit</a>
             <h5 style="margin-bottom: 100px;">{{message}}</h5>
         </div>
         
-        <div v-if="!fetchingData && isLoggedIn && selectedTab === 1" class="mock_interview_container">
+        <div v-if="!fetchingData && isLoggedIn && selectedTarget === 1" class="mock_interview_container">
             <div class="interviewee_container">
             <h1 v-if="interviews.length === 0" style="font-family: Jeko; margin-top: 2.5%; margin-bottom: 3.5%;">You have no upcoming interviews</h1>
             <div class="interviewee_row" v-for="interviewrow in interviews">
@@ -61,8 +49,9 @@ import UserService from '@/services/UserService'
 export default {
     data() {
         return {
-            interviewers: ["Yusef Ahmed", "Asfandyar Azhar", "Jeroen Schols", "All"],
-            selectedInterviewer: '',
+            selectedTarget: 0,
+            selector1: 'selected',
+            selector2: 'unselected',
             selectedTab: 0,
             availability: '',
             company: '',
@@ -75,8 +64,15 @@ export default {
         }
     },
     methods: {
-        onClick(event) {
-            this.selectedInterviewer = this.interviewers[parseInt(event.currentTarget.id)]
+        chooseDisplay(event) {
+            this.selectedTarget = parseInt(event.currentTarget.id)
+            if (parseInt(event.currentTarget.id) == 0) {
+                this.selector1 = 'selected';
+                this.selector2 = 'unselected';
+            } else {
+                this.selector2 = 'selected';
+                this.selector1 = 'unselected';
+            }
         },
         selectTab(event) {
             this.selectedTab = parseInt(event.currentTarget.id)
@@ -89,7 +85,6 @@ export default {
             await InterviewService.scheduleInterview({
                 availability: this.availability,
                 company: this.company,
-                interviewer: this.selectedInterviewer,
                 interviewee: this.interviewee,
                 role: this.role,
                 contactInfo: this.contactInfo,
@@ -146,7 +141,6 @@ export default {
 
 
                     interviewRow.push({
-                        interviewer: res.data[i].interviewer,
                         role: res.data[i].role,
                         company: res.data[i].company,
                         availability: res.data[i].availability,

@@ -1,6 +1,6 @@
 <template>
     <div style="min-height: 100vh;" v-if="!fetchingData && isLoggedIn">
-        <h1 style="font-family: Jeko; margin-top: 2.5%; margin-bottom: 3.5%;">Manage Event</h1>
+        <h1 style="font-family: Poppins; margin-top: 2.5%; margin-bottom: 2.5%; font-size: 64px;">Manage event</h1>
         <h1 v-if="events.length === 0" style="font-family: Jeko;">There are no existing events</h1>
         <div class="event_manage_card" v-for="event in events">
             <div style="display: flex; flex-direction: row; justify-content: center; align-items: center;">

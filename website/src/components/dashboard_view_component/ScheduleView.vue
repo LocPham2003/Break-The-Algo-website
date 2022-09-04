@@ -1,6 +1,6 @@
 <template>
     <div v-if="!fetchingData && isLoggedIn" class="content_container">
-        <h1 style="font-family: Jeko; margin-top: 2.5%; margin-bottom: 3.5%;">Upcoming interviews</h1>
+        <h1 style="font-family: Poppins; margin-top: 2.5%; margin-bottom: 2.5%; font-size: 64px;">Your interview schedule</h1>
         
         <div v-if="!isEmpty" class="interview_container">
             <div class="interview_row" v-for="interviewrow in interviews">
@@ -99,9 +99,7 @@ export default {
                 this.isLoggedIn = res.data.isLoggedIn
             })
 
-            await InterviewService.getInterviewerSchedule({
-                interviewer: this.interviewer
-            }).then(res => {
+            await InterviewService.getInterviewerSchedule().then(res => {
                 if (res.data.length != 0) {
                     var size = 0;
                 var interviewRow = []

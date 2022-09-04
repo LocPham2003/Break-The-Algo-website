@@ -1,15 +1,15 @@
 <template>
     <p style="color: white; font-size: 30px; font-family: Poppins; margin-top: 10%" v-if="fetchingInfo">Please wait, fetching events from database...</p>
-    <div class="header_container">
-        <a class="event_selector" id="0" @click="onClick($event)">Upcoming events</a>
+    <div class="selector_container">
+        <a :class="selector1" id="0" @click="onClick($event)">Upcoming Event</a>
         <svg width="2.5" height="40px">
             <rect width="2.5" height="100" style="fill:white;stroke-width:0;stroke:rgb(0,0,0)" />
         </svg>
-        <a class="event_selector" id="1" @click="onClick($event)">Past events</a> 
+        <a :class="selector2" id="1" @click="onClick($event)">Past events</a> 
     </div>
     <h1 v-if="events.length === 0 && !fetchingInfo" style="font-family: Jeko;">There are no existing events</h1>
     <div class="event_container">
-        <div v-if="activeSession === 0" v-for="event in events">
+        <div v-if="selectedTarget === 0" v-for="event in events">
             <EventCard
                     :name="name"
                     :email="email"
@@ -28,9 +28,8 @@
             ></EventCard>
         </div>
 
-        <div v-if="activeSession === 1">
-            <h1>Display past events</h1>
-            <img src="http://localhost:8081/unknown.png">
+        <div v-if="selectedTarget === 1">
+            <h1>There are currently no past events</h1>
         </div>
     </div>
     
@@ -45,6 +44,9 @@ import EventCard from '../components/event_view_components/EventCard.vue'
 export default {
     data() {
         return {
+            selector1: 'selected',
+            selector2: 'unselected',
+            selectedTarget: 0,
             name: '',
             username: '',
             isLoggedIn: false,
@@ -61,7 +63,14 @@ export default {
     },
     methods: {
         onClick(event) {
-            this.activeSession = parseInt(event.currentTarget.id);
+            this.selectedTarget = parseInt(event.currentTarget.id)
+            if (parseInt(event.currentTarget.id) == 0) {
+                this.selector1 = 'selected';
+                this.selector2 = 'unselected';
+            } else {
+                this.selector2 = 'selected';
+                this.selector1 = 'unselected';
+            }
         }
     },
     beforeMount() {
@@ -97,21 +106,18 @@ export default {
             })
             
             if (this.isLoggedIn) {
-                await UserService.getUserListOfEvents({ email: this.email}).then(res => {
+                await UserService.getUserListOfEvents({ email: this.email }).then(res => {
+                    console.log(res.data.events)
                     if (res.data.events.length != 0) {
                         var j = 0;
                         var i = 0;
-                        while (i < this.events.length) {
-                            if (j === res.data.events.length) {
-                                break;
+                        for (var i = 0; i < res.data.events.length; i++) {
+                            for (var j = 0; j < this.events.length; j++) {
+                                if (this.events[j].code === res.data.events[i].code) {
+                                    this.events[i].isSignedUp = true;
+                                    break;
+                                }
                             }
-
-                            if (this.events[i].code === res.data.events[j].code) {
-                                this.events[i].isSignedUp = true;
-                                j++;
-                                i = -1;
-                            }
-                            i++;
                         }
                     }
                     this.fetchingInfo = false
@@ -128,28 +134,37 @@ export default {
 </script>
 
 <style>
-.header_container {
+.selector_container {
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
 }
 
-.header_container a.event_selector{
-    color: white; 
-    font-size: 30px; 
-    font-family: Poppins;
+.selector_container a.selected {
+    color: white;
+    background-color: #2E2E2F;
+    padding: 5px;
     text-decoration: none;
-    margin-top: 2.5%; 
-    margin-bottom: 2.5%;
-    -webkit-transition: color 2s;
-    transition: color 0.5s;
-    margin-left: 10px;
-    margin-right: 10px;
+    margin: 10px;
+    font-size: 32px;
+    font-family: Poppins;
 }
 
-.header_container a:hover{
-    color: red;
+.selector_container a.unselected {
+    color: white;
+    text-decoration: none;
+    padding: 5px;
+    margin: 10px;
+    font-size: 32px;
+    font-family: Poppins;
+}
+
+.selector_container a.selected:hover {
+    cursor: pointer;
+}
+
+.selector_container a.unselected:hover {
     cursor: pointer;
 }
 

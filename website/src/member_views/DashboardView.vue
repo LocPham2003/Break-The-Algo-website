@@ -1,8 +1,8 @@
 <template>
     <div v-if="!fetchingData && isLoggedIn" class="dashboard_container">
-        <h1 style="margin: 2.5% 5%; font-family: Poppins;">Your dashboard</h1>
+        <h1 style="font-family: Poppins; margin-top: 2.5%; margin-bottom: 2.5%; font-size: 64px;">Your dashboard</h1>
 
-        <div class="row_container">
+        <div v-if="role === 0 || role===3" class="row_container">
             <div id="1" @click="onClick($event)" class="utility">
                 <i class="fa fa-user"></i>
                 <p>User info</p>
@@ -67,7 +67,7 @@ export default {
     data() {
         return {
             isLoggedIn: '',
-            role: 0,
+            role: -1,
             isTasked: false, // Is tasked means check if one of the button is clicked
             detectedUsername: '',
             message: '',
@@ -147,6 +147,9 @@ export default {
                     break;
                 case "activityCommittee":
                     this.role = 2;
+                    break;
+                case "member":
+                    this.role = 3;
                     break;
             }
 

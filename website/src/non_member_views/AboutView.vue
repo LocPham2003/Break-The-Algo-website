@@ -62,7 +62,7 @@
       <h1 class="members_header">Meet our team</h1>
       <div class="member_card_section">
         <div class="card_parent_container">
-        <div class="upper_half" style="background-color: red;">
+        <div class="upper_half">
             <img src="@/assets/media/asfandyar.jpg">
         </div>
           <div class="lower_half">
@@ -80,7 +80,7 @@
         </div>
 
         <div class="card_parent_container">
-        <div class="upper_half" style="background-color: red;">
+        <div class="upper_half">
             <img src="@/assets/media/diako.jpg">
         </div>
           <div class="lower_half">
@@ -98,7 +98,7 @@
         </div>
 
         <div class="card_parent_container">
-        <div class="upper_half" style="background-color: red;">
+        <div class="upper_half">
             <img src="@/assets/media/Loc.jpg">
         </div>
           <div class="lower_half">
@@ -118,7 +118,7 @@
 
       <div class="member_card_section">
         <div class="card_parent_container">
-        <div class="upper_half" style="background-color: red;">
+        <div class="upper_half">
             <img src="@/assets/media/yusef.jpg">
         </div>
           <div class="lower_half">
@@ -136,7 +136,7 @@
         </div>
 
         <div class="card_parent_container">
-        <div class="upper_half" style="background-color: red;">
+        <div class="upper_half"> 
             <img src="@/assets/media/marom.jpg">
         </div>
           <div class="lower_half">
@@ -156,7 +156,7 @@
 
       <div class="member_card_section">
                 <div class="card_parent_container">
-        <div class="upper_half" style="background-color: red;">
+        <div class="upper_half">
             <img src="@/assets/media/Prad.jpg">
         </div>
           <div class="lower_half">
@@ -174,7 +174,7 @@
         </div>
 
         <div class="card_parent_container">
-        <div class="upper_half" style="background-color: red;">
+        <div class="upper_half">
             <img src="@/assets/media/tanishq.jpg">
         </div>
           <div class="lower_half">
@@ -192,7 +192,7 @@
         </div>
 
         <div class="card_parent_container">
-        <div class="upper_half" style="background-color: red;">
+        <div class="upper_half">
             <img src="@/assets/media/kati.jpg">
         </div>
           <div class="lower_half">
@@ -376,13 +376,15 @@ h1.members_header {
 .card_parent_container .upper_half {
     width: 100%;
     z-index: 1;
-    background: rgb(2,0,36);
-    background: linear-gradient(305deg, rgba(2,0,36,1) 0%, rgba(193,35,21,1) 100%, rgba(0,212,255,1) 100%);    
+    background-color: darkred;
+    /* background: rgb(2,0,36); */
+    /* background: linear-gradient(305deg, rgba(2,0,36,1) 0%, rgba(193,35,21,1) 100%, rgba(0,212,255,1) 100%);     */
 }
 
 .card_parent_container .upper_half img {
-    width: 60%;
-    height: 60%;
+    max-width: 60%;
+    max-height: 60%;
+    object-fit: cover;
     border-radius: 50%;
     transform: translateY(30%);
     z-index: 1;
@@ -417,6 +419,7 @@ a.view_more_button {
     padding: 5px 10px;
     border-radius: 5px;
     background-color: red;
+    display: none;
 }
 
 a.view_more_button:hover {

@@ -127,6 +127,7 @@ export default {
 
 .student_support_content {
     width: 60%;
+    margin: 10px; 
 }
 
 .student_support_image {
@@ -193,7 +194,8 @@ export default {
     }
 
     .company_support_content {
-        width: 95%;    
+        margin: 15px;
+        width: 95%;
     }
 
     .company_support_image {
@@ -205,6 +207,7 @@ export default {
     }
 
     .student_support_content {
+        margin: 15px;
         width: 95%;
     }
 

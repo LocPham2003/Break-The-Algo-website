@@ -71,6 +71,7 @@ export default {
                 }).then(res => {
                     this.show = true
                     this.status = res.data.message
+                    setTimeout(() => this.$router.go(), 1500);
                 }, err => {
                     this.status = err.response.data.message
                 })
@@ -88,6 +89,7 @@ export default {
                 }).then(res => {
                     this.show = true
                     this.status = res.data.message
+                    setTimeout(() => this.$router.go(), 1500);
                 }, err => {
                     this.status = err.response.data.message
                 })

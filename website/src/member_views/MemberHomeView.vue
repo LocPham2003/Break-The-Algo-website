@@ -1,7 +1,7 @@
 <template>
     <h1 v-if="fetchingData">Loading your homescreen...</h1>
     <div class="member_home_container" v-if="!fetchingData && isLoggedIn === true">
-        <h1>Welcome back, {{ name }}</h1>
+        <h1 style="font-family: Poppins; margin-top: 2.5%; margin-bottom: 2.5%; font-size: 64px;">Welcome back {{name}}</h1>
         <div class="member_home_content_container">
             <div class="job_postings_and_leetcode">
                 <h1>Daily problems</h1>
@@ -12,7 +12,7 @@
                 <p>Please check #daily_problem channel from the data_science category in our discord server!</p>
 
                 <h1>Feedback</h1>
-                <p>If you think the website can be done better or you would like to report a bug, please do so by clicking <a href="" style="color: white; text-decoration: underline;">here</a></p>
+                <p>If you think the website can be done better or you would like to report a bug, please do so by clicking <a href="https://forms.gle/RGkMLEXVV19dmQJM8" style="color: white; text-decoration: underline;">here</a></p>
             </div>
             <div class="instruction_and_feedback">
                 <h1>Website instruction</h1>

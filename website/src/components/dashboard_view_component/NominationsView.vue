@@ -1,6 +1,6 @@
 <template>
-    <div class="nominations_container">
-            <h1 style="font-family: Poppins; margin-top: 2.5%; margin-bottom: 3.5%;">List of Nominations</h1>
+    <div style="min-height: 100vh; display; flex; flex-direction: column; justify-content: flex-start;" class="nominations_container">
+        <h1 style="font-family: Poppins; margin-top: 2.5%; margin-bottom: 2.5%; font-size: 64px;">Nominations</h1>
         <div v-if="nominations.length != 0" class="nomination_container">
             <div class="nomination_row" v-for="nominationrow in nominations">
             <div class="nomination_card" v-for="nomination in nominationrow">
@@ -12,16 +12,14 @@
 
                 <div style="margin-bottom: 10px;" class="buttons">
                     <a v-bind:id="nomination.code + 1" @click="onClick($event)" class="action_button">Accept</a>
-                    <a @click="showRefusalReasonInput()" class="action_button">Deny</a>
+                    <a v-bind:id="nomination.indexForReasonDisplay" @click="showRefusalReasonInput($event)" class="action_button">Deny</a>
                 </div>
 
-                <div style="margin-bottom: 5px;" v-if="showReasonInput">
+                <div style="margin-bottom: 5px;" v-if="reasonDisplayStatus[nomination.indexForReasonDisplay]">
                     <textarea @input="getData" style="width: 100%; margin-bottom: 5px;" placeholder="Enter the reason this request is denied"></textarea>
                     <a v-bind:id="nomination.code + 2" @click="onClick($event)" class="action_button">OK</a>
-                    <a @click="showRefusalReasonInput()" class="action_button">Cancel</a>
+                    <a v-bind:id="nomination.indexForReasonDisplay" @click="showRefusalReasonInput($event)" class="action_button">Cancel</a>
                 </div>
-
-                <p style="text-align: center;">{{message}}</p>
             </div>
             </div>
         </div>
@@ -43,23 +41,26 @@ export default {
             message: '',
             reason: '',
             showReasonInput: false,
-            nominations: []
+            nominations: [],
+            reasonDisplayStatus: []
         }
     },
     methods: {
-        showRefusalReasonInput() {
-            this.showReasonInput = !this.showReasonInput
+        showRefusalReasonInput(event) {
+            this.reasonDisplayStatus[parseInt(event.currentTarget.id)] = !this.reasonDisplayStatus[parseInt(event.currentTarget.id)]
+            console.log(this.reasonDisplayStatus[parseInt(event.currentTarget.id)])
         },
         async onClick(event) {
             const nominationCode = event.currentTarget.id.substring(0, event.currentTarget.id.length - 1)
             const status = event.currentTarget.id.slice(-1)
-            console.log(this.reason)
             NominationService.updateNomination({
                 code: nominationCode,
                 status: status,
                 reason: this.reason
             }).then(res => {
                 this.message = res.data.message
+                alert("Successfully update the nomination status")
+                this.$router.go()
             }, err => {
                 console.log(err)
             })
@@ -73,9 +74,10 @@ export default {
             await UserService.fetchUserState().then(res => {
                 this.isLoggedIn = res.data.isLoggedIn
             })
-
+            
             await NominationService.getNominations().then(res => {
                 var size = 0;
+                var indexForReasonDisplay = 0;
                 var nominationRow = []
                 for (var i = 0; i < res.data.length; i++) {
                     nominationRow.push({
@@ -85,7 +87,10 @@ export default {
                         cvLink: res.data[i].cvLink,
                         studyMajor: res.data[i].studyMajor,
                         description: res.data[i].description,
+                        indexForReasonDisplay: indexForReasonDisplay
                     })
+                    this.reasonDisplayStatus.push(false)
+                    indexForReasonDisplay++;
                     size++
                     if (size == 2){
                         size = 0

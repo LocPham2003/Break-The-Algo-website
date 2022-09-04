@@ -1,6 +1,6 @@
 <template>
     <div class="event_post_container">
-        <h1 style="font-family: Jeko; margin-top: 2.5%; margin-bottom: 3.5%;">Post an event</h1>
+        <h1 style="font-family: Poppins; margin-top: 2.5%; margin-bottom: 2.5%; font-size: 64px;">Post event</h1>
         
         <h2>Event code: </h2>
         <input @input="getData" v-bind:id="0" placeholder="Enter the code of the event">

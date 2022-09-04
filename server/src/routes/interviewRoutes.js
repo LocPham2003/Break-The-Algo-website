@@ -4,7 +4,7 @@ const router = express.Router()
 
 router.post('/scheduleInterview', scheduleInterview)
 router.post('/updateInterviewScheduleStatus', updateInterviewScheduleStatus)
-router.post('/getInterviewerSchedule', getInterviewerSchedule)
+router.get('/getInterviewerSchedule', getInterviewerSchedule)
 router.post('/deleteInterview', deleteInterview)
 router.post('/getIntervieweeSchedule', getIntervieweeSchedule)
 
