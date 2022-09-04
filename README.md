@@ -1,7 +1,9 @@
+Website is deployed and can be found via www.breakthealgo.com
+
 This is a website built using these following technologies
 - HTML and Bootstrap (CSS)
 - Vuejs framework (JavaScript)
-- Python for backend
+- ExpressJS + NodeJS for backend
 - MongoDB for Database management
 
 Features:
