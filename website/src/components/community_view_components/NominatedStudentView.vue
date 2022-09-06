@@ -70,7 +70,6 @@ div.nomination_card div.nominee_information {
     text-decoration-color: red;
     text-underline-offset: 8px;
     font-family: Menlo;
-    margin-bottom: 20px;
     font-size: 16px;
 }
 
@@ -83,8 +82,6 @@ div.nomination_card div.nominee_information {
     font-family: Menlo;
     color: white;
     text-decoration: none;
-    margin: 15px 10px;
-    margin-top: 15px;
     padding: 10px;
     border-radius: 10px;
 }
@@ -101,7 +98,6 @@ div.nomination_card div.nominee_information {
         flex-direction: column;
         justify-content: center;
         align-items: center;
-
     }
 
     div.nomination_card div.nominee_information {

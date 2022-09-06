@@ -145,7 +145,6 @@
               <p>{{memberMajor[2]}}</p>  
             
               <div style="display: flex; flex-direction: row; justify-content: center; align-items: center; margin-bottom: 10px;">
-                <a v-bind:href="memberLinkedIn[4]" style="font-size: 32px; color: white; margin: 5px;"><i class="fab fa-linkedin"></i></a>
                 <a @click="displayDiscord($event)" v-bind:id="4" style="font-size: 32px; color: white; margin: 5px; transform: translateY(1.5px);"><i class="fab fa-discord"></i></a>
               </div>
 

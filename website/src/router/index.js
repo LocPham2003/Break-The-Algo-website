@@ -21,6 +21,7 @@ import EventPostView from '../components/dashboard_view_component/EventPostView.
 import EventManageView from '../components/dashboard_view_component/EventManageView.vue'
 import EventEditView from '../components/dashboard_view_component/EventEditView.vue'
 import NominationsView from '../components/dashboard_view_component/NominationsView.vue'
+import ChangePasswordView from '../components/miscellaneous/ChangePasswordView.vue'
 
 const routes = [  
   {
@@ -135,6 +136,12 @@ const routes = [
     path: '/dashboard/nominations',
     name: 'nominations',
     component: NominationsView
+  },
+  // Path for other various utilities
+  {
+    path: '/dashboard/userInfo/changePassword',
+    name: 'changePassword',
+    component: ChangePasswordView
   }
 ]
 

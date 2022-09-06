@@ -80,7 +80,8 @@ export default {
                         await ImageService.deleteImageByCode({ code: code })
 
                         await EventService.deleteEvent({ code: code }).then(res => {
-                            this.status = res.data.message
+                            alert(res.data.message + '. Reloading the page for changes to be updated.')
+                            setTimeout(() => this.$router.go(), 2000);
                         }, err => {
                             console.log(err)
                         })

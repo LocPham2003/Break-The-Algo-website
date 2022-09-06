@@ -1,7 +1,7 @@
 <template>
-    <h1 style="font-family: Jeko; margin-top: 2.5%; margin-bottom: 2.5%;">Register for Event</h1>
-    <p style=" color: white; font-size: 30px; font-family: Jeko; margin-bottom: 1%;">It seems you aren't a member. Please fill in your information below</p>
-    <p style=" color: white; font-size: 30px; font-family: Jeko;">If you already are, you can <a @click="redirect()" class="sign_in_highlight">sign in/ register</a></p>
+    <h1 style="font-family: Poppins; margin-top: 2.5%; margin-bottom: 2.5%;">Register for Event</h1>
+    <p style=" color: white; font-size: 30px; font-family: Poppins; margin-bottom: 1%;">It seems you aren't a member. Please fill in your information below</p>
+    <p style=" color: white; font-size: 30px; font-family: Poppins;">If you already are, you can <a @click="redirect()" class="sign_in_highlight">sign in/register</a></p>
     <div class="event_register_container">
         <h2>Event code</h2>
         <input placeholder="Enter event code" v-bind:id="0" @input="getData">

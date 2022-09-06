@@ -9,8 +9,9 @@
                 </div>
                 
             </div>
-
-            <div class="database_information">
+            
+            <div class="database_information_container">
+                <div class="database_information">
                 <div class="information_row" v-for="attributes in userInfoArr">
                     <h5 class="text">{{userInfoArr[attributes.id].text}}</h5>
                     <h5 class="data">{{userInfoArr[attributes.id].data}}</h5>
@@ -21,6 +22,8 @@
                     <a id="5" @click="onClick($event)" class="profile_button">Change information</a>                    
                 </div>
             </div>
+            </div>
+            
             
         </div>
     </div>
@@ -41,10 +44,10 @@ export default {
         onClick(event) {
             switch(parseInt(event.currentTarget.id)) {
                 case 4:
-                    // Change the password
+                    this.$router.push({name: 'changePassword'})
                     break;
                 case 5: 
-                    // change the information
+                    alert('Please contact Loc Pham (Board member) to change your personal information in the database.')
                     break;
             }
         }
@@ -74,6 +77,7 @@ export default {
     flex-direction: row;
     padding-left: 20px;
     padding-right: 20px;
+    height: fit-content;
 }
 
 .user_info_container .profile_row {
@@ -91,6 +95,11 @@ export default {
     padding-left: 30px;
     padding-right: 30px;
     border-color: white;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 .user_info_container .profile_row .profile_card i {
@@ -130,13 +139,18 @@ export default {
     color: red;
 }
 
+.user_info_container .database_information_container {
+    flex-basis: 70%;
+}
+
 .user_info_container .database_information {
-    flex: 1;
     display: flex;
     flex-direction: column;
-    flex-basis: 70%;
+    justify-content: flex-start;
+    align-items: center;
     border-style: solid;
     border-color: white;
+    height: 100%;
 }
 
 .user_info_container .database_information .information_row {
@@ -166,7 +180,7 @@ export default {
 .user_info_container .database_information .button_container {
     display: flex;
     flex-direction: row;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
 }
 
@@ -201,7 +215,7 @@ export default {
         width: 100%;
     }
 
-    .user_info_container .database_information {
+    .user_info_container .database_information_container {
         width: 100%;
         padding-bottom: 20px;
     }

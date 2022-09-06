@@ -24,7 +24,7 @@
         <h1 style="font-family: Poppins; margin-bottom: 2.5%; font-size: 64px; display: block;">Featured Students</h1>
                 
         <div class="nominations_display">
-            <div v-for="nomination in nominations">
+            <div class="nomination_container" v-for="nomination in nominations">
                 <NominatedStudentView
                     :image="nomination.image"
                     :nominee="nomination.nominee"
@@ -241,6 +241,20 @@ export default {
 
     .student_community_content {
         width: 80%;
+    }
+
+    .nominations_display {
+        width: 90%;
+        
+    }
+
+    .nomination_container {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        
     }
 
     .partnership_community_header {

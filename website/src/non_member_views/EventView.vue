@@ -7,7 +7,7 @@
         </svg>
         <a :class="selector2" id="1" @click="onClick($event)">Past events</a> 
     </div>
-    <h1 v-if="events.length === 0 && !fetchingInfo" style="font-family: Jeko;">There are no existing events</h1>
+    <h1 v-if="events.length === 0 && !fetchingInfo && selectedTarget === 0" style="font-family: Poppins; margin-top: 100px;">There are no upcoming events at the moment, stay tuned for more!</h1>
     <div class="event_container">
         <div v-if="selectedTarget === 0" v-for="event in events">
             <EventCard
@@ -29,7 +29,7 @@
         </div>
 
         <div v-if="selectedTarget === 1">
-            <h1>There are currently no past events</h1>
+            <h1 style="font-family: Poppins; margin-top: 100px;">Please check our instagram page (@breakthealgo) to see our past events!</h1>
         </div>
     </div>
     

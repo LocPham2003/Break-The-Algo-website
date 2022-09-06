@@ -286,7 +286,7 @@ export default {
 
             // Terminal control variables
             availableCommands: ['help', 'register', 'login', 'discord', 'linkedin', 'instagram', 'email', 'twitter', 'facebook', 'github', 'techstack', 'founders'],
-            availableContent: ['These are the following commands that are available to you: help, register, login, founders, discord, twitter, instagram, linkedin, email, github.\n You can also clear the terminal by typing the Escape key on your keyboard.', 
+            availableContent: ['These are the following commands that are available to you: help, register, login, exit, founders, discord, twitter, instagram, linkedin, email, github.\n You can clear the terminal by typing the \'exit\' command.', 
             'You are currently in register mode. Please fill in the fields below.', 
             'You are currently in login mode. Please fill in the fields below.',
             'https://discord.gg/3daSHa7',
@@ -318,36 +318,28 @@ export default {
             }
         },
         onEnter(e) {
-            console.log(e.target.id)
             // If the target == 6 then we know this is the last field
             if (!this.isLogin) {
-                if (parseInt(e.target.id) == 6) {
+                if (parseInt(e.target.id) == 6 || this.requestDone) {
                     this.sendUserRequest();
                 } else {
                     this.displayedCommands = this.displayedCommands + 1
                 }
             } else {
-                if (parseInt(e.target.id) == 1) {
+                if (parseInt(e.target.id) == 1 || this.requestDone) {
                     this.sendUserRequest();
                 } else {
                     this.displayedCommands = this.displayedCommands + 1;
                 }
             }
-            
-
-            
-            // If the request is not sent, display the next message
-            // if (!this.requestDone) {
-                
-            // // If the request has already been sent, then resend the user request if the user press enter
-            // } else {
-            //     this.sendUserRequest()
-            // }
         },
         getCommand(event) {
             var enteredCommand = event.currentTarget.value;
-
-            if (enteredCommand === 'register' || enteredCommand === 'login') {
+            
+            if (enteredCommand === 'exit') {
+                this.$router.go();
+            } else {
+                if (enteredCommand === 'register' || enteredCommand === 'login') {
                 this.isLoginOrRegister = true;
                 
                 if (enteredCommand === 'login') {
@@ -374,6 +366,9 @@ export default {
                     content: 'Command \'' + enteredCommand + '\' is not found. Type help to see a list of available commands and try again'
                 })
             }
+            }
+
+            
             
         },
         getData(e) {
@@ -451,13 +446,6 @@ export default {
                 })
             }
         }
-    },
-    created() {
-         window.addEventListener('keydown', (e) => {
-            if (e.key == 'Escape') {
-                this.$router.go();
-            }
-    });
     }
 }
 </script>
