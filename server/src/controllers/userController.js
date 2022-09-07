@@ -23,43 +23,56 @@ exports.userSignup = (req, res) => {
 				message: "Username must not contain whitespaces or special characters"
 			})
 		} else {
-			User.findOne({username: username }, function (err, docs) {
-				if (err){
+			User.findOne({email : body.email}, function (err, docs) {
+				if (err) {
 					console.log("Something happened")
 				} else {
 					if (docs === null) {
-						if (passwordReEntry != password) {
-							return res.status(400).json({
-								message: "Password does not match, please check again"
-							})	
-						} else {
-							// If the username does not exist and the password is matching, then we can save this new user to the database
-							// Hash the password before pushing the user onto the database
-							bcrypt.hash(password, salt).then(async (hash) => {
-								console.log(hash)
-								body.password = hash
-								body.passwordReEntry = hash
-								const user = new User(body);
-								user.save((err, user) => {
-									if (err) {
+						User.findOne({username: username }, function (err, docs) {
+							if (err){
+								console.log("Something happened")
+							} else {
+								if (docs === null) {
+									if (passwordReEntry != password) {
 										return res.status(400).json({
-											error: "Unable to add user"
-										})
+											message: "Password does not match, please check again"
+										})	
 									} else {
-										return res.json({
-											message: "Success! Welcome to Break The Algo, " + user.name + " :D. You are now a member, so you can login"
+										// If the username does not exist and the password is matching, then we can save this new user to the database
+										// Hash the password before pushing the user onto the database
+										bcrypt.hash(password, salt).then(async (hash) => {
+											console.log(hash)
+											body.password = hash
+											body.passwordReEntry = hash
+											const user = new User(body);
+											user.save((err, user) => {
+												if (err) {
+													return res.status(400).json({
+														error: "Unable to add user"
+													})
+												} else {
+													return res.json({
+														message: "Success! Welcome to Break The Algo, " + user.name + " :D. You are now a member, so you can login"
+													})
+												}
+											})
 										})
 									}
-								})
-							})
-						}
+								} else {
+									return res.status(400).json({
+										message: "Username already existed, please enter a new one"
+									})	
+								}
+							}
+						});
 					} else {
 						return res.status(400).json({
-							message: "Username already existed, please enter a new one"
+							message: "Email is already used, please enter a new one"
 						})	
 					}
 				}
 			});
+			
 		}
 	}
 }
@@ -199,6 +212,57 @@ exports.userState = (req, res) => {
 
 		
 	}
+}
+
+exports.changePassword = (req, res) => {
+	const body = req.body;
+	const email = body.email
+	const currentPassword = body.currentPassword
+	const newPasswordReEntry = body.newPasswordReEntry
+	const newPassword = body.newPassword
+
+	// Check if user email exists -> compare current password -> update new password
+	User.findOne({email : email}, function(err, docs){
+		if (docs != null) {
+			bcrypt.compare(currentPassword, docs.password, (error, result) => {
+				/* If this succeeds then proceed to create a cookie to store the user token (generated via JWT)
+				 Since the token is stored in the cookie and the cookie is used to keep track whether the user
+				 need to sign in or not, you just need to delete the cookie from the user browser when making the
+				 log out function */
+				if(result) {
+					// Generate the unique token of the user based on the id
+					// Need to find a way to pass this token into the browser's cookie
+					if (newPasswordReEntry != newPassword) {
+						return res.status(400).json({
+							message: "Password does not match, please check again"
+						})	
+					} else {
+						// If the username does not exist and the password is matching, then we can save this new user to the database
+						// Hash the password before pushing the user onto the database
+						bcrypt.hash(newPassword, salt).then(async (hash) => {
+							body.newPassword = hash
+							body.newPasswordReEntry = hash
+							
+							User.findOneAndUpdate({email : email}, {password : body.newPassword, passwordReEntry: body.newPasswordReEntry}, function(err, docs){
+								if (err) {
+									console.log("Unable to update password")
+									console.log(err)
+								} else {
+									console.log(docs.name)
+									return res.json({message: "Password updated successfully, you can now leave this tab."})
+								}
+							}) 
+						})
+					}
+					
+				} else {
+					return res.status(400).json({ message: "Current password is not correct, please try again."})
+				} 
+			})
+		} else {
+			return res.status(400).json({ message: "Email address is invalid or does not exist, please try again."})
+		}
+	})
 
 	
 }
@@ -211,4 +275,12 @@ function containsSpecialChars(str) {
 
 function containsWhiteSpace(str) {
 	return /\s/g.test(str); //eslint-disable-line
+}
+
+function checkPasswordStrength(str) {
+	if (str.length < 8) {
+		return false;
+	} else {
+		return true;
+	}
 }

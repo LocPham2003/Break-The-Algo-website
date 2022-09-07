@@ -285,7 +285,7 @@ export default {
             email: '',
 
             // Terminal control variables
-            availableCommands: ['help', 'register', 'login', 'discord', 'linkedin', 'instagram', 'email', 'twitter', 'facebook', 'github', 'techstack', 'founders'],
+            availableCommands: ['help', 'register', 'login', 'discord', 'linkedin', 'instagram', 'email', 'facebook', 'github', 'techstack', 'founders'],
             availableContent: ['These are the following commands that are available to you: help, register, login, exit, founders, discord, twitter, instagram, linkedin, email, github.\n You can clear the terminal by typing the \'exit\' command.', 
             'You are currently in register mode. Please fill in the fields below.', 
             'You are currently in login mode. Please fill in the fields below.',
@@ -293,7 +293,6 @@ export default {
             'https://www.linkedin.com/company/break-the-algo/',
             'https://www.instagram.com/breakthealgo/',
             'info@breakthealgo.com',
-            'https://twitter.com/breakthealgo',
             'https://www.facebook.com/breakthealgo/',
             'https://github.com/LocPham2003/Break-The-Algo-website',
             'This website is developed using the MEVN (MongoDB + ExpressJS + VueJS + NodeJS) stack',

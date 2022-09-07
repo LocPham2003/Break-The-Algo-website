@@ -235,7 +235,7 @@ export default {
   data() {
     return {
       memberImage: [0, 1, 2, 3, 4,],
-      memberName: ["Asfanyar Azhar", "Diako Mazneh", "Loc Pham", "Yusef Ahmed", "Marom Sverdlov", "Pradyut Nair", "Tanishq Virwani", "Kati Overbeeke"],
+      memberName: ["Asfandyar Azhar", "Diako Mazneh", "Loc Pham", "Yusef Ahmed", "Marom Sverdlov", "Pradyut Nair", "Tanishq Virwani", "Kati Overbeeke"],
       memberRole: ["Founder/ Board member", "Board member", "Board member", "Interview Committee", "Interview Committee", "Project Committee", "External Relations Committee", "Activity Committee"],
       memberMajor: ["Data Science Student","Data Science Student", "Computer Science Student"],
       memberLinkedIn: ["https://www.linkedin.com/in/asfandyarazhar/", 
