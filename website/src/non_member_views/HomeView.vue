@@ -10,7 +10,6 @@
         <a @click="redirectToRegister()" class="get_started">Get started.</a>
         
         <div style="margin: 10px 10px 10px 10px; display: flex; flex-direction: row; justify-content: center; align-items: center;">
-          <a class="social" href="https://twitter.com/breakthealgo"><i class="fab fa-twitter"></i></a>
           <a class="social" href="https://www.facebook.com/breakthealgo/"><i class="fab fa-facebook"></i></a>
           <a class="social" href="https://www.instagram.com/breakthealgo/"><i class="fab fa-instagram"></i></a>
           <a class="social" href="https://discord.gg/3daSHa7"><i class="fab fa-discord"></i></a>

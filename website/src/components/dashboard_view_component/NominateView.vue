@@ -1,6 +1,7 @@
 <template>
     <!-- Root component is in EventView.vue. Modify the header_container in EventView to change the appearance of this -->
-    <div class="selector_container">
+
+    <div v-if="isLoggedIn" class="selector_container">
         <a :class="selector1" id="0" @click="chooseDisplay($event)">Nominate member</a>
         <svg width="2.5" height="40px">
             <rect width="2.5" height="100" style="fill:white;stroke-width:0;stroke:rgb(0,0,0)" />
@@ -8,11 +9,12 @@
         <a :class="selector2" id="1" @click="chooseDisplay($event)">Pending nominations</a> 
     </div>
     
-    <div v-if="selectedTarget === 0" class="nominate_container">
+    <div v-if="selectedTarget === 0 && isLoggedIn" class="nominate_container">
         <h3 style="text-align: center; color: white; font-family: Poppins; margin: 5px;">Nominee's name:</h3>
         <input v-bind:id='0' @input="getData" style="margin: 5px;" placeholder="Enter the name of the nominee">
 
         <h3 style="text-align: center; color: white; font-family: Poppins; margin: 5px;">Nominee's portrait (Optional):</h3>
+        <p style="color: white; font-family: Poppins;">Currently the file upload feature does not work. Please upload the portrait by sending it via discord to @Chaotic_Spongebob#9101</p>
          <form enctype="multipart/form-data">
             <input class="portrait_input" @change="onChange" ref="image" style="color: white;" type="file">
         </form>
@@ -38,7 +40,7 @@
         <p style="color: white; font-family: Poppins;">{{status}}</p>
     </div>
 
-    <div v-if="selectedTarget === 1">
+    <div v-if="selectedTarget === 1 && isLoggedIn">
         <div v-if="!isEmpty" class="nominations_container">
             <div class="nomination_row" v-for="nominationrow in nominations">
             <div class="nomination_card" v-for="nomination in nominationrow">
@@ -56,6 +58,10 @@
         <div style="min-height: 100vh;" v-else>
             <h1>Your nominations are empty... create one now if you can!</h1>
         </div>
+    </div>
+
+    <div v-else>
+        <h1 style="font-family: Poppins; margin-top: 2.5%; margin-bottom: 2.5%; font-size: 64px;">You need to login first</h1>
     </div>
 </template>
 
@@ -80,6 +86,7 @@ export default {
             nominations: [],
             portrait: '',
             code: '',
+            isLoggedIn : false,
             isEmpty: false
         }
     },
@@ -142,7 +149,7 @@ export default {
                 this.status = res.data.message;
                 this.code = res.data.code
                 this.addImage()
-                setTimeout(() => this.$router.go(), 2000);
+                //setTimeout(() => this.$router.go(), 2000);
             }, err => {
                 this.status = err.response.data.message    
             })
@@ -162,6 +169,7 @@ export default {
         const fetchData = async() => { 
             await UserService.fetchUserState().then(res => {
                 this.nominator = res.data.name
+                this.isLoggedIn = res.data.isLoggedIn;
             }, err => {
                 console.log(err)
             })
@@ -169,7 +177,6 @@ export default {
             await NominationService.getPendingNominations({
                 nominator: this.nominator
             }).then(res => {
-                console.log(res)
                 if (res.data.length != 0) {
                     var size = 0;
                 var nominationRow = []

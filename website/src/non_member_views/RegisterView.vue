@@ -286,7 +286,7 @@ export default {
 
             // Terminal control variables
             availableCommands: ['help', 'register', 'login', 'discord', 'linkedin', 'instagram', 'email', 'facebook', 'github', 'techstack', 'founders'],
-            availableContent: ['These are the following commands that are available to you: help, register, login, exit, founders, discord, twitter, instagram, linkedin, email, github.\n You can clear the terminal by typing the \'exit\' command.', 
+            availableContent: ['These are the following commands that are available to you: help, register, login, exit, founders, discord, instagram, linkedin, email, github.\n You can clear the terminal by typing the \'exit\' command.', 
             'You are currently in register mode. Please fill in the fields below.', 
             'You are currently in login mode. Please fill in the fields below.',
             'https://discord.gg/3daSHa7',
@@ -353,7 +353,6 @@ export default {
                         command: enteredCommand,
                         content: this.availableContent[i]
                     })
-                    console.log(this.terminalFlow)
                     commandNotFound = false
                     break;
                 }

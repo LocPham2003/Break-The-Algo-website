@@ -453,6 +453,11 @@ p.contact_info_links {
 
 
 @media screen and (max-width: 700px) {
+    h1.who_we_are_header {
+      text-align: center;
+      margin: 0;
+    }
+
     h1.join_us_header {
       font-size: 48px;
     }

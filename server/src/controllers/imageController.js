@@ -3,8 +3,6 @@ const fs = require('fs')
 const path = require('path')
 
 exports.uploadImage = (req, res) => {
-    console.log(req.body.code)
-
     var obj = {
         code: req.body.code,
         img: {

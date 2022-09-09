@@ -10,8 +10,29 @@ const salt = 10
 exports.userSignup = (req, res) => {
 	const body = req.body;
 	const username = req.body.username
+	const email = req.body.email
 	const password = body.password
 	const passwordReEntry = body.passwordReEntry
+
+	const tueEmail = '@student.tue.nl'
+
+	if (!email.toLowerCase().includes(tueEmail.toLowerCase())) {
+		return res.status(400).json({
+			message: "Please use Eindhoven University of Technology student email to sign up"
+		})
+	}
+
+	if (password.length < 8) {
+		return res.status(400).json({
+			message: "Please use a password with more than 8 characters"
+		})
+	}
+
+	if (!Number.isInteger(+body.studyYear) || parseInt(body.studyYear) < 1) {
+		return res.status(400).json({
+			message: "Invalid study year"
+		})
+	  }
 
 	if (!body.name || !body.studyMajor || !body.studyYear || !username || !password || !body.email) {
 		return res.status(400).json({
@@ -277,10 +298,6 @@ function containsWhiteSpace(str) {
 	return /\s/g.test(str); //eslint-disable-line
 }
 
-function checkPasswordStrength(str) {
-	if (str.length < 8) {
-		return false;
-	} else {
-		return true;
-	}
-}
+function isInteger(value) {
+	return /^\d+$/.test(value);
+  }
