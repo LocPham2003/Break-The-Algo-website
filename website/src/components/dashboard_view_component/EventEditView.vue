@@ -1,5 +1,5 @@
 <template>
-    <div class="event_edit_container">
+    <div v-if="!fetchingData && isLoggedIn && (role == 'admin' || role == 'activityCommittee')" class="event_edit_container">
         <h1 style="font-family: Jeko; margin-top: 2.5%; margin-bottom: 3.5%;">Edit event</h1>
         
         <h3>Title <i id="0" @click="toggleEdit($event)" class="fa fa-pen"></i></h3>
@@ -68,6 +68,10 @@ import ImageService from '@/services/ImageService';
 export default {
     data() {
         return {
+            fetchingData : true,
+            isLoggedIn : false,
+            email: '',
+            role: '',
             code: '',
             title: '',
             startTime: '',
@@ -164,6 +168,17 @@ export default {
             }, err => {
                 console.log(err)
             })
+
+            await UserService.fetchUserState().then(res => {
+                    this.isLoggedIn = res.data.isLoggedIn
+                    this.email = res.data.email
+
+                    UserService.getUserRole({email : this.email }).then(res => {
+                        console.log(res)
+                        this.role = res.data.role
+                    })
+                    this.fetchingData = false;
+                })
 
             await EventService.getEventByCode({code: this.code}).then(res => {
                 this.description = res.data.description

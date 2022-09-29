@@ -12,7 +12,7 @@
                 <p>Please check #daily_problem channel from the data_science category in our discord server!</p>
 
                 <h1>Feedback</h1>
-                <p>If you think the website can be done better or you would like to report a bug, please do so by clicking <a href="https://forms.gle/RGkMLEXVV19dmQJM8" style="color: white; text-decoration: underline;">here</a></p>
+                <p>If you think the website can be done better, please do so by clicking <a href="https://forms.gle/RGkMLEXVV19dmQJM8" style="color: white; text-decoration: underline;">here</a>. If you would like to report a bug <a href="https://forms.gle/jL6bJXRQVMwzVEkt9" style="color: white; text-decoration: underline;">here</a></p>
             </div>
             <div class="instruction_and_feedback">
                 <h1>Website instruction</h1>

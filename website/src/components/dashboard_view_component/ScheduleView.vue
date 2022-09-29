@@ -1,5 +1,5 @@
 <template>
-    <div v-if="!fetchingData && isLoggedIn" class="content_container">
+    <div v-if="!fetchingData && isLoggedIn && (role == 'admin' || role == 'interviewCommittee')" class="content_container">
         <h1 style="font-family: Poppins; margin-top: 2.5%; margin-bottom: 2.5%; font-size: 64px;">Your interview schedule</h1>
         
         <div v-if="!isEmpty" class="interview_container">
@@ -48,6 +48,8 @@ export default {
         return {
             interviewer: '',
             interviews: [],
+            email: '',
+            role: '',
             isLoggedIn: false,
             fetchingData: true,
             isEmpty: false,
@@ -97,6 +99,12 @@ export default {
             await UserService.fetchUserState().then(res => {
                 this.interviewer = res.data.name
                 this.isLoggedIn = res.data.isLoggedIn
+                this.email = res.data.email
+            })
+
+            await UserService.getUserRole({email : this.email }).then(res => {
+                console.log(res)
+                this.role = res.data.role
             })
 
             await InterviewService.getInterviewerSchedule().then(res => {

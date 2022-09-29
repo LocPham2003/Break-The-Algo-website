@@ -131,6 +131,8 @@ export default {
 }
 
 .student_support_image {
+    display: flex;
+    flex-direction: column;
     width: 40%;
     margin: 10px;
 }
@@ -194,7 +196,7 @@ export default {
     }
 
     .company_support_content {
-        margin: 15px;
+        margin: 20px;
         width: 95%;
     }
 
@@ -207,7 +209,7 @@ export default {
     }
 
     .student_support_content {
-        margin: 15px;
+        margin: 20px;
         width: 95%;
     }
 

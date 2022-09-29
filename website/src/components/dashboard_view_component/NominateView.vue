@@ -14,7 +14,7 @@
         <input v-bind:id='0' @input="getData" style="margin: 5px;" placeholder="Enter the name of the nominee">
 
         <h3 style="text-align: center; color: white; font-family: Poppins; margin: 5px;">Nominee's portrait (Optional):</h3>
-        <p style="color: white; font-family: Poppins;">Currently the file upload feature does not work. Please upload the portrait by sending it via discord to @Chaotic_Spongebob#9101</p>
+        <p style="color: white; font-family: Poppins; margin: 10px;">Currently the file upload feature does not work. Please upload the portrait by sending it via discord to @Chaotic_Spongebob#9101</p>
          <form enctype="multipart/form-data">
             <input class="portrait_input" @change="onChange" ref="image" style="color: white;" type="file">
         </form>

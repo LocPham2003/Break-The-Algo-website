@@ -1,5 +1,5 @@
 <template>
-    <div style="min-height: 100vh;" v-if="!fetchingData && isLoggedIn">
+    <div style="min-height: 100vh;" v-if="!fetchingData && isLoggedIn && (role == 'admin' || role == 'activityCommittee')">
         <h1 style="font-family: Poppins; margin-top: 2.5%; margin-bottom: 2.5%; font-size: 64px;">Manage event</h1>
         <h1 v-if="events.length === 0" style="font-family: Jeko;">There are no existing events</h1>
         <div class="event_manage_card" v-for="event in events">
@@ -51,6 +51,8 @@ export default {
         return {
             isLoggedIn: false,
             fetchingData: true,
+            email: '',
+            role: '',
             events: [],
             images: [],
             status: ''
@@ -120,10 +122,16 @@ export default {
             }
             })
 
-            await UserService.fetchUserState().then(res =>{
-                this.isLoggedIn = res.data.isLoggedIn
-                this.fetchingData = false;
-            })
+            await UserService.fetchUserState().then(res => {
+                    this.isLoggedIn = res.data.isLoggedIn
+                    this.email = res.data.email
+
+                    UserService.getUserRole({email : this.email }).then(res => {
+                        console.log(res)
+                        this.role = res.data.role
+                    })
+                    this.fetchingData = false;
+                })
         }
         fetchData()
     }

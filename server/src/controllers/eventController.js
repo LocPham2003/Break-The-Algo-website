@@ -29,7 +29,7 @@ exports.eventRegister = (req, res) => {
     // The eventTitle for searching
     const code = body.code;
 
-    Event.findOneAndUpdate({code: code}, {$push: {participants: {name: body.name, studyMajor: body.studyMajor}}}, function (err, docs) {
+    Event.findOneAndUpdate({code: code}, {$push: {participants: {name: body.name, studyMajor: body.studyMajor, email: body.email}}}, function (err, docs) {
         if (err){
             console.log("Find event to register gone wrong");
         } else {

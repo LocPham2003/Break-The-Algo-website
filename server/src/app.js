@@ -11,6 +11,7 @@ const cookieParser = require('cookie-parser')
 
 //'https://break-the-algo-production-production.up.railway.app/'
 //https://www.breakthealgo.com
+//http://localhost:8080
 const frontEndURL = 'https://www.breakthealgo.com'
 // This cors option is enabled so that when the client side send a request, the server side can access the data stored in the cookie with the given security properties.
 // For example, the user authentication token is created in the server side and we would like to store it in the cookie with httpOnly flag set to true. We can only do this in the server side,

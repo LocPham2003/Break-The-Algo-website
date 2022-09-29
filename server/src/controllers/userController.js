@@ -9,6 +9,7 @@ const salt = 10
 // Route for signing up a new user
 exports.userSignup = (req, res) => {
 	const body = req.body;
+	body.role = 'member';
 	const username = req.body.username
 	const email = req.body.email
 	const password = body.password
@@ -44,7 +45,7 @@ exports.userSignup = (req, res) => {
 				message: "Username must not contain whitespaces or special characters"
 			})
 		} else {
-			User.findOne({email : body.email}, function (err, docs) {
+			User.findOne({email : body.email.trim()}, function (err, docs) {
 				if (err) {
 					console.log("Something happened")
 				} else {
@@ -233,6 +234,34 @@ exports.userState = (req, res) => {
 
 		
 	}
+}
+
+exports.getUserRole = (req, res) => {
+	const body = req.body;
+	const email = body.email
+
+	if (email == '') {
+		return res.status(400).json({ message: "Unauthorized"})
+	}
+
+	User.findOne({email: email}, function(err, docs) {
+		if (err){
+			console.log(err)
+			return res.status(400).json({
+				message: "Something happened"
+			})		
+		}
+
+		if (docs == null) {
+			return res.status(400).json({ message: "Unauthorized"})
+		} else {
+			console.log(docs.role)
+			return res.status(200).json({
+				role: docs.role
+			})
+		}
+		
+	})
 }
 
 exports.changePassword = (req, res) => {

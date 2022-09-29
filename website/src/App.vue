@@ -33,10 +33,9 @@
       </ul>
     </nav>
     <router-view/>
-    <footer style="background-color: #2E2E2F; height: 100px; margin-top: 50px; display: flex; flex-direction: column; justify-content: flex-end;
+    <footer style="background-color: #2E2E2F; height: 100px; margin-top: 50px; display: flex; flex-direction: column; justify-content: center;
      align-items: center;">
       <h5 style="color: white; font-family: Poppins; margin: 0; padding: 0;">© Copyright Break The Algo. All Rights Reserved.</h5>
-      <p style="color: white; font-family: Poppins;">Website is developed by Loc Pham</p>
     </footer>
 </template>
 

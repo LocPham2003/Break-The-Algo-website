@@ -1,5 +1,5 @@
 <template>
-    <div class="event_post_container">
+    <div v-if="!fetchingData && isLoggedIn && (role == 'admin' || role == 'interviewCommittee')" class="event_post_container">
         <h1 style="font-family: Poppins; margin-top: 2.5%; margin-bottom: 2.5%; font-size: 64px;">Post event</h1>
         
         <h2>Event code: </h2>
@@ -50,12 +50,17 @@
 </template>
 
 <script>
+import UserService from '@/services/UserService';
 import EventService from '@/services/EventService';
 import ImageService from '@/services/ImageService.js'
 
 export default {
     data() {
         return {
+            fetchingData: '',
+            isLoggedIn: '',
+            role: '',
+            email: '',
             code: '',
             title: '',
             startTime: '',
@@ -67,7 +72,6 @@ export default {
             image: '',
             participants: [],
             status: '',
-            image: ''
         }
     }, 
     methods: {
@@ -138,7 +142,23 @@ export default {
                 console.log(err)
             }
         }
-    }
+    },
+    beforeMount() {
+            const fetchData = async() => {
+                await UserService.fetchUserState().then(res => {
+                    this.interviewer = res.data.name
+                    this.isLoggedIn = res.data.isLoggedIn
+                    this.email = res.data.email
+
+                    UserService.getUserRole({email : this.email }).then(res => {
+                        this.role = res.data.role
+                    })
+                    this.fetchingData = false;
+                })
+            }
+    
+            fetchData()
+        }
 }
 </script>
 

@@ -1,5 +1,5 @@
 <template>
-    <div style="min-height: 100vh; display; flex; flex-direction: column; justify-content: flex-start;" class="nominations_container">
+    <div v-if="role == 'admin'" style="min-height: 100vh; display; flex; flex-direction: column; justify-content: flex-start;" class="nominations_container">
         <h1 style="font-family: Poppins; margin-top: 2.5%; margin-bottom: 2.5%; font-size: 64px;">Nominations</h1>
         <div v-if="nominations.length != 0" class="nomination_container">
             <div class="nomination_row" v-for="nominationrow in nominations">
@@ -40,6 +40,8 @@ export default {
             isLoggedIn: '',
             message: '',
             reason: '',
+            role: '',
+            email: '',
             showReasonInput: false,
             nominations: [],
             reasonDisplayStatus: []
@@ -73,8 +75,13 @@ export default {
         const fetchData = async() => {
             await UserService.fetchUserState().then(res => {
                 this.isLoggedIn = res.data.isLoggedIn
-            })
-            
+                this.email = res.data.email
+                UserService.getUserRole({email : this.email }).then(res => {
+                    this.role = res.data.role
+                }, err => {
+                    console.log(err)
+                })
+            })     
             await NominationService.getNominations().then(res => {
                 var size = 0;
                 var indexForReasonDisplay = 0;

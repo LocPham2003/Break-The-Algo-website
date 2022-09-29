@@ -52,9 +52,9 @@ export default {
             isLoggedIn: false,
             fetchingInfo: true,
             activeSession: 0,
+            image: '',
             events: [],
-            images: [],
-            name: '',
+            email: '',
             studyMajor: ''
         }
     },  
@@ -75,25 +75,31 @@ export default {
     },
     beforeMount() {
         const fetchData = async() => {
-            await ImageService.getImage().then(res => {
-                for(var i = 0; i < res.data.images.length; i++){
-                    this.images.push("data:image/png;base64," + res.data.images[i].data)
-                }
-            })
-
             await EventService.fetchEventList().then(res => {
+                console.log(res)
+
                 for (var i = 0; i < res.data.length; i++) {
-                this.events.push({
-                    code: res.data[i].code,
-                    title: res.data[i].title,
-                    image: this.images[i],
-                    description: res.data[i].description,
+                    var tempCode = res.data[i].code
+                    var tempTitle = res.data[i].title
+                    var tempDesc = res.data[i].description
+                    var tempStartTime = res.data[i].startTime
+                    var tempEndTime = res.data[i].endTime
+                    var tempLocation = res.data[i].location
+                    var tempStartMonth = res.data[i].startMonth
+                    var tempStartDate = res.data[i].startDate
+                ImageService.findImageByCode({ code: res.data[i].code }).then(res => {
+                    this.events.push({
+                    code: tempCode,
+                    title: tempTitle,
+                    image: "data:image/png;base64," + res.data.image,
+                    description: tempDesc,
                     isSignedUp: false,
-                    startTime: res.data[i].startTime,
-                    endTime: res.data[i].endTime,
-                    location: res.data[i].location,
-                    startMonth: res.data[i].startMonth,
-                    startDate: res.data[i].startDate,
+                    startTime: tempStartTime,
+                    endTime: tempEndTime,
+                    location: tempLocation,
+                    startMonth: tempStartMonth,
+                    startDate: tempStartDate,
+                })
                 })
             }
             })
@@ -101,7 +107,7 @@ export default {
             await UserService.fetchUserState().then(res => {
                 this.isLoggedIn = res.data.isLoggedIn
                 this.name = res.data.name
-                this.studymajor = res.data.studyMajor
+                this.studyMajor = res.data.studyMajor
                 this.email = res.data.email
             })
             

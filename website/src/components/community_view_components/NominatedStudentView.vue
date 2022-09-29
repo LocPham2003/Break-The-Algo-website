@@ -7,7 +7,7 @@
         <div class="nominee_information">
             <h2 style="font-size: 24px; font-family: sans-serif; color: white;">{{nominee}}</h2>
             <h5 style="font-size: 18px; color: white; font-family: Monospace;">{{studyMajor}} <br>{{description}}</h5>
-            <a v-bind:href="cvLink" class="see_more">&#8594 See more of {{nominee.split(" ")[0]}}'s work</a>
+            <a v-if="cvLink != 'none'" v-bind:href="cvLink" class="see_more">&#8594 See more of {{nominee.split(" ")[0]}}'s work</a>
             <div style="display: flex; flex-direction: row; justify-content: center; align-items: center; width: 100%;">
                 <a @click="displayDiscord($event)" v-bind:id="discord" class="social_plugins"><i style="margin-right: 5px;" class="fab fa-discord"></i>Discord</a>
                 <a v-bind:href="linkedin" class="social_plugins"><i style="margin-right: 5px;" class="fab fa-linkedin"></i>Linkedin</a>

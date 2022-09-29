@@ -287,8 +287,8 @@ export default {
             // Terminal control variables
             availableCommands: ['help', 'register', 'login', 'discord', 'linkedin', 'instagram', 'email', 'facebook', 'github', 'techstack', 'founders'],
             availableContent: ['These are the following commands that are available to you: help, register, login, exit, founders, discord, instagram, linkedin, email, github.\n You can clear the terminal by typing the \'exit\' command.', 
-            'You are currently in register mode. Please fill in the fields below.', 
-            'You are currently in login mode. Please fill in the fields below.',
+            'You are currently in register mode. Please fill in the fields below. If you incorrectly fill in any fields, tap/ click onto that field to edit your content', 
+            'You are currently in login mode. Please fill in the fields below. If you incorrectly fill in any fields, tap/ click onto that field to edit your content',
             'https://discord.gg/3daSHa7',
             'https://www.linkedin.com/company/break-the-algo/',
             'https://www.instagram.com/breakthealgo/',
@@ -415,7 +415,6 @@ export default {
                     studyMajor: this.studyMajor,
                     studyYear: this.studyYear,
                     username: this.username,
-                    role: this.role,
                     password: this.password,
                     passwordReEntry: this.passwordReEntry,
                     email: this.email,

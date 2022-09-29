@@ -15,9 +15,9 @@
             <img style="max-width: 100%; max-height: 100%;" src="@/assets/media/outstandingmember.svg">
             </div>
             <div class="student_community_content">
-                <h3 style="font-family: Poppins; color: white; text-align: left; margin: 10px;">The list of notable and outstanding students in the BTA can be found here! Each students are selected via nominations, which are made by other students and employees within the BreakTheAlgo community. Each nominated students have their CV, achievements and records 
+                <h5 style="font-family: Poppins; color: white; text-align: left; margin: 10px;">The list of notable and outstanding students in the BTA can be found here! Each students are selected via nominations, which are made by other students and employees within the BreakTheAlgo community. Each nominated students have their CV, achievements and records 
             available here in this section of the website. Dive in and see what our students are capable of!
-                </h3>
+                </h5>
             </div>
         </div>
         
@@ -49,7 +49,7 @@
         <div class="partnership_community_section" v-if="selectedTarget === 1">
             <div class="partnership_community_header">
                 <div class="partnership_community_content">
-                    <h3 style="font-family: Poppins; color: white; text-align: left; margin: 10px;">
+                    <h5 style="font-family: Poppins; color: white; text-align: left; margin: 10px;">
                     We value the support and partnership of educational institutions, companies and organizations, so we want to show our appreciation by feature those who are partner or sponsors of BTA in here!
                     <br>
                     <br>
@@ -57,7 +57,7 @@
                     <br>
                     <br>
                     Therefore, you can be the first sponsor/ partner collaborate with us! Any contributions, regardless of the volume, will be featured in this section of our website. Please navigate to the <a @click="goToSupport" style="text-decoration: underline;">Support</a> section to get started on how to collaborate with us!
-                    </h3>
+                    </h5>
                 </div>
 
                 <div class="partnership_community_image">

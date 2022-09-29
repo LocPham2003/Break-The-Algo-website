@@ -3,7 +3,7 @@
     <div class="who_we_are_container">
       <div>
         <h1 class="who_we_are_header">Who we are</h1>
-        <h5 style="color: white; font-family: Poppins; text-align: justify; margin-left: 5%; margin-right: 5%;">{{whoWeAreMessage}}</h5>
+        <h5 style="color: white; font-family: Poppins; text-align: justify; margin-left: 5%; margin-right: 4%;">{{whoWeAreMessage}}</h5>
       </div>
       <img style="height: 500px; margin: 5%;" src="@/assets/media/teamup.svg">
     </div>
@@ -119,7 +119,7 @@
       <div class="member_card_section">
         <div class="card_parent_container">
         <div class="upper_half">
-            <img src="@/assets/media/yusef.jpg">
+            <img src="@/assets/media/empty_profile_2.png">
         </div>
           <div class="lower_half">
               <h3>{{memberName[3]}}</h3>
@@ -127,8 +127,25 @@
               <p>{{memberMajor[2]}}</p>  
             
               <div style="display: flex; flex-direction: row; justify-content: center; align-items: center; margin-bottom: 10px;">
-                <a v-bind:href="memberLinkedIn[3]" style="font-size: 32px; color: white; margin: 5px;"><i class="fab fa-linkedin"></i></a>
                 <a @click="displayDiscord($event)" v-bind:id="3" style="font-size: 32px; color: white; margin: 5px; transform: translateY(1.5px);"><i class="fab fa-discord"></i></a>
+              </div>
+
+              <a class="view_more_button">View More</a>
+          </div>
+        </div>
+
+        <div class="card_parent_container">
+        <div class="upper_half">
+            <img src="@/assets/media/yusef.jpg">
+        </div>
+          <div class="lower_half">
+              <h3>{{memberName[4]}}</h3>
+              <p>{{memberRole[4]}}</p>
+              <p>{{memberMajor[2]}}</p>  
+            
+              <div style="display: flex; flex-direction: row; justify-content: center; align-items: center; margin-bottom: 10px;">
+                <a v-bind:href="memberLinkedIn[4]" style="font-size: 32px; color: white; margin: 5px;"><i class="fab fa-linkedin"></i></a>
+                <a @click="displayDiscord($event)" v-bind:id="4" style="font-size: 32px; color: white; margin: 5px; transform: translateY(1.5px);"><i class="fab fa-discord"></i></a>
               </div>
 
               <a class="view_more_button">View More</a>
@@ -140,12 +157,12 @@
             <img src="@/assets/media/marom.jpg">
         </div>
           <div class="lower_half">
-              <h3>{{memberName[4]}}</h3>
+              <h3>{{memberName[5]}}</h3>
               <p>{{memberRole[4]}}</p>
               <p>{{memberMajor[2]}}</p>  
             
               <div style="display: flex; flex-direction: row; justify-content: center; align-items: center; margin-bottom: 10px;">
-                <a @click="displayDiscord($event)" v-bind:id="4" style="font-size: 32px; color: white; margin: 5px; transform: translateY(1.5px);"><i class="fab fa-discord"></i></a>
+                <a @click="displayDiscord($event)" v-bind:id="5" style="font-size: 32px; color: white; margin: 5px; transform: translateY(1.5px);"><i class="fab fa-discord"></i></a>
               </div>
 
               <a class="view_more_button">View More</a>
@@ -159,27 +176,9 @@
             <img src="@/assets/media/Prad.jpg">
         </div>
           <div class="lower_half">
-              <h3>{{memberName[5]}}</h3>
+              <h3>{{memberName[6]}}</h3>
               <p>{{memberRole[5]}}</p>
               <p>{{memberMajor[1]}}</p>  
-            
-              <div style="display: flex; flex-direction: row; justify-content: center; align-items: center; margin-bottom: 10px;">
-                <a v-bind:href="memberLinkedIn[5]" style="font-size: 32px; color: white; margin: 5px;"><i class="fab fa-linkedin"></i></a>
-                <a @click="displayDiscord($event)" v-bind:id="5" style="font-size: 32px; color: white; margin: 5px; transform: translateY(1.5px);"><i class="fab fa-discord"></i></a>
-              </div>
-
-              <a class="view_more_button">View More</a>
-          </div>
-        </div>
-
-        <div class="card_parent_container">
-        <div class="upper_half">
-            <img src="@/assets/media/tanishq.jpg">
-        </div>
-          <div class="lower_half">
-              <h3>{{memberName[6]}}</h3>
-              <p>{{memberRole[6]}}</p>
-              <p>{{memberMajor[2]}}</p>  
             
               <div style="display: flex; flex-direction: row; justify-content: center; align-items: center; margin-bottom: 10px;">
                 <a v-bind:href="memberLinkedIn[6]" style="font-size: 32px; color: white; margin: 5px;"><i class="fab fa-linkedin"></i></a>
@@ -192,16 +191,34 @@
 
         <div class="card_parent_container">
         <div class="upper_half">
-            <img src="@/assets/media/kati.jpg">
+            <img src="@/assets/media/tanishq.jpg">
         </div>
           <div class="lower_half">
               <h3>{{memberName[7]}}</h3>
-              <p>{{memberRole[7]}}</p>
+              <p>{{memberRole[6]}}</p>
               <p>{{memberMajor[2]}}</p>  
             
               <div style="display: flex; flex-direction: row; justify-content: center; align-items: center; margin-bottom: 10px;">
                 <a v-bind:href="memberLinkedIn[7]" style="font-size: 32px; color: white; margin: 5px;"><i class="fab fa-linkedin"></i></a>
                 <a @click="displayDiscord($event)" v-bind:id="7" style="font-size: 32px; color: white; margin: 5px; transform: translateY(1.5px);"><i class="fab fa-discord"></i></a>
+              </div>
+
+              <a class="view_more_button">View More</a>
+          </div>
+        </div>
+
+        <div class="card_parent_container">
+        <div class="upper_half">
+            <img src="@/assets/media/kati.jpg">
+        </div>
+          <div class="lower_half">
+              <h3>{{memberName[8]}}</h3>
+              <p>{{memberRole[7]}}</p>
+              <p>{{memberMajor[2]}}</p>  
+            
+              <div style="display: flex; flex-direction: row; justify-content: center; align-items: center; margin-bottom: 10px;">
+                <a v-bind:href="memberLinkedIn[8]" style="font-size: 32px; color: white; margin: 5px;"><i class="fab fa-linkedin"></i></a>
+                <a @click="displayDiscord($event)" v-bind:id="8" style="font-size: 32px; color: white; margin: 5px; transform: translateY(1.5px);"><i class="fab fa-discord"></i></a>
               </div>
 
               <a class="view_more_button">View More</a>
@@ -235,18 +252,19 @@ export default {
   data() {
     return {
       memberImage: [0, 1, 2, 3, 4,],
-      memberName: ["Asfandyar Azhar", "Diako Mazneh", "Loc Pham", "Yusef Ahmed", "Marom Sverdlov", "Pradyut Nair", "Tanishq Virwani", "Kati Overbeeke"],
+      memberName: ["Asfandyar Azhar", "Diako Mazneh", "Loc Pham", "Wout Huynen", "Yusef Ahmed", "Marom Sverdlov", "Pradyut Nair", "Tanishq Virwani", "Kati Overbeeke"],
       memberRole: ["Founder/ Board member", "Board member", "Board member", "Interview Committee", "Interview Committee", "Project Committee", "External Relations Committee", "Activity Committee"],
       memberMajor: ["Data Science Student","Data Science Student", "Computer Science Student"],
       memberLinkedIn: ["https://www.linkedin.com/in/asfandyarazhar/", 
                       "https://www.linkedin.com/in/diakomazneh/", 
                       "https://www.linkedin.com/in/loc-duc-pham/",
+                      "",
                       "https://www.linkedin.com/in/yusef-ahmed-417333223/",
                       "",
                       "https://www.linkedin.com/in/pradyut-nair-b5b7071ba/", 
                       "https://www.linkedin.com/in/tanishq-virwani-092bb11ba/",
                       "https://www.linkedin.com/in/kati-overbeeke/"],
-      memberDiscord: ["Asfandyar_Azhar#2675", "MultiDiako#1999", "Chaotic_Spongebob#9101", "BronzeSlayer#9787", "magical#2355", "Geeky#2285", "tanishqv#9830", "kati.ov#9929"],
+      memberDiscord: ["Asfandyar_Azhar#2675", "MultiDiako#1999", "Chaotic_Spongebob#9101", "Wout#2545", "BronzeSlayer#9787", "magical#2355", "Geeky#2285", "tanishqv#9830", "kati.ov#9929"],
 
       iconNames: ["fa fa-comment", "fa fa-ribbon", "fa fa-user", "fa fa-laptop-code", "fa fa-lightbulb", "fa fa-calendar"],
       cardTitle: ['Community', 'Job Application Help', 'Mock interviews', 'Daily practice', 'Projects', 'Events'],
@@ -259,7 +277,7 @@ export default {
         "Partake in one of our several events throughout the year where you can get exposure directly from Big-N companies. Be sure to look forward to our workshops, guest speakers, and more ambitious events to come soon!"                    
       ],
       whoWeAreMessage: 
-      "Break The Algo is a student-led career association whose goal is to establish the necessary foundation for students to get internships in (Big-tech) companies. We seek to bring students a holistic career-based education complementary to your studies at the university, as we want to set-up our future computer science and data science graduates for an advantageous head start in the industry.",
+      "Break The Algo is a student-led career association whose goal is to establish the necessary foundation for students to get internships in (Big-tech) companies. We seek to bring students a holistic career-based education complementary to your studies at the university, as we want to set-up our future all graduates for an advantageous head start in the industry.",
       joinDiscord: 
       "A discord server was created as a medium for all the members in the BTA community to chat, discuss and collaborate with each others and with the committee/ board members themselves. Joining our discord is a great way for you to expand your network with like-minded students and acquire new knowledge through other members in the BTA, so we urge you to do so!"
     }

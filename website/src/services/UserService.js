@@ -16,6 +16,9 @@ export default {
   getUserListOfEvents(params) {
     return Api().post('getUserListOfEvents', params)
   },
+  getUserRole(params) {
+    return Api().post('getUserRole', params)
+  },
   changePassword(params) {
     return Api().post('changePassword', params)
   },
