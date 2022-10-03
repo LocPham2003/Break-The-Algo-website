@@ -20,13 +20,3 @@ Information:
 - Support section (donate or buy merch)
 - A page for huge sponsors.
 
-Design
-- Design (Contact Nidhish for front-end design)
-    - Event card
-    - Roster of members
-- Terminal theme for member sign up.
-
-Issues to tackle:
-- Front end design of the website
-- Separate into different pages
-- Add more features for the current website
