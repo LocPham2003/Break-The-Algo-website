@@ -1,22 +1,22 @@
-Website is deployed and can be found via www.breakthealgo.com. Backend can be found in: https://github.com/LocPham2003/Break-The-Algo-Production
+This website is no longer hosted as the domain subscription has expired. 
 
 This is a website built using these following technologies
-- HTML and Bootstrap (CSS)
-- Vuejs framework (JavaScript)
-- ExpressJS + NodeJS for backend (Migrating to Springboot - Java as a backend)
-- MongoDB for Database management
+- Vuejs framework and Bootstrap (JavaScript)
+- ExpressJS + NodeJS for backend
+- MongoDB for Database
 
 Features:
-- Add a mock interview scheduling system and nomination system (Exclusive for BTA members).
+- Mock interview scheduling system and nomination system (Exclusive for BTA members).
 - Dashboard for upcoming events for the future.    
-- A gmail bot to send event notification if a person is subscribe. (send link from the website).
-- Newsletter (notify users with various stuff).
-- Matchmaking tab for companies to recruit members.
+- Posting and event manager panel for admins
+- Interactive login and signup terminal for visitors
 
 Information:
 - Student highlights (nomination system in the features)
-- Project showcase (projects that BTA members are doing)
 - About us (update the roster of the association)
 - Support section (donate or buy merch)
-- A page for huge sponsors.
 
+
+Running the website 
+- To run the front-end, navigate to /website folder and use the command "npm run serve"
+- To run the backend, navigate to /server folder and use the command "npm run start:dev"
